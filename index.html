@@ -7,7 +7,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
+
 
 :root{
   --teal:#1a7a6e;
@@ -586,89 +588,141 @@ body{
   margin-top:4px;
 }
 
+
+
+/* ── AUTH SCREEN ── */
+.auth-screen{
+  min-height:100vh;
+  background:linear-gradient(160deg,var(--forest) 0%,var(--teal) 45%,var(--blue) 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:2rem 1.5rem;
+}
+.auth-card{
+  width:100%;max-width:360px;
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:20px;padding:2rem;
+  backdrop-filter:blur(12px);
+  text-align:center;
+}
+.auth-logo{
+  width:72px;height:72px;margin:0 auto 1.25rem;
+  background:rgba(255,255,255,0.15);
+  border-radius:18px;border:1px solid rgba(255,255,255,0.25);
+  display:flex;align-items:center;justify-content:center;
+}
+.auth-title{
+  font-family:'Lora',serif;font-size:24px;font-weight:600;
+  color:white;margin-bottom:0.3rem;
+}
+.auth-sub{font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:1.75rem;}
+.auth-tabs{display:flex;gap:0;margin-bottom:1.5rem;background:rgba(0,0,0,0.15);border-radius:10px;padding:3px;}
+.auth-tab{
+  flex:1;padding:8px;font-size:13px;font-weight:500;
+  color:rgba(255,255,255,0.6);cursor:pointer;
+  border-radius:8px;transition:all 0.2s;border:none;background:transparent;
+  font-family:inherit;
+}
+.auth-tab.active{background:rgba(255,255,255,0.2);color:white;}
+.auth-field{margin-bottom:1rem;text-align:left;}
+.auth-field label{display:block;font-size:11px;font-weight:500;color:rgba(255,255,255,0.6);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.07em;}
+.auth-field input{
+  width:100%;padding:11px 14px;font-size:15px;font-family:inherit;
+  border:1.5px solid rgba(255,255,255,0.2);border-radius:10px;
+  background:rgba(255,255,255,0.1);color:white;
+  transition:border-color 0.15s;
+}
+.auth-field input::placeholder{color:rgba(255,255,255,0.35);}
+.auth-field input:focus{outline:none;border-color:rgba(255,255,255,0.5);}
+.auth-btn{
+  width:100%;padding:13px;font-size:15px;font-weight:500;font-family:inherit;
+  border-radius:10px;border:1px solid rgba(255,255,255,0.3);
+  background:rgba(255,255,255,0.2);color:white;cursor:pointer;
+  transition:all 0.2s;margin-top:0.25rem;
+}
+.auth-btn:hover{background:rgba(255,255,255,0.3);}
+.auth-btn:disabled{opacity:0.5;cursor:default;}
+.auth-error{font-size:13px;color:rgba(255,180,180,1);margin-bottom:0.75rem;min-height:18px;text-align:left;}
+.auth-footer{font-size:12px;color:rgba(255,255,255,0.35);margin-top:1.25rem;}
+.user-badge{
+  display:flex;align-items:center;gap:8px;margin-left:auto;
+}
+.user-email{font-size:11px;color:rgba(255,255,255,0.65);max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.signout-btn{
+  background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);
+  color:rgba(255,255,255,0.75);border-radius:7px;padding:5px 10px;
+  font-size:11px;cursor:pointer;font-family:inherit;white-space:nowrap;
+}
+.signout-btn:hover{background:rgba(255,255,255,0.2);}
+
 </style>
 </head>
 <body>
 
-<!-- PASSWORD SCREEN -->
-<div id="lock-screen" style="display:none;position:fixed;inset:0;background:linear-gradient(135deg,#0d4f46,#1a7a6e,#2496a0);z-index:999;display:flex;align-items:center;justify-content:center;padding:2rem;">
-  <div style="width:100%;max-width:340px;text-align:center;">
-    <div style="width:80px;height:80px;margin:0 auto 1.5rem;background:rgba(255,255,255,0.15);border-radius:22px;border:1px solid rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;">
-      <svg width="46" height="46" viewBox="0 0 26 26" fill="none">
-        <rect x="1" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.95)"/>
-        <rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.55)"/>
-        <rect x="18" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.95)"/>
-        <rect x="1" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.55)"/>
-        <rect x="9.5" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.95)"/>
-        <rect x="18" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.55)"/>
-        <rect x="1" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.95)"/>
-        <rect x="9.5" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.55)"/>
-        <rect x="18" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.95)"/>
-        <line x1="8" y1="1" x2="8" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
-        <line x1="17.5" y1="1" x2="17.5" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
-        <line x1="1" y1="8" x2="25" y2="8" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
-        <line x1="1" y1="17.5" x2="25" y2="17.5" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
-      </svg>
+<!-- AUTH SCREEN -->
+<div id="auth-screen" style="display:flex;flex-direction:column;">
+  <div class="auth-screen">
+    <div class="auth-card">
+      <div class="auth-logo"><svg width="46" height="46" viewBox="0 0 26 26" fill="none">
+  <rect x="1" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.95)"/>
+  <rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.55)"/>
+  <rect x="18" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.95)"/>
+  <rect x="1" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.55)"/>
+  <rect x="9.5" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.95)"/>
+  <rect x="18" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.55)"/>
+  <rect x="1" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.95)"/>
+  <rect x="9.5" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.55)"/>
+  <rect x="18" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.95)"/>
+  <line x1="8" y1="1" x2="8" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+  <line x1="17.5" y1="1" x2="17.5" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+  <line x1="1" y1="8" x2="25" y2="8" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+  <line x1="1" y1="17.5" x2="25" y2="17.5" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+</svg></div>
+      <div class="auth-title">Stitch &amp; Story</div>
+      <div class="auth-sub">Your personal quilting companion</div>
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="auth-tab-login" onclick="switchAuthTab('login')">Sign in</button>
+        <button class="auth-tab" id="auth-tab-signup" onclick="switchAuthTab('signup')">Create account</button>
+      </div>
+      <div id="auth-error" class="auth-error"></div>
+
+      <!-- LOGIN FORM -->
+      <div id="auth-form-login">
+        <div class="auth-field"><label>Email</label><input type="email" id="login-email" placeholder="you@example.com" onkeydown="if(event.key==='Enter')doLogin()"></div>
+        <div class="auth-field"><label>Password</label><input type="password" id="login-password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
+        <button class="auth-btn" id="login-btn" onclick="doLogin()">Sign in</button>
+      </div>
+
+      <!-- SIGNUP FORM -->
+      <div id="auth-form-signup" style="display:none">
+        <div class="auth-field"><label>Email</label><input type="email" id="signup-email" placeholder="you@example.com"></div>
+        <div class="auth-field"><label>Password</label><input type="password" id="signup-password" placeholder="At least 6 characters"></div>
+        <div class="auth-field"><label>Confirm password</label><input type="password" id="signup-confirm" placeholder="••••••••"></div>
+        <button class="auth-btn" id="signup-btn" onclick="doSignup()">Create account</button>
+      </div>
+      <div class="auth-footer">Your quilts are private and only visible to you.</div>
     </div>
-    <h1 style="font-family:'Lora',serif;font-size:26px;font-weight:600;color:white;margin-bottom:0.4rem;">Stitch &amp; Story</h1>
-    <p style="font-size:14px;color:rgba(255,255,255,0.65);margin-bottom:2rem;">Enter your password to continue</p>
-    <input type="password" id="pw-input" placeholder="Password" onkeydown="if(event.key==='Enter')checkPw()"
-      style="width:100%;padding:13px 16px;font-size:16px;border:1.5px solid rgba(255,255,255,0.25);border-radius:12px;background:rgba(255,255,255,0.12);color:white;margin-bottom:10px;text-align:center;letter-spacing:0.15em;font-family:'DM Sans',sans-serif;backdrop-filter:blur(4px);" 
-      placeholder="••••••••">
-    <div id="pw-error" style="font-size:13px;color:rgba(255,180,180,1);margin-bottom:10px;min-height:18px;"></div>
-    <button onclick="checkPw()"
-      style="width:100%;padding:13px;font-size:15px;font-weight:500;border-radius:12px;border:none;background:rgba(255,255,255,0.2);color:white;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:0.02em;transition:background 0.2s;border:1px solid rgba(255,255,255,0.3);">
-      Enter
-    </button>
-    <p style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:1.5rem;">Share with friends &amp; family — just send them the password.</p>
   </div>
 </div>
-<script>
-
-// ── SET YOUR PASSWORD HERE ──────────────────────────
-var APP_PASSWORD = 'iwanttoquilt';
-// ───────────────────────────────────────────────────
-
-function checkPw(){
-  var input=document.getElementById('pw-input').value;
-  if(input===APP_PASSWORD){
-    localStorage.setItem('quilt_auth','yes');
-    document.getElementById('lock-screen').style.display='none';
-  } else {
-    document.getElementById('pw-error').textContent='Incorrect password — try again.';
-    document.getElementById('pw-input').value='';
-    document.getElementById('pw-input').focus();
-  }
-}
-
-(function(){
-  if(localStorage.getItem('quilt_auth')!=='yes'){
-    document.getElementById('lock-screen').style.display='flex';
-  }
-})();
-
-</script>
 
 <!-- LANDING SCREEN -->
-<div id="landing">
+<div id="landing" style="display:none;">
   <div class="landing">
-    <div class="landing-logo">
-      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="1" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
-        <rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
-        <rect x="18" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
-        <rect x="1" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
-        <rect x="9.5" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
-        <rect x="18" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
-        <rect x="1" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
-        <rect x="9.5" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
-        <rect x="18" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
-        <line x1="8" y1="1" x2="8" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
-        <line x1="17.5" y1="1" x2="17.5" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
-        <line x1="1" y1="8" x2="25" y2="8" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
-        <line x1="1" y1="17.5" x2="25" y2="17.5" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
-      </svg>
-    </div>
+    <div class="landing-logo"><svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+  <rect x="1" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+  <rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
+  <rect x="18" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+  <rect x="1" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
+  <rect x="9.5" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+  <rect x="18" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
+  <rect x="1" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+  <rect x="9.5" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
+  <rect x="18" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+  <line x1="8" y1="1" x2="8" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+  <line x1="17.5" y1="1" x2="17.5" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+  <line x1="1" y1="8" x2="25" y2="8" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+  <line x1="1" y1="17.5" x2="25" y2="17.5" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+</svg></div>
     <h1>Stitch &amp; Story</h1>
     <p class="landing-sub">Your personal quilting companion</p>
     <div class="landing-cards">
@@ -698,33 +752,34 @@ function checkPw(){
   </div>
 </div>
 
-<!-- MAIN APP (hidden until section chosen) -->
+<!-- MAIN APP -->
 <div id="main-app" style="display:none;">
-
   <header class="app-header">
     <div class="header-top">
-      <div class="app-logo" onclick="goHome()" style="cursor:pointer;" title="Home">
-        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="1" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
-        <rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
-        <rect x="18" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
-        <rect x="1" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
-        <rect x="9.5" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
-        <rect x="18" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
-        <rect x="1" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
-        <rect x="9.5" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
-        <rect x="18" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
-        <line x1="8" y1="1" x2="8" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
-        <line x1="17.5" y1="1" x2="17.5" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
-        <line x1="1" y1="8" x2="25" y2="8" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
-        <line x1="1" y1="17.5" x2="25" y2="17.5" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
-      </svg>
+      <div class="app-logo" onclick="goHome()" style="cursor:pointer;">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+  <rect x="1" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+  <rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
+  <rect x="18" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+  <rect x="1" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
+  <rect x="9.5" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+  <rect x="18" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
+  <rect x="1" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+  <rect x="9.5" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
+  <rect x="18" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+  <line x1="8" y1="1" x2="8" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+  <line x1="17.5" y1="1" x2="17.5" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+  <line x1="1" y1="8" x2="25" y2="8" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+  <line x1="1" y1="17.5" x2="25" y2="17.5" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+</svg>
       </div>
       <div>
         <div class="app-name">Stitch &amp; Story</div>
-        <div class="app-tagline">Your personal quilting companion</div>
+        <div class="app-tagline" id="user-email-display">Your quilting companion</div>
       </div>
-      <button onclick="goHome()" style="margin-left:auto;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.8);border-radius:8px;padding:6px 12px;font-size:12px;cursor:pointer;font-family:inherit;">⌂ Home</button>
+      <div class="user-badge">
+        <button class="signout-btn" onclick="doSignOut()">Sign out</button>
+      </div>
     </div>
     <div class="tab-bar">
       <div class="tab active" id="tab-guide" onclick="switchTab('guide')">📖 Guide</div>
@@ -767,8 +822,7 @@ function checkPw(){
       <div id="inspo-list"></div>
     </div>
   </div>
-
-</div><!-- end main-app -->
+</div>
 
 <!-- CATALOGUE DETAIL VIEW -->
 <div id="detail-view" style="display:none">
@@ -786,13 +840,10 @@ function checkPw(){
   </div>
 </div>
 
-<!-- CATALOGUE ADD/EDIT MODAL -->
+<!-- CATALOGUE MODAL -->
 <div class="modal-bg" id="modal" style="display:none">
   <div class="modal">
-    <div class="modal-hdr">
-      <h3 id="modal-title">Add a quilt</h3>
-      <button class="close-btn" onclick="closeModal()">✕</button>
-    </div>
+    <div class="modal-hdr"><h3 id="modal-title">Add a quilt</h3><button class="close-btn" onclick="closeModal()">✕</button></div>
     <div class="modal-body">
       <div class="form-group">
         <label>Photo</label>
@@ -833,13 +884,10 @@ function checkPw(){
   </div>
 </div>
 
-<!-- INSPO ADD/EDIT MODAL -->
+<!-- INSPO MODAL -->
 <div class="modal-bg" id="inspo-modal" style="display:none">
   <div class="modal">
-    <div class="modal-hdr">
-      <h3 id="im-title">Add inspiration</h3>
-      <button class="close-btn" onclick="closeInspoModal()">✕</button>
-    </div>
+    <div class="modal-hdr"><h3 id="im-title">Add inspiration</h3><button class="close-btn" onclick="closeInspoModal()">✕</button></div>
     <div class="modal-body">
       <div class="form-group">
         <label>Photo</label>
@@ -851,7 +899,7 @@ function checkPw(){
       <div class="form-group"><label>Title</label><input type="text" id="if-title" placeholder="e.g. Blue log cabin pattern"></div>
       <div class="form-group">
         <label>Category</label>
-        <input type="text" id="if-tag" placeholder="e.g. Want to make, Color inspo, Pattern idea, Gift idea" list="tag-suggestions">
+        <input type="text" id="if-tag" placeholder="e.g. Want to make, Color inspo, Pattern idea" list="tag-suggestions">
         <datalist id="tag-suggestions">
           <option value="Want to make">
           <option value="Color inspo">
@@ -880,6 +928,203 @@ function goHome(){
   document.getElementById('inspo-detail-view').style.display='none';
 }
 
+// ── SUPABASE CONFIG ───────────────────────────────────
+const SUPA_URL = 'https://rxrbqkekbpbubvzkdizy.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ4cmJxa2VrYnBidWJ2emtkaXp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1NDU1MzAsImV4cCI6MjA5MDEyMTUzMH0.qioTo7hfC3GymwXzHgjK1nZMQE3ZUsQ3wOrSZ90f7fQ';
+let supabase = null;
+let currentUser = null;
+
+async function initSupabase() {
+  const { createClient } = window.supabase;
+  supabase = createClient(SUPA_URL, SUPA_KEY);
+  const { data: { session } } = await supabase.auth.getSession();
+  if (session) {
+    currentUser = session.user;
+    showApp();
+  } else {
+    showAuth();
+  }
+  supabase.auth.onAuthStateChange(function(event, session) {
+    if (session) { currentUser = session.user; }
+    else { currentUser = null; }
+  });
+}
+
+function showAuth() {
+  document.getElementById('auth-screen').style.display = 'flex';
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('main-app').style.display = 'none';
+}
+
+function showApp() {
+  document.getElementById('auth-screen').style.display = 'none';
+  document.getElementById('landing').style.display = 'block';
+  document.getElementById('main-app').style.display = 'none';
+  updateUserBadge();
+}
+
+function updateUserBadge() {
+  var el = document.getElementById('user-email-display');
+  if (el && currentUser) el.textContent = currentUser.email;
+}
+
+function switchAuthTab(t) {
+  document.querySelectorAll('.auth-tab').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('auth-tab-'+t).classList.add('active');
+  document.getElementById('auth-form-login').style.display = t==='login'?'block':'none';
+  document.getElementById('auth-form-signup').style.display = t==='signup'?'block':'none';
+  document.getElementById('auth-error').textContent = '';
+}
+
+async function doLogin() {
+  var email = document.getElementById('login-email').value.trim();
+  var password = document.getElementById('login-password').value;
+  var btn = document.getElementById('login-btn');
+  var err = document.getElementById('auth-error');
+  if (!email || !password) { err.textContent = 'Please enter your email and password.'; return; }
+  btn.disabled = true; btn.textContent = 'Signing in...'; err.textContent = '';
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  btn.disabled = false; btn.textContent = 'Sign in';
+  if (error) { err.textContent = error.message; return; }
+  const { data: { session } } = await supabase.auth.getSession();
+  currentUser = session.user;
+  showApp();
+}
+
+async function doSignup() {
+  var email = document.getElementById('signup-email').value.trim();
+  var password = document.getElementById('signup-password').value;
+  var confirm = document.getElementById('signup-confirm').value;
+  var btn = document.getElementById('signup-btn');
+  var err = document.getElementById('auth-error');
+  if (!email || !password) { err.textContent = 'Please enter your email and password.'; return; }
+  if (password.length < 6) { err.textContent = 'Password must be at least 6 characters.'; return; }
+  if (password !== confirm) { err.textContent = 'Passwords do not match.'; return; }
+  btn.disabled = true; btn.textContent = 'Creating account...'; err.textContent = '';
+  const { error } = await supabase.auth.signUp({ email, password });
+  btn.disabled = false; btn.textContent = 'Create account';
+  if (error) { err.textContent = error.message; return; }
+  err.style.color = 'rgba(180,255,200,1)';
+  err.textContent = 'Account created! Check your email to confirm, then sign in.';
+}
+
+async function doSignOut() {
+  await supabase.auth.signOut();
+  currentUser = null;
+  showAuth();
+}
+
+// ── CLOUD CATALOGUE ───────────────────────────────────
+async function loadQuilts() {
+  if (!supabase || !currentUser) {
+    try { var d=localStorage.getItem('quilts_v1'); return d?JSON.parse(d):[]; } catch(e) { return []; }
+  }
+  const { data, error } = await supabase.from('quilts').select('*').order('saved_at', {ascending: false});
+  if (error) { console.error(error); return []; }
+  return (data||[]).map(function(r) {
+    return {
+      id: r.id, name: r.name, date: r.date, notes: r.notes,
+      rating: r.rating, photo: r.photo, gifted: r.gifted,
+      giftee: r.giftee, occasion: r.occasion, savedAt: r.saved_at
+    };
+  });
+}
+
+async function saveQuilts(quilts) {
+  // not used in cloud mode — individual saves handle it
+}
+
+async function saveQuiltRecord(q, existingId) {
+  if (!supabase || !currentUser) {
+    var existing = [];
+    try { existing = JSON.parse(localStorage.getItem('quilts_v1')||'[]'); } catch(e) {}
+    if (existingId) {
+      var idx = existing.findIndex(function(x){return x.id===existingId;});
+      if (idx>=0) existing[idx]=q; else existing.unshift(q);
+    } else { existing.unshift(q); }
+    localStorage.setItem('quilts_v1', JSON.stringify(existing));
+    return;
+  }
+  var record = {
+    user_id: currentUser.id, name: q.name, date: q.date,
+    notes: q.notes, rating: q.rating, photo: q.photo,
+    gifted: q.gifted, giftee: q.giftee, occasion: q.occasion
+  };
+  if (existingId) {
+    await supabase.from('quilts').update(record).eq('id', existingId);
+  } else {
+    await supabase.from('quilts').insert(record);
+  }
+}
+
+async function deleteQuiltRecord(id) {
+  if (!supabase || !currentUser) {
+    var existing = [];
+    try { existing = JSON.parse(localStorage.getItem('quilts_v1')||'[]'); } catch(e) {}
+    existing = existing.filter(function(x){return x.id!==id;});
+    localStorage.setItem('quilts_v1', JSON.stringify(existing));
+    return;
+  }
+  await supabase.from('quilts').delete().eq('id', id);
+}
+
+// ── CLOUD INSPO ───────────────────────────────────────
+async function loadInspo() {
+  if (!supabase || !currentUser) {
+    try { var d=localStorage.getItem('inspo_v1'); return d?JSON.parse(d):[]; } catch(e) { return []; }
+  }
+  const { data, error } = await supabase.from('inspo').select('*').order('saved_at', {ascending: false});
+  if (error) { console.error(error); return []; }
+  return (data||[]).map(function(r) {
+    return { id: r.id, title: r.title, tag: r.tag, link: r.link, notes: r.notes, photo: r.photo, savedAt: r.saved_at };
+  });
+}
+
+async function saveInspoData(items) {
+  // not used in cloud mode
+}
+
+async function saveInspoRecord(item, existingId) {
+  if (!supabase || !currentUser) {
+    var existing = [];
+    try { existing = JSON.parse(localStorage.getItem('inspo_v1')||'[]'); } catch(e) {}
+    if (existingId) {
+      var idx = existing.findIndex(function(x){return x.id===existingId;});
+      if (idx>=0) existing[idx]=item; else existing.unshift(item);
+    } else { existing.unshift(item); }
+    localStorage.setItem('inspo_v1', JSON.stringify(existing));
+    return;
+  }
+  var record = {
+    user_id: currentUser.id, title: item.title, tag: item.tag,
+    link: item.link, notes: item.notes, photo: item.photo
+  };
+  if (existingId) {
+    await supabase.from('inspo').update(record).eq('id', existingId);
+  } else {
+    await supabase.from('inspo').insert(record);
+  }
+}
+
+async function deleteInspoRecord(id) {
+  if (!supabase || !currentUser) {
+    var existing = [];
+    try { existing = JSON.parse(localStorage.getItem('inspo_v1')||'[]'); } catch(e) {}
+    existing = existing.filter(function(x){return x.id!==id;});
+    localStorage.setItem('inspo_v1', JSON.stringify(existing));
+    return;
+  }
+  await supabase.from('inspo').delete().eq('id', id);
+}
+
+
+function goHome(){
+  document.getElementById('main-app').style.display='none';
+  document.getElementById('landing').style.display='block';
+  document.getElementById('detail-view').style.display='none';
+  document.getElementById('inspo-detail-view').style.display='none';
+}
+
 // ── TABS ──────────────────────────────────────────────
 function switchTab(t){
   document.getElementById('landing').style.display='none';
@@ -897,8 +1142,8 @@ function loadQuilts(){try{var d=localStorage.getItem('quilts_v1');return d?JSON.
 function saveQuilts(q){try{localStorage.setItem('quilts_v1',JSON.stringify(q));}catch(e){}}
 
 // ── CATALOGUE ─────────────────────────────────────────
-function renderCat(){
-  var quilts=loadQuilts();
+async function renderCat(){
+  var quilts=await loadQuilts();
   var el=document.getElementById('cat-list');
   if(!el)return;
   if(!quilts.length){
@@ -924,8 +1169,8 @@ function renderCat(){
   el.innerHTML=html;
 }
 
-function openDetail(i){
-  var quilts=loadQuilts();
+async function openDetail(i){
+  var quilts=await loadQuilts();
   var q=quilts[i];
   if(!q)return;
   document.getElementById('panel-cat').style.display='none';
@@ -974,8 +1219,8 @@ function openAddModal(){
   document.getElementById('modal').style.display='flex';
 }
 
-function openEditModal(i){
-  var quilts=loadQuilts();var q=quilts[i];if(!q)return;
+async function openEditModal(i){
+  var quilts=await loadQuilts();var q=quilts[i];if(!q)return;
   editingIndex=i;currentRating=q.rating||0;currentPhoto=q.photo||null;isGifted=q.gifted||false;
   document.getElementById('modal-title').textContent='Edit quilt';
   document.getElementById('delete-btn').style.display='block';
@@ -1024,7 +1269,7 @@ function toggleGift(){
   document.getElementById('gift-fields').style.display=isGifted?'block':'none';
 }
 
-function saveQuilt(){
+async function saveQuilt(){
   var quilts=loadQuilts();
   var q={
     name:document.getElementById('f-name').value.trim()||'Untitled quilt',
@@ -1037,27 +1282,27 @@ function saveQuilt(){
     occasion:isGifted?document.getElementById('f-occasion').value.trim():'',
     savedAt:new Date().toISOString()
   };
-  if(editingIndex>=0){quilts[editingIndex]=q;}else{quilts.unshift(q);}
-  saveQuilts(quilts);
+  var existingId = editingIndex>=0 ? (quilts[editingIndex]||{}).id : null;
+  await saveQuiltRecord(q, existingId);
   closeModal();
   renderCat();
 }
 
-function deleteQuilt(){
+async function deleteQuilt(){
   if(editingIndex<0)return;
   if(!confirm('Delete this quilt from your catalogue? This cannot be undone.'))return;
-  var quilts=loadQuilts();
-  quilts.splice(editingIndex,1);
-  saveQuilts(quilts);
+  var quilts=await loadQuilts();
+  var id = (quilts[editingIndex]||{}).id;
+  await deleteQuiltRecord(id||editingIndex);
   closeModal();
   renderCat();
 }
 
-function confirmDelete(i){
+async function confirmDelete(i){
   if(!confirm('Delete this quilt from your catalogue?'))return;
-  var quilts=loadQuilts();
-  quilts.splice(i,1);
-  saveQuilts(quilts);
+  var quilts=await loadQuilts();
+  var id = (quilts[i]||{}).id;
+  await deleteQuiltRecord(id||i);
   closeDetail();
 }
 
@@ -1186,8 +1431,8 @@ function formatDate(d){if(!d)return'';try{var dt=new Date(d+'T00:00:00');return 
 function loadInspo(){try{var d=localStorage.getItem('inspo_v1');return d?JSON.parse(d):[];}catch(e){return[];}}
 function saveInspoData(items){try{localStorage.setItem('inspo_v1',JSON.stringify(items));}catch(e){}}
 
-function renderInspo(){
-  var items=loadInspo();
+async function renderInspo(){
+  var items=await loadInspo();
   var el=document.getElementById('inspo-list');
   if(!el)return;
   if(!items.length){
@@ -1206,8 +1451,8 @@ function renderInspo(){
   el.innerHTML=html;
 }
 
-function openInspoDetail(i){
-  var items=loadInspo(); var item=items[i]; if(!item)return;
+async function openInspoDetail(i){
+  var items=await loadInspo(); var item=items[i]; if(!item)return;
   document.getElementById('panel-inspo').style.display='none';
   var dv=document.getElementById('inspo-detail-view'); dv.style.display='block';
   var imgHTML=item.photo
@@ -1236,8 +1481,8 @@ function openAddInspo(){
   resetInspoPhoto();
   document.getElementById('inspo-modal').style.display='flex';
 }
-function openEditInspo(i){
-  var items=loadInspo(); var item=items[i]; if(!item)return;
+async function openEditInspo(i){
+  var items=await loadInspo(); var item=items[i]; if(!item)return;
   inspoEditIdx=i; inspoPhoto=item.photo||null;
   document.getElementById('im-title').textContent='Edit inspiration';
   document.getElementById('idb-del').style.display='block';
@@ -1267,7 +1512,7 @@ function resetInspoPhoto(){
   document.getElementById('inspo-photo-zone').className='photo-upload';
   document.getElementById('inspo-photo-wrap').innerHTML='<div style="font-size:28px;opacity:0.4;margin-bottom:0.5rem">📷</div><div style="font-size:14px;color:#6b8080">Tap to add a photo</div>';
 }
-function saveInspoItem(){
+async function saveInspoItem(){
   var items=loadInspo();
   var item={
     title:document.getElementById('if-title').value.trim()||'Untitled',
@@ -1277,23 +1522,25 @@ function saveInspoItem(){
     photo:inspoPhoto,
     savedAt:new Date().toISOString()
   };
-  if(inspoEditIdx>=0){items[inspoEditIdx]=item;} else {items.unshift(item);}
-  saveInspoData(items); closeInspoModal(); renderInspo();
+  var existingId = inspoEditIdx>=0 ? (await loadInspo())[inspoEditIdx]?.id : null;
+  await saveInspoRecord(item, existingId);
+  closeInspoModal(); renderInspo();
 }
-function deleteInspoConfirm(i){
+async function deleteInspoConfirm(i){
   if(!confirm('Remove this from your inspiration board?'))return;
-  var items=loadInspo(); items.splice(i,1); saveInspoData(items); closeInspoDetail();
+  var items=await loadInspo(); var id=(items[i]||{}).id; await deleteInspoRecord(id||i); closeInspoDetail();
 }
-function deleteInspoFromModal(){
+async function deleteInspoFromModal(){
   if(inspoEditIdx<0)return;
   if(!confirm('Remove this from your inspiration board?'))return;
-  var items=loadInspo(); items.splice(inspoEditIdx,1); saveInspoData(items); closeInspoModal(); renderInspo();
+  var items=await loadInspo(); var id=(items[inspoEditIdx]||{}).id; await deleteInspoRecord(id||inspoEditIdx); closeInspoModal(); renderInspo();
 }
 
 // ── INIT ──────────────────────────────────────────────
 renderProg();
 renderGuide();
-renderCat();
+initSupabase();
+
 
 </script>
 </body>
