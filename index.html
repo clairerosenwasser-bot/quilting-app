@@ -3,159 +3,1122 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your First Quilt — Step by Step Guide</title>
+<title>Stitch &amp; Story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+
+:root{
+  --teal:#1a7a6e;
+  --teal-mid:#2496a0;
+  --teal-light:#5DCAA5;
+  --teal-pale:#e4f5f0;
+  --teal-wash:#f0f9f6;
+  --blue:#2563a0;
+  --blue-mid:#3a89c9;
+  --blue-light:#85C5E8;
+  --blue-pale:#e8f4fc;
+  --blue-wash:#f0f7fb;
+  --forest:#0d4f46;
+  --ink:#162622;
+  --ink-mid:#3a4f4a;
+  --ink-muted:#6b8080;
+  --ink-light:#9db8b3;
+  --ink-faint:#c8dbd8;
+  --surface:#f6faf8;
+  --surface-card:#ffffff;
+  --border:#daeae6;
+  --border-mid:#c0d8d2;
+  --gold:#c4943a;
+  --gold-pale:#fdf3e3;
+  --danger:#b83232;
+  --danger-pale:#fdf0f0;
+}
+
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:system-ui,sans-serif;background:#fafaf8;color:#1a1a18;padding:1rem;}
-.app{max-width:660px;margin:0 auto;padding:1rem 0 4rem;}
-.prog-wrap{display:flex;gap:5px;margin-bottom:2rem;}
-.pseg{flex:1;height:4px;border-radius:2px;background:#e0e0d8;transition:background 0.4s;}
-.pseg.done{background:#1D9E75;}.pseg.active{background:#5DCAA5;}
-.phase-tag{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#888;margin-bottom:0.4rem;}
-.step-title{font-size:21px;font-weight:500;margin-bottom:0.75rem;}
-.step-body{font-size:15px;color:#555;line-height:1.75;margin-bottom:1.25rem;}
-.tip{background:#f0faf5;border-left:3px solid #5DCAA5;border-radius:0 8px 8px 0;padding:0.7rem 1rem;margin-bottom:1.25rem;font-size:14px;color:#555;}
-.tip strong{color:#1a1a18;font-weight:500;}
-.vbtn{display:flex;align-items:center;gap:10px;padding:10px 16px;font-size:14px;border-radius:8px;border:1px solid #ddd;background:transparent;cursor:pointer;margin-bottom:1.25rem;width:100%;text-align:left;}
-.vbtn:hover{background:#f5f5f0;}
-.vico{width:30px;height:30px;min-width:30px;background:#ff0000;border-radius:6px;display:flex;align-items:center;justify-content:center;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--surface);
+  color:var(--ink);
+  min-height:100vh;
+}
+
+/* ── HEADER ── */
+.app-header{
+  background:linear-gradient(135deg,var(--forest) 0%,var(--teal) 55%,var(--blue) 100%);
+  padding:1rem 1.25rem 0;
+  position:sticky;top:0;z-index:20;
+  box-shadow:0 2px 12px rgba(13,79,70,0.18);
+}
+.header-top{
+  display:flex;align-items:center;gap:12px;
+  max-width:660px;margin:0 auto;
+  padding-bottom:0.75rem;
+}
+.app-logo{
+  display:flex;align-items:center;justify-content:center;
+  width:40px;height:40px;min-width:40px;
+  background:rgba(255,255,255,0.15);
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.25);
+}
+.app-name{
+  font-family:'Lora',serif;
+  font-size:18px;font-weight:600;
+  color:white;letter-spacing:-0.01em;
+}
+.app-tagline{font-size:11px;color:rgba(255,255,255,0.65);margin-top:1px;}
+
+/* ── TABS ── */
+.tab-bar{
+  display:flex;
+  max-width:660px;margin:0 auto;
+  gap:4px;
+}
+.tab{
+  flex:1;padding:10px 8px 12px;
+  text-align:center;font-size:13px;font-weight:500;
+  color:rgba(255,255,255,0.6);
+  cursor:pointer;
+  border-bottom:2.5px solid transparent;
+  transition:all 0.2s;
+  letter-spacing:0.01em;
+}
+.tab.active{
+  color:white;
+  border-bottom-color:rgba(255,255,255,0.9);
+}
+.tab:hover:not(.active){color:rgba(255,255,255,0.85);}
+.tab-panel{display:none;animation:fadeIn 0.2s ease;}
+.tab-panel.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SHARED ── */
+.app{max-width:660px;margin:0 auto;padding:1.5rem 1rem 5rem;}
+
+.btn{
+  padding:9px 20px;font-size:14px;font-family:inherit;
+  border-radius:8px;border:1.5px solid var(--border-mid);
+  background:var(--surface-card);color:var(--ink-mid);
+  cursor:pointer;transition:all 0.15s;font-weight:400;
+}
+.btn:hover{background:var(--teal-wash);border-color:var(--teal-light);color:var(--teal);}
+.btn-p{
+  background:linear-gradient(135deg,var(--teal),var(--blue-mid));
+  border:none;color:white;font-weight:500;
+  box-shadow:0 2px 8px rgba(26,122,110,0.25);
+}
+.btn-p:hover{
+  background:linear-gradient(135deg,var(--forest),var(--teal));
+  box-shadow:0 3px 12px rgba(26,122,110,0.35);
+  color:white;
+}
+.btn:disabled{opacity:0.35;cursor:default;box-shadow:none;}
+
+/* ── GUIDE ── */
+.prog-wrap{display:flex;gap:4px;margin-bottom:2rem;}
+.pseg{flex:1;height:5px;border-radius:3px;background:var(--border);transition:background 0.4s;}
+.pseg.done{background:var(--teal);}
+.pseg.active{background:var(--teal-light);}
+
+.phase-tag{
+  font-size:10px;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--teal);font-weight:500;margin-bottom:0.5rem;
+}
+.step-title{
+  font-family:'Lora',serif;
+  font-size:22px;font-weight:600;
+  color:var(--ink);margin-bottom:0.8rem;
+  line-height:1.3;
+}
+.step-body{font-size:15px;color:var(--ink-mid);line-height:1.8;margin-bottom:1.25rem;}
+
+.tip{
+  background:var(--teal-wash);
+  border-left:3px solid var(--teal-light);
+  border-radius:0 10px 10px 0;
+  padding:0.75rem 1rem;margin-bottom:1.25rem;
+  font-size:14px;color:var(--ink-mid);
+}
+.tip strong{color:var(--teal);font-weight:500;}
+
+.vbtn{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 16px;font-size:14px;font-family:inherit;
+  border-radius:10px;border:1.5px solid var(--border);
+  background:var(--surface-card);color:var(--ink);
+  cursor:pointer;margin-bottom:1.25rem;width:100%;text-align:left;
+  transition:all 0.15s;
+}
+.vbtn:hover{border-color:var(--blue-light);background:var(--blue-wash);}
+.vico{
+  width:32px;height:32px;min-width:32px;background:#ff0000;
+  border-radius:7px;display:flex;align-items:center;justify-content:center;
+}
 .vico::after{content:'';border-style:solid;border-width:5px 0 5px 11px;border-color:transparent transparent transparent white;margin-left:2px;}
 .vlbl{display:flex;flex-direction:column;}
-.vlbl strong{font-weight:500;font-size:14px;}
-.vlbl span{font-size:11px;color:#888;}
-.diag{background:#f5f5f0;border-radius:12px;padding:1rem;margin-bottom:1.25rem;}
-.diag-lbl{font-size:12px;color:#888;text-align:center;margin-bottom:0.5rem;}
-.calc-card{background:#fff;border:1px solid #e8e8e0;border-radius:12px;padding:1.25rem;margin-bottom:1.25rem;}
-.calc-title{font-size:14px;font-weight:500;margin-bottom:1rem;}
+.vlbl strong{font-weight:500;font-size:14px;color:var(--ink);}
+.vlbl span{font-size:11px;color:var(--ink-light);margin-top:1px;}
+
+.diag{
+  background:linear-gradient(135deg,var(--teal-wash),var(--blue-wash));
+  border:1px solid var(--border);
+  border-radius:12px;padding:1rem;margin-bottom:1.25rem;
+}
+.diag-lbl{font-size:12px;color:var(--ink-muted);text-align:center;margin-bottom:0.6rem;}
+
+.calc-card{
+  background:var(--surface-card);
+  border:1.5px solid var(--border);
+  border-radius:14px;padding:1.25rem;margin-bottom:1.25rem;
+  box-shadow:0 1px 4px rgba(26,122,110,0.06);
+}
+.calc-title{
+  font-family:'Lora',serif;
+  font-size:15px;font-weight:600;color:var(--ink);
+  margin-bottom:1rem;
+}
 .cg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1rem;}
-.cf label{display:block;font-size:12px;color:#888;margin-bottom:4px;}
-.cf input{width:100%;padding:7px 10px;font-size:14px;border:1px solid #ddd;border-radius:8px;background:#f9f9f6;}
+.cf label{display:block;font-size:11px;font-weight:500;color:var(--ink-muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.06em;}
+.cf input,.cf select{
+  width:100%;padding:8px 11px;font-size:14px;font-family:inherit;
+  border:1.5px solid var(--border);border-radius:8px;
+  background:var(--surface);color:var(--ink);
+  transition:border-color 0.15s;
+}
+.cf input:focus,.cf select:focus{outline:none;border-color:var(--teal-light);}
 .cres{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
-.cr{background:#f5f5f0;border-radius:8px;padding:0.6rem 0.75rem;}
-.rl{font-size:11px;color:#888;margin-bottom:2px;}
-.rv{font-size:18px;font-weight:500;}
-.ru{font-size:11px;color:#888;}
-.summary{background:#f0faf5;border:1px solid #c0e8d0;border-radius:8px;padding:0.75rem 1rem;margin-bottom:1.25rem;font-size:14px;color:#555;}
-.summary strong{color:#1a1a18;}
+.cr{
+  background:linear-gradient(135deg,var(--teal-wash),var(--blue-wash));
+  border:1px solid var(--border);
+  border-radius:10px;padding:0.65rem 0.75rem;
+}
+.rl{font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-muted);margin-bottom:3px;font-weight:500;}
+.rv{font-size:20px;font-weight:500;color:var(--teal);font-family:'Lora',serif;}
+.ru{font-size:11px;color:var(--ink-light);}
+
+.summary{
+  background:linear-gradient(135deg,var(--teal-pale),var(--blue-pale));
+  border:1px solid var(--teal-light);
+  border-radius:10px;padding:0.85rem 1rem;
+  margin-bottom:1.25rem;font-size:14px;color:var(--ink-mid);
+}
+.summary strong{color:var(--teal);}
+
 .checklist{list-style:none;margin-bottom:1.25rem;}
-.checklist li{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid #eee;font-size:14px;cursor:pointer;}
+.checklist li{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:9px 0;border-bottom:1px solid var(--border);
+  font-size:14px;color:var(--ink);cursor:pointer;
+  transition:color 0.15s;
+}
 .checklist li:last-child{border-bottom:none;}
-.chk{width:18px;height:18px;min-width:18px;border:1.5px solid #ccc;border-radius:4px;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all 0.2s;}
-.chk.on{background:#1D9E75;border-color:#1D9E75;}
+.checklist li:hover .chk{border-color:var(--teal-light);}
+.chk{
+  width:19px;height:19px;min-width:19px;
+  border:1.5px solid var(--ink-faint);
+  border-radius:5px;display:flex;align-items:center;justify-content:center;
+  margin-top:1px;transition:all 0.2s;
+}
+.chk.on{background:var(--teal);border-color:var(--teal);}
 .chk.on::after{content:'';display:block;width:5px;height:9px;border:2px solid white;border-top:none;border-left:none;transform:rotate(45deg) translateY(-1px);}
-.li-done span{color:#aaa;text-decoration:line-through;}
-.nav{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;}
-.btn{padding:9px 20px;font-size:14px;border-radius:8px;border:1px solid #ddd;background:transparent;cursor:pointer;transition:background 0.15s;}
-.btn:hover{background:#f5f5f0;}
-.btn-p{background:#1D9E75;border-color:#1D9E75;color:white;}
-.btn-p:hover{background:#0F6E56;}
-.btn:disabled{opacity:0.35;cursor:default;background:transparent;}
-.ctr-b{font-size:12px;color:#888;background:#f5f5f0;padding:4px 12px;border-radius:99px;border:1px solid #e0e0d8;}
-.done{text-align:center;padding:2.5rem 1rem;}
-.done h2{font-size:24px;font-weight:500;margin-bottom:0.75rem;}
-.done p{color:#555;font-size:15px;line-height:1.7;margin-bottom:2rem;}
+.li-done span{color:var(--ink-light);text-decoration:line-through;}
+
+.g-nav{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;}
+.ctr-b{
+  font-size:12px;color:var(--ink-muted);
+  background:var(--surface-card);
+  padding:5px 14px;border-radius:99px;
+  border:1px solid var(--border);
+}
+
+.done{text-align:center;padding:3rem 1rem;}
+.done h2{font-family:'Lora',serif;font-size:26px;font-weight:600;margin-bottom:0.75rem;color:var(--ink);}
+.done p{color:var(--ink-mid);font-size:15px;line-height:1.7;margin-bottom:2rem;}
 .done-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
-.ai-panel{border:1px solid #e8e8e0;border-radius:12px;overflow:hidden;margin-bottom:1.25rem;}
-.ai-hdr{display:flex;align-items:center;gap:10px;padding:0.9rem 1.25rem;background:#f5f5f0;border-bottom:1px solid #e8e8e0;}
-.ai-dot{width:8px;height:8px;border-radius:50%;background:#1D9E75;}
-.ai-hdr-txt{font-size:14px;font-weight:500;}
-.ai-hdr-sub{font-size:12px;color:#888;margin-left:auto;}
+
+/* ── AI FEEDBACK ── */
+.ai-panel{
+  border:1.5px solid var(--border);border-radius:14px;
+  overflow:hidden;margin-bottom:1.25rem;
+  box-shadow:0 1px 4px rgba(26,122,110,0.06);
+}
+.ai-hdr{
+  display:flex;align-items:center;gap:10px;
+  padding:0.9rem 1.25rem;
+  background:linear-gradient(135deg,var(--teal-wash),var(--blue-wash));
+  border-bottom:1px solid var(--border);
+}
+.ai-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 3px var(--teal-pale);}
+.ai-hdr-txt{font-size:14px;font-weight:500;color:var(--ink);}
+.ai-hdr-sub{font-size:11px;color:var(--ink-light);margin-left:auto;}
 .ai-body{padding:1.25rem;}
-.upload-zone{border:1.5px dashed #ccc;border-radius:8px;padding:2rem 1rem;text-align:center;cursor:pointer;margin-bottom:1rem;transition:all 0.2s;}
-.upload-zone:hover{border-color:#5DCAA5;background:#f0faf5;}
-.upload-zone.has-img{border-style:solid;border-color:#1D9E75;padding:0.5rem;}
-.upload-hint{font-size:14px;color:#888;margin-bottom:0.25rem;}
-.upload-sub{font-size:12px;color:#aaa;}
+.upload-zone{
+  border:1.5px dashed var(--border-mid);border-radius:10px;
+  padding:2rem 1rem;text-align:center;cursor:pointer;
+  margin-bottom:1rem;transition:all 0.2s;
+  background:var(--surface);
+}
+.upload-zone:hover{border-color:var(--teal);background:var(--teal-wash);}
+.upload-zone.has-img{border-style:solid;border-color:var(--teal);padding:0.5rem;}
+.upload-hint{font-size:14px;color:var(--ink-mid);margin-bottom:0.25rem;}
+.upload-sub{font-size:12px;color:var(--ink-light);}
 .preview-img{width:100%;border-radius:8px;display:block;max-height:280px;object-fit:contain;}
-.analyze-btn{width:100%;padding:10px;font-size:14px;font-weight:500;border-radius:8px;border:none;background:#1D9E75;color:white;cursor:pointer;margin-bottom:1rem;}
-.analyze-btn:hover{background:#0F6E56;}
-.analyze-btn:disabled{opacity:0.5;cursor:default;}
-.fb-sections{display:flex;flex-direction:column;gap:12px;}
-.fb-sec{background:#f5f5f0;border-radius:8px;padding:0.9rem 1rem;}
-.fb-lbl{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:#888;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:0.5rem;}
+.analyze-btn{
+  width:100%;padding:11px;font-size:14px;font-weight:500;font-family:inherit;
+  border-radius:8px;border:none;
+  background:linear-gradient(135deg,var(--teal),var(--blue-mid));
+  color:white;cursor:pointer;margin-bottom:1rem;
+  box-shadow:0 2px 8px rgba(26,122,110,0.2);
+  transition:all 0.15s;
+}
+.analyze-btn:hover{background:linear-gradient(135deg,var(--forest),var(--teal));}
+.analyze-btn:disabled{opacity:0.5;cursor:default;box-shadow:none;}
+.fb-sections{display:flex;flex-direction:column;gap:10px;}
+.fb-sec{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.9rem 1rem;}
+.fb-lbl{
+  display:flex;align-items:center;gap:8px;
+  font-size:10px;font-weight:500;color:var(--ink-muted);
+  text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem;
+}
 .fb-dot{width:7px;height:7px;border-radius:50%;}
-.fb-txt{font-size:14px;line-height:1.65;}
-.loading{display:flex;gap:5px;justify-content:center;padding:1.5rem 0;}
-.loading span{width:8px;height:8px;border-radius:50%;background:#5DCAA5;animation:bop 1.2s infinite;}
+.fb-txt{font-size:14px;color:var(--ink-mid);line-height:1.65;}
+.loading{display:flex;gap:6px;justify-content:center;padding:1.5rem 0;}
+.loading span{
+  width:9px;height:9px;border-radius:50%;
+  background:var(--teal-light);animation:bop 1.2s infinite;
+}
 .loading span:nth-child(2){animation-delay:0.2s;}
 .loading span:nth-child(3){animation-delay:0.4s;}
 @keyframes bop{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-8px)}}
-.retry-btn{font-size:13px;color:#888;background:transparent;border:1px solid #ddd;padding:6px 14px;border-radius:8px;cursor:pointer;margin-top:0.75rem;}
+.retry-btn{
+  font-size:13px;color:var(--ink-muted);background:transparent;
+  border:1px solid var(--border);padding:6px 14px;
+  border-radius:8px;cursor:pointer;margin-top:0.75rem;
+  font-family:inherit;
+}
+.retry-btn:hover{background:var(--surface);border-color:var(--border-mid);}
+
+/* ── CATALOGUE ── */
+.cat-header{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:1.75rem;padding-bottom:1rem;
+  border-bottom:1px solid var(--border);
+}
+.cat-header h2{
+  font-family:'Lora',serif;
+  font-size:22px;font-weight:600;color:var(--ink);
+}
+.empty-state{text-align:center;padding:3.5rem 1rem;color:var(--ink-light);}
+.empty-state .empty-icon{
+  width:72px;height:72px;margin:0 auto 1.25rem;
+  background:linear-gradient(135deg,var(--teal-pale),var(--blue-pale));
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--border);
+}
+.empty-state p{font-size:15px;line-height:1.65;color:var(--ink-muted);}
+
+.quilt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;margin-bottom:2rem;}
+.quilt-card{
+  background:var(--surface-card);
+  border:1.5px solid var(--border);border-radius:14px;
+  overflow:hidden;cursor:pointer;
+  transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s;
+}
+.quilt-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 24px rgba(26,122,110,0.12);
+  border-color:var(--teal-light);
+}
+.qc-photo{
+  width:100%;height:190px;
+  background:linear-gradient(135deg,var(--teal-wash),var(--blue-wash));
+  display:flex;align-items:center;justify-content:center;
+}
+.qc-photo img{width:100%;height:190px;object-fit:cover;display:block;}
+.qc-body{padding:1rem 1.1rem;}
+.qc-name{
+  font-family:'Lora',serif;
+  font-size:15px;font-weight:600;
+  color:var(--ink);margin-bottom:3px;
+}
+.qc-meta{font-size:12px;color:var(--ink-light);margin-bottom:8px;}
+.qc-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.tag{
+  font-size:11px;padding:3px 9px;border-radius:99px;
+  background:var(--teal-wash);color:var(--teal);
+  border:1px solid var(--border);
+}
+.tag.gift{background:var(--blue-wash);color:var(--blue);border-color:var(--blue-pale);}
+.stars{color:var(--gold);font-size:13px;letter-spacing:1px;}
+
+/* ── MODAL ── */
+.modal-bg{
+  position:fixed;inset:0;
+  background:rgba(13,40,36,0.5);
+  backdrop-filter:blur(3px);
+  display:flex;align-items:center;justify-content:center;
+  z-index:100;padding:1rem;
+}
+.modal{
+  background:var(--surface-card);border-radius:18px;
+  width:100%;max-width:520px;max-height:90vh;overflow-y:auto;
+  box-shadow:0 20px 60px rgba(13,40,36,0.2);
+  border:1px solid var(--border);
+}
+.modal-hdr{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);
+  position:sticky;top:0;background:var(--surface-card);z-index:1;
+  border-radius:18px 18px 0 0;
+}
+.modal-hdr h3{font-family:'Lora',serif;font-size:17px;font-weight:600;color:var(--ink);}
+.close-btn{
+  background:var(--surface);border:1px solid var(--border);
+  font-size:16px;cursor:pointer;color:var(--ink-muted);
+  padding:5px 9px;border-radius:7px;line-height:1;
+}
+.close-btn:hover{background:var(--teal-wash);color:var(--teal);}
+.modal-body{padding:1.25rem 1.5rem;}
+.form-group{margin-bottom:1.1rem;}
+.form-group label{
+  display:block;font-size:11px;font-weight:500;
+  color:var(--ink-muted);margin-bottom:5px;
+  text-transform:uppercase;letter-spacing:0.07em;
+}
+.form-group input,.form-group textarea,.form-group select{
+  width:100%;padding:9px 12px;font-size:14px;font-family:inherit;
+  border:1.5px solid var(--border);border-radius:9px;
+  background:var(--surface);color:var(--ink);
+  transition:border-color 0.15s;
+}
+.form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--teal-light);}
+.form-group textarea{resize:vertical;min-height:80px;line-height:1.55;}
+.star-picker{display:flex;gap:4px;margin-top:4px;}
+.star-btn{
+  font-size:26px;background:none;border:none;
+  cursor:pointer;opacity:0.2;transition:all 0.15s;
+  color:var(--gold);line-height:1;
+}
+.star-btn.on{opacity:1;transform:scale(1.1);}
+.photo-upload{
+  border:1.5px dashed var(--border-mid);border-radius:10px;
+  padding:1.5rem;text-align:center;cursor:pointer;
+  transition:all 0.2s;margin-top:4px;background:var(--surface);
+}
+.photo-upload:hover{border-color:var(--teal);background:var(--teal-wash);}
+.photo-upload.has-photo{border-style:solid;border-color:var(--teal);padding:0.5rem;}
+.photo-thumb{width:100%;max-height:200px;object-fit:contain;border-radius:7px;display:block;}
+.gift-row{display:flex;align-items:center;gap:12px;padding:10px 0;}
+.toggle{
+  width:42px;height:24px;background:var(--ink-faint);
+  border-radius:12px;cursor:pointer;position:relative;
+  transition:background 0.2s;border:none;
+}
+.toggle.on{background:var(--teal);}
+.toggle::after{
+  content:'';position:absolute;
+  width:18px;height:18px;background:white;
+  border-radius:50%;top:3px;left:3px;
+  transition:left 0.2s;
+  box-shadow:0 1px 3px rgba(0,0,0,0.15);
+}
+.toggle.on::after{left:21px;}
+.gift-fields{
+  margin-top:0.75rem;padding:0.85rem;
+  background:var(--blue-wash);border-radius:10px;
+  border:1px solid var(--blue-pale);
+}
+.modal-footer{
+  padding:1rem 1.5rem;border-top:1px solid var(--border);
+  display:flex;gap:10px;justify-content:flex-end;
+  position:sticky;bottom:0;background:var(--surface-card);
+  border-radius:0 0 18px 18px;
+}
+.btn-danger{color:var(--danger);border-color:#f0c8c8;}
+.btn-danger:hover{background:var(--danger-pale);border-color:#e0a0a0;}
+
+/* ── DETAIL VIEW ── */
+.detail-back{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:13px;color:var(--ink-muted);cursor:pointer;
+  margin-bottom:1.5rem;background:none;border:none;
+  font-family:inherit;padding:0;
+}
+.detail-back:hover{color:var(--teal);}
+.detail-photo{
+  width:100%;max-height:380px;object-fit:contain;
+  border-radius:14px;background:var(--teal-wash);
+  margin-bottom:1.5rem;display:block;
+  border:1px solid var(--border);
+}
+.detail-photo-placeholder{
+  width:100%;height:200px;
+  background:linear-gradient(135deg,var(--teal-wash),var(--blue-wash));
+  border-radius:14px;border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:60px;margin-bottom:1.5rem;
+}
+.detail-title{font-family:'Lora',serif;font-size:26px;font-weight:600;margin-bottom:0.4rem;color:var(--ink);}
+.detail-meta{font-size:14px;color:var(--ink-light);margin-bottom:1rem;}
+.detail-section{margin-bottom:1.25rem;}
+.detail-section-label{
+  font-size:10px;text-transform:uppercase;letter-spacing:0.1em;
+  color:var(--ink-light);margin-bottom:0.4rem;font-weight:500;
+}
+.detail-section-val{font-size:15px;color:var(--ink-mid);line-height:1.65;}
+.detail-gift{
+  background:var(--blue-wash);border:1px solid var(--blue-pale);
+  border-radius:10px;padding:0.85rem 1rem;
+  font-size:14px;color:var(--blue);margin-bottom:1.25rem;
+}
+.detail-actions{display:flex;gap:10px;}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border-mid);border-radius:3px;}
+
+
+/* ── LANDING ── */
+.landing{
+  min-height:100vh;
+  background:linear-gradient(160deg,var(--forest) 0%,var(--teal) 45%,var(--blue) 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:2rem 1.5rem;text-align:center;
+}
+.landing-logo{
+  width:80px;height:80px;
+  background:rgba(255,255,255,0.15);
+  border-radius:22px;border:1px solid rgba(255,255,255,0.25);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 1.5rem;
+  box-shadow:0 8px 32px rgba(0,0,0,0.12);
+}
+.landing h1{
+  font-family:'Lora',serif;
+  font-size:32px;font-weight:600;
+  color:white;margin-bottom:0.4rem;
+  letter-spacing:-0.02em;
+}
+.landing-sub{
+  font-size:15px;color:rgba(255,255,255,0.7);
+  margin-bottom:3rem;line-height:1.5;
+}
+.landing-cards{
+  display:flex;flex-direction:column;gap:14px;
+  width:100%;max-width:340px;
+}
+.landing-card{
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:16px;padding:1.25rem 1.5rem;
+  cursor:pointer;text-align:left;
+  transition:all 0.2s;display:flex;align-items:center;gap:16px;
+  backdrop-filter:blur(8px);
+}
+.landing-card:hover{
+  background:rgba(255,255,255,0.2);
+  border-color:rgba(255,255,255,0.4);
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(0,0,0,0.15);
+}
+.landing-card-icon{
+  width:48px;height:48px;min-width:48px;
+  background:rgba(255,255,255,0.15);
+  border-radius:12px;display:flex;align-items:center;justify-content:center;
+  font-size:22px;
+}
+.landing-card-text{}
+.landing-card-title{
+  font-size:16px;font-weight:500;color:white;margin-bottom:2px;
+  font-family:'Lora',serif;
+}
+.landing-card-desc{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.4;}
+.landing-footer{
+  margin-top:2.5rem;font-size:12px;
+  color:rgba(255,255,255,0.4);
+}
+
+/* ── INSPO ── */
+.inspo-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(155px,1fr));
+  gap:12px;margin-bottom:2rem;
+}
+.inspo-card{
+  background:var(--surface-card);
+  border:1.5px solid var(--border);border-radius:12px;
+  overflow:hidden;cursor:pointer;
+  transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s;
+}
+.inspo-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 18px rgba(26,122,110,0.1);
+  border-color:var(--teal-light);
+}
+.inspo-img{
+  width:100%;height:130px;
+  background:linear-gradient(135deg,var(--teal-wash),var(--blue-wash));
+  overflow:hidden;
+}
+.inspo-img img{width:100%;height:130px;object-fit:cover;display:block;}
+.inspo-no-photo{
+  width:100%;height:130px;
+  background:linear-gradient(135deg,var(--teal-wash),var(--blue-wash));
+  display:flex;align-items:center;justify-content:center;
+}
+.inspo-body{padding:0.7rem 0.75rem;}
+.inspo-card-title{
+  font-size:13px;font-weight:500;
+  color:var(--ink);margin-bottom:5px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.inspo-tag{
+  font-size:10px;padding:2px 8px;border-radius:99px;
+  background:var(--teal-wash);color:var(--teal);
+  border:1px solid var(--border);display:inline-block;
+}
+.inspo-link-badge{
+  font-size:10px;color:var(--blue-mid);
+  margin-top:4px;
+}
+
 </style>
 </head>
 <body>
-<div class="app">
-  <div class="prog-wrap" id="prog"></div>
-  <div id="content"></div>
-  <div class="nav" id="nav">
-    <button class="btn" id="bbk" onclick="go(-1)">Back</button>
-    <span class="ctr-b" id="ctr"></span>
-    <button class="btn btn-p" id="bfwd" onclick="go(1)">Continue</button>
+
+<!-- PASSWORD SCREEN -->
+<div id="lock-screen" style="display:none;position:fixed;inset:0;background:linear-gradient(135deg,#0d4f46,#1a7a6e,#2496a0);z-index:999;display:flex;align-items:center;justify-content:center;padding:2rem;">
+  <div style="width:100%;max-width:340px;text-align:center;">
+    <div style="width:80px;height:80px;margin:0 auto 1.5rem;background:rgba(255,255,255,0.15);border-radius:22px;border:1px solid rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;">
+      <svg width="46" height="46" viewBox="0 0 26 26" fill="none">
+        <rect x="1" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.95)"/>
+        <rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.55)"/>
+        <rect x="18" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.95)"/>
+        <rect x="1" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.55)"/>
+        <rect x="9.5" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.95)"/>
+        <rect x="18" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.55)"/>
+        <rect x="1" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.95)"/>
+        <rect x="9.5" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.55)"/>
+        <rect x="18" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.95)"/>
+        <line x1="8" y1="1" x2="8" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+        <line x1="17.5" y1="1" x2="17.5" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+        <line x1="1" y1="8" x2="25" y2="8" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+        <line x1="1" y1="17.5" x2="25" y2="17.5" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+      </svg>
+    </div>
+    <h1 style="font-family:'Lora',serif;font-size:26px;font-weight:600;color:white;margin-bottom:0.4rem;">Stitch &amp; Story</h1>
+    <p style="font-size:14px;color:rgba(255,255,255,0.65);margin-bottom:2rem;">Enter your password to continue</p>
+    <input type="password" id="pw-input" placeholder="Password" onkeydown="if(event.key==='Enter')checkPw()"
+      style="width:100%;padding:13px 16px;font-size:16px;border:1.5px solid rgba(255,255,255,0.25);border-radius:12px;background:rgba(255,255,255,0.12);color:white;margin-bottom:10px;text-align:center;letter-spacing:0.15em;font-family:'DM Sans',sans-serif;backdrop-filter:blur(4px);" 
+      placeholder="••••••••">
+    <div id="pw-error" style="font-size:13px;color:rgba(255,180,180,1);margin-bottom:10px;min-height:18px;"></div>
+    <button onclick="checkPw()"
+      style="width:100%;padding:13px;font-size:15px;font-weight:500;border-radius:12px;border:none;background:rgba(255,255,255,0.2);color:white;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:0.02em;transition:background 0.2s;border:1px solid rgba(255,255,255,0.3);">
+      Enter
+    </button>
+    <p style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:1.5rem;">Share with friends &amp; family — just send them the password.</p>
   </div>
 </div>
 <script>
+
+// ── SET YOUR PASSWORD HERE ──────────────────────────
+var APP_PASSWORD = 'iwanttoquilt';
+// ───────────────────────────────────────────────────
+
+function checkPw(){
+  var input=document.getElementById('pw-input').value;
+  if(input===APP_PASSWORD){
+    localStorage.setItem('quilt_auth','yes');
+    document.getElementById('lock-screen').style.display='none';
+  } else {
+    document.getElementById('pw-error').textContent='Incorrect password — try again.';
+    document.getElementById('pw-input').value='';
+    document.getElementById('pw-input').focus();
+  }
+}
+
+(function(){
+  if(localStorage.getItem('quilt_auth')!=='yes'){
+    document.getElementById('lock-screen').style.display='flex';
+  }
+})();
+
+</script>
+
+<!-- LANDING SCREEN -->
+<div id="landing">
+  <div class="landing">
+    <div class="landing-logo">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+        <rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
+        <rect x="18" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+        <rect x="1" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
+        <rect x="9.5" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+        <rect x="18" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
+        <rect x="1" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+        <rect x="9.5" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
+        <rect x="18" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+        <line x1="8" y1="1" x2="8" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+        <line x1="17.5" y1="1" x2="17.5" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+        <line x1="1" y1="8" x2="25" y2="8" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+        <line x1="1" y1="17.5" x2="25" y2="17.5" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+      </svg>
+    </div>
+    <h1>Stitch &amp; Story</h1>
+    <p class="landing-sub">Your personal quilting companion</p>
+    <div class="landing-cards">
+      <div class="landing-card" onclick="switchTab('guide')">
+        <div class="landing-card-icon">📖</div>
+        <div class="landing-card-text">
+          <div class="landing-card-title">Build a new quilt</div>
+          <div class="landing-card-desc">Step-by-step guide with videos, diagrams &amp; calculators</div>
+        </div>
+      </div>
+      <div class="landing-card" onclick="switchTab('cat')">
+        <div class="landing-card-icon">🧵</div>
+        <div class="landing-card-text">
+          <div class="landing-card-title">My quilt projects</div>
+          <div class="landing-card-desc">Your personal catalogue of finished quilts</div>
+        </div>
+      </div>
+      <div class="landing-card" onclick="switchTab('inspo')">
+        <div class="landing-card-icon">✨</div>
+        <div class="landing-card-text">
+          <div class="landing-card-title">Quilt inspo</div>
+          <div class="landing-card-desc">Save photos &amp; links of quilts you love or want to make</div>
+        </div>
+      </div>
+    </div>
+    <div class="landing-footer">Tap any section to get started</div>
+  </div>
+</div>
+
+<!-- MAIN APP (hidden until section chosen) -->
+<div id="main-app" style="display:none;">
+
+  <header class="app-header">
+    <div class="header-top">
+      <div class="app-logo" onclick="goHome()" style="cursor:pointer;" title="Home">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+        <rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
+        <rect x="18" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+        <rect x="1" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
+        <rect x="9.5" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+        <rect x="18" y="9.5" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
+        <rect x="1" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+        <rect x="9.5" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
+        <rect x="18" y="18" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+        <line x1="8" y1="1" x2="8" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+        <line x1="17.5" y1="1" x2="17.5" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+        <line x1="1" y1="8" x2="25" y2="8" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+        <line x1="1" y1="17.5" x2="25" y2="17.5" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
+      </svg>
+      </div>
+      <div>
+        <div class="app-name">Stitch &amp; Story</div>
+        <div class="app-tagline">Your personal quilting companion</div>
+      </div>
+      <button onclick="goHome()" style="margin-left:auto;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.8);border-radius:8px;padding:6px 12px;font-size:12px;cursor:pointer;font-family:inherit;">⌂ Home</button>
+    </div>
+    <div class="tab-bar">
+      <div class="tab active" id="tab-guide" onclick="switchTab('guide')">📖 Guide</div>
+      <div class="tab" id="tab-cat" onclick="switchTab('cat')">🧵 My Quilts</div>
+      <div class="tab" id="tab-inspo" onclick="switchTab('inspo')">✨ Inspo</div>
+    </div>
+  </header>
+
+  <!-- GUIDE TAB -->
+  <div class="tab-panel active" id="panel-guide">
+    <div class="app">
+      <div class="prog-wrap" id="prog"></div>
+      <div id="gcontent"></div>
+      <div class="g-nav" id="gnav">
+        <button class="btn" id="bbk" onclick="go(-1)">Back</button>
+        <span class="ctr-b" id="ctr"></span>
+        <button class="btn btn-p" id="bfwd" onclick="go(1)">Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATALOGUE TAB -->
+  <div class="tab-panel" id="panel-cat">
+    <div class="app">
+      <div class="cat-header">
+        <h2>My Quilts</h2>
+        <button class="btn btn-p" onclick="openAddModal()">+ Add quilt</button>
+      </div>
+      <div id="cat-list"></div>
+    </div>
+  </div>
+
+  <!-- INSPO TAB -->
+  <div class="tab-panel" id="panel-inspo">
+    <div class="app">
+      <div class="cat-header">
+        <h2>Quilt Inspo</h2>
+        <button class="btn btn-p" onclick="openAddInspo()">+ Add inspo</button>
+      </div>
+      <div id="inspo-list"></div>
+    </div>
+  </div>
+
+</div><!-- end main-app -->
+
+<!-- CATALOGUE DETAIL VIEW -->
+<div id="detail-view" style="display:none">
+  <div class="app">
+    <button class="detail-back" onclick="closeDetail()">← Back to my quilts</button>
+    <div id="detail-content"></div>
+  </div>
+</div>
+
+<!-- INSPO DETAIL VIEW -->
+<div id="inspo-detail-view" style="display:none">
+  <div class="app">
+    <button class="detail-back" onclick="closeInspoDetail()">← Back to inspo board</button>
+    <div id="inspo-detail-content"></div>
+  </div>
+</div>
+
+<!-- CATALOGUE ADD/EDIT MODAL -->
+<div class="modal-bg" id="modal" style="display:none">
+  <div class="modal">
+    <div class="modal-hdr">
+      <h3 id="modal-title">Add a quilt</h3>
+      <button class="close-btn" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Photo</label>
+        <div class="photo-upload" id="photo-upload-zone" onclick="document.getElementById('photo-file').click()">
+          <div id="photo-preview-wrap"><div style="font-size:28px;opacity:0.4;margin-bottom:0.5rem">📷</div><div style="font-size:14px;color:#6b8080">Tap to add a photo</div></div>
+        </div>
+        <input type="file" id="photo-file" accept="image/*" style="display:none" onchange="handlePhotoUpload(event)">
+      </div>
+      <div class="form-group"><label>Pattern name</label><input type="text" id="f-name" placeholder="e.g. Charm Pack Patchwork"></div>
+      <div class="form-group"><label>Date completed</label><input type="date" id="f-date"></div>
+      <div class="form-group"><label>Notes</label><textarea id="f-notes" placeholder="What did you learn? What would you do differently?"></textarea></div>
+      <div class="form-group">
+        <label>Rating</label>
+        <div class="star-picker" id="star-picker">
+          <button class="star-btn" onclick="setRating(1)">★</button>
+          <button class="star-btn" onclick="setRating(2)">★</button>
+          <button class="star-btn" onclick="setRating(3)">★</button>
+          <button class="star-btn" onclick="setRating(4)">★</button>
+          <button class="star-btn" onclick="setRating(5)">★</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="gift-row">
+          <button class="toggle" id="gift-toggle" onclick="toggleGift()"></button>
+          <label style="margin:0;cursor:pointer" onclick="toggleGift()">This quilt was gifted to someone</label>
+        </div>
+        <div class="gift-fields" id="gift-fields" style="display:none">
+          <div class="form-group" style="margin-bottom:0.75rem"><label>Gifted to</label><input type="text" id="f-giftee" placeholder="e.g. Grandma, Sarah's baby shower"></div>
+          <div class="form-group" style="margin-bottom:0"><label>Occasion</label><input type="text" id="f-occasion" placeholder="e.g. Birthday, Christmas, New baby"></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger" id="delete-btn" onclick="deleteQuilt()" style="display:none;margin-right:auto">Delete</button>
+      <button class="btn" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-p" onclick="saveQuilt()">Save quilt</button>
+    </div>
+  </div>
+</div>
+
+<!-- INSPO ADD/EDIT MODAL -->
+<div class="modal-bg" id="inspo-modal" style="display:none">
+  <div class="modal">
+    <div class="modal-hdr">
+      <h3 id="im-title">Add inspiration</h3>
+      <button class="close-btn" onclick="closeInspoModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Photo</label>
+        <div class="photo-upload" id="inspo-photo-zone" onclick="document.getElementById('inspo-photo-file').click()">
+          <div id="inspo-photo-wrap"><div style="font-size:28px;opacity:0.4;margin-bottom:0.5rem">📷</div><div style="font-size:14px;color:#6b8080">Tap to add a photo</div></div>
+        </div>
+        <input type="file" id="inspo-photo-file" accept="image/*" style="display:none" onchange="handleInspoPhoto(event)">
+      </div>
+      <div class="form-group"><label>Title</label><input type="text" id="if-title" placeholder="e.g. Blue log cabin pattern"></div>
+      <div class="form-group">
+        <label>Category</label>
+        <input type="text" id="if-tag" placeholder="e.g. Want to make, Color inspo, Pattern idea, Gift idea" list="tag-suggestions">
+        <datalist id="tag-suggestions">
+          <option value="Want to make">
+          <option value="Color inspo">
+          <option value="Pattern idea">
+          <option value="Gift idea">
+          <option value="Technique to try">
+          <option value="Fabric inspo">
+        </datalist>
+      </div>
+      <div class="form-group"><label>Link (optional)</label><input type="url" id="if-link" placeholder="https://..."></div>
+      <div class="form-group"><label>Notes</label><textarea id="if-notes" placeholder="What do you love about it? Any ideas for adapting it?"></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger" id="idb-del" onclick="deleteInspoFromModal()" style="display:none;margin-right:auto">Remove</button>
+      <button class="btn" onclick="closeInspoModal()">Cancel</button>
+      <button class="btn btn-p" onclick="saveInspoItem()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function goHome(){
+  document.getElementById('main-app').style.display='none';
+  document.getElementById('landing').style.display='block';
+  document.getElementById('detail-view').style.display='none';
+  document.getElementById('inspo-detail-view').style.display='none';
+}
+
+// ── TABS ──────────────────────────────────────────────
+function switchTab(t){
+  document.getElementById('landing').style.display='none';
+  document.getElementById('main-app').style.display='block';
+  document.querySelectorAll('.tab').forEach(function(el){el.classList.remove('active');});
+  document.querySelectorAll('.tab-panel').forEach(function(el){el.classList.remove('active');});
+  document.getElementById('tab-'+t).classList.add('active');
+  document.getElementById('panel-'+t).classList.add('active');
+  if(t==='cat'){closeDetail();renderCat();}
+  if(t==='inspo'){renderInspo();}
+}
+
+// ── STORAGE ───────────────────────────────────────────
+function loadQuilts(){try{var d=localStorage.getItem('quilts_v1');return d?JSON.parse(d):[];}catch(e){return[];}}
+function saveQuilts(q){try{localStorage.setItem('quilts_v1',JSON.stringify(q));}catch(e){}}
+
+// ── CATALOGUE ─────────────────────────────────────────
+function renderCat(){
+  var quilts=loadQuilts();
+  var el=document.getElementById('cat-list');
+  if(!el)return;
+  if(!quilts.length){
+    el.innerHTML='<div class="empty-state"><div class="empty-icon"><svg width="32" height="32" viewBox="0 0 26 26" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.6"/><rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="18" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.6"/><rect x="1" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="9.5" y="9.5" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.6"/><rect x="18" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="1" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.6"/><rect x="9.5" y="18" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="18" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.6"/></svg></div><p>No quilts yet!<br>Finish your first quilt and add it here<br>to start your personal catalogue.</p></div>';
+    return;
+  }
+  var html='<div class="quilt-grid">';
+  quilts.forEach(function(q,i){
+    var stars=q.rating?'★'.repeat(q.rating):'';
+    var photoHTML=q.photo?'<img src="'+q.photo+'" alt="'+q.name+'">':"<div style='width:100%;height:190px;background:linear-gradient(135deg,#e4f5f0,#e8f4fc);display:flex;align-items:center;justify-content:center;'><svg width='44' height='44' viewBox='0 0 26 26' fill='none'><rect x='1' y='1' width='7' height='7' rx='1.5' fill='#1a7a6e' opacity='0.4'/><rect x='9.5' y='1' width='7' height='7' rx='1.5' fill='#2496a0' opacity='0.3'/><rect x='18' y='1' width='7' height='7' rx='1.5' fill='#1a7a6e' opacity='0.4'/><rect x='1' y='9.5' width='7' height='7' rx='1.5' fill='#2496a0' opacity='0.3'/><rect x='9.5' y='9.5' width='7' height='7' rx='1.5' fill='#1a7a6e' opacity='0.4'/><rect x='18' y='9.5' width='7' height='7' rx='1.5' fill='#2496a0' opacity='0.3'/><rect x='1' y='18' width='7' height='7' rx='1.5' fill='#1a7a6e' opacity='0.4'/><rect x='9.5' y='18' width='7' height='7' rx='1.5' fill='#2496a0' opacity='0.3'/><rect x='18' y='18' width='7' height='7' rx='1.5' fill='#1a7a6e' opacity='0.4'/></svg></div>";
+    var tags='';
+    if(q.gifted) tags+='<span class="tag gift">🎁 Gifted to '+q.giftee+'</span>';
+    if(q.rating) tags+='<span class="tag"><span class="stars">'+stars+'</span></span>';
+    html+='<div class="quilt-card" onclick="openDetail('+i+')">';
+    html+='<div class="qc-photo">'+photoHTML+'</div>';
+    html+='<div class="qc-body">';
+    html+='<div class="qc-name">'+escHtml(q.name||'Untitled quilt')+'</div>';
+    html+='<div class="qc-meta">'+(q.date?formatDate(q.date):'No date')+'</div>';
+    if(tags) html+='<div class="qc-tags">'+tags+'</div>';
+    html+='</div></div>';
+  });
+  html+='</div>';
+  el.innerHTML=html;
+}
+
+function openDetail(i){
+  var quilts=loadQuilts();
+  var q=quilts[i];
+  if(!q)return;
+  document.getElementById('panel-cat').style.display='none';
+  var dv=document.getElementById('detail-view');
+  dv.style.display='block';
+  var stars=q.rating?'★'.repeat(q.rating)+'☆'.repeat(5-q.rating):'Not rated';
+  var photoHTML=q.photo?'<img class="detail-photo" src="'+q.photo+'" alt="'+escHtml(q.name)+'">':"<div class='detail-photo-placeholder'><svg width='60' height='60' viewBox='0 0 26 26' fill='none'><rect x='1' y='1' width='7' height='7' rx='1.5' fill='#1a7a6e' opacity='0.4'/><rect x='9.5' y='1' width='7' height='7' rx='1.5' fill='#2496a0' opacity='0.3'/><rect x='18' y='1' width='7' height='7' rx='1.5' fill='#1a7a6e' opacity='0.4'/><rect x='1' y='9.5' width='7' height='7' rx='1.5' fill='#2496a0' opacity='0.3'/><rect x='9.5' y='9.5' width='7' height='7' rx='1.5' fill='#1a7a6e' opacity='0.4'/><rect x='18' y='9.5' width='7' height='7' rx='1.5' fill='#2496a0' opacity='0.3'/><rect x='1' y='18' width='7' height='7' rx='1.5' fill='#1a7a6e' opacity='0.4'/><rect x='9.5' y='18' width='7' height='7' rx='1.5' fill='#2496a0' opacity='0.3'/><rect x='18' y='18' width='7' height='7' rx='1.5' fill='#1a7a6e' opacity='0.4'/></svg></div>";
+  var giftHTML=q.gifted?'<div class="detail-gift">🎁 Gifted to <strong>'+escHtml(q.giftee||'')+'</strong>'+(q.occasion?' for '+escHtml(q.occasion):'')+'</div>':'';
+  var notesHTML=q.notes?'<div class="detail-section"><div class="detail-section-label">Notes</div><div class="detail-section-val">'+escHtml(q.notes)+'</div></div>':'';
+  document.getElementById('detail-content').innerHTML=
+    photoHTML+
+    '<div class="detail-title">'+escHtml(q.name||'Untitled quilt')+'</div>'+
+    '<div class="detail-meta">'+(q.date?formatDate(q.date):'No date added')+'</div>'+
+    '<div style="margin-bottom:1rem"><span class="stars" style="font-size:18px">'+(q.rating?'★'.repeat(q.rating):'')+'</span><span style="color:#ddd;font-size:18px">'+(q.rating?'☆'.repeat(5-q.rating):'No rating')+'</span></div>'+
+    giftHTML+
+    notesHTML+
+    '<div class="detail-actions">'+
+    '<button class="btn btn-p" onclick="openEditModal('+i+')">Edit</button>'+
+    '<button class="btn btn-danger" onclick="confirmDelete('+i+')">Delete</button>'+
+    '</div>';
+}
+
+function closeDetail(){
+  document.getElementById('detail-view').style.display='none';
+  document.getElementById('panel-cat').style.display='block';
+  renderCat();
+}
+
+// ── MODAL ─────────────────────────────────────────────
+var currentRating=0, currentPhoto=null, isGifted=false, editingIndex=-1;
+
+function openAddModal(){
+  editingIndex=-1;
+  currentRating=0;currentPhoto=null;isGifted=false;
+  document.getElementById('modal-title').textContent='Add a quilt';
+  document.getElementById('delete-btn').style.display='none';
+  document.getElementById('f-name').value='';
+  document.getElementById('f-date').value=new Date().toISOString().split('T')[0];
+  document.getElementById('f-notes').value='';
+  document.getElementById('f-giftee').value='';
+  document.getElementById('f-occasion').value='';
+  setRating(0);
+  resetPhotoUpload();
+  document.getElementById('gift-toggle').className='toggle';
+  document.getElementById('gift-fields').style.display='none';
+  document.getElementById('modal').style.display='flex';
+}
+
+function openEditModal(i){
+  var quilts=loadQuilts();var q=quilts[i];if(!q)return;
+  editingIndex=i;currentRating=q.rating||0;currentPhoto=q.photo||null;isGifted=q.gifted||false;
+  document.getElementById('modal-title').textContent='Edit quilt';
+  document.getElementById('delete-btn').style.display='block';
+  document.getElementById('f-name').value=q.name||'';
+  document.getElementById('f-date').value=q.date||'';
+  document.getElementById('f-notes').value=q.notes||'';
+  document.getElementById('f-giftee').value=q.giftee||'';
+  document.getElementById('f-occasion').value=q.occasion||'';
+  setRating(currentRating);
+  if(currentPhoto){
+    document.getElementById('photo-upload-zone').className='photo-upload has-photo';
+    document.getElementById('photo-preview-wrap').innerHTML='<img class="photo-thumb" src="'+currentPhoto+'">';
+  } else {resetPhotoUpload();}
+  document.getElementById('gift-toggle').className='toggle'+(isGifted?' on':'');
+  document.getElementById('gift-fields').style.display=isGifted?'block':'none';
+  document.getElementById('modal').style.display='flex';
+}
+
+function closeModal(){document.getElementById('modal').style.display='none';}
+
+function handlePhotoUpload(e){
+  var f=e.target.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(ev){
+    currentPhoto=ev.target.result;
+    document.getElementById('photo-upload-zone').className='photo-upload has-photo';
+    document.getElementById('photo-preview-wrap').innerHTML='<img class="photo-thumb" src="'+currentPhoto+'">';
+  };
+  r.readAsDataURL(f);
+}
+
+function resetPhotoUpload(){
+  currentPhoto=null;
+  document.getElementById('photo-upload-zone').className='photo-upload';
+  document.getElementById('photo-preview-wrap').innerHTML='<div style="font-size:28px;opacity:0.4;margin-bottom:0.5rem">📷</div><div style="font-size:14px;color:#6b8080">Tap to add a photo</div>';
+}
+
+function setRating(n){
+  currentRating=n;
+  document.querySelectorAll('.star-btn').forEach(function(b,i){b.className='star-btn'+(i<n?' on':'');});
+}
+
+function toggleGift(){
+  isGifted=!isGifted;
+  document.getElementById('gift-toggle').className='toggle'+(isGifted?' on':'');
+  document.getElementById('gift-fields').style.display=isGifted?'block':'none';
+}
+
+function saveQuilt(){
+  var quilts=loadQuilts();
+  var q={
+    name:document.getElementById('f-name').value.trim()||'Untitled quilt',
+    date:document.getElementById('f-date').value,
+    notes:document.getElementById('f-notes').value.trim(),
+    rating:currentRating,
+    photo:currentPhoto,
+    gifted:isGifted,
+    giftee:isGifted?document.getElementById('f-giftee').value.trim():'',
+    occasion:isGifted?document.getElementById('f-occasion').value.trim():'',
+    savedAt:new Date().toISOString()
+  };
+  if(editingIndex>=0){quilts[editingIndex]=q;}else{quilts.unshift(q);}
+  saveQuilts(quilts);
+  closeModal();
+  renderCat();
+}
+
+function deleteQuilt(){
+  if(editingIndex<0)return;
+  if(!confirm('Delete this quilt from your catalogue? This cannot be undone.'))return;
+  var quilts=loadQuilts();
+  quilts.splice(editingIndex,1);
+  saveQuilts(quilts);
+  closeModal();
+  renderCat();
+}
+
+function confirmDelete(i){
+  if(!confirm('Delete this quilt from your catalogue?'))return;
+  var quilts=loadQuilts();
+  quilts.splice(i,1);
+  saveQuilts(quilts);
+  closeDetail();
+}
+
+// ── GUIDE ─────────────────────────────────────────────
 var YT={1:'https://www.youtube.com/watch?v=-TyihOEvJ8E',2:'https://www.youtube.com/watch?v=YayeZcs3FsQ',3:'https://www.youtube.com/watch?v=R7EdVJailUQ',4:'https://www.youtube.com/watch?v=wPEY9VhSL6U',5:'https://www.youtube.com/watch?v=3Yb0xOgc098',6:'https://www.youtube.com/watch?v=efE87vCVo6U'};
-var cur=0,chkd={},uploadedImage=null,feedbackCache=null;
+var gcur=0,chkd={},uploadedImage=null,feedbackCache=null;
 var pv={width:50,height:65,blockSize:5,colors:3};
 
 var DIAGS={
 charmpack:'<div class="diag"><div class="diag-lbl">A charm pack — coordinating 5" pre-cut squares, ready to sew</div><svg viewBox="0 0 380 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:110px;"><rect x="10" y="10" width="52" height="52" rx="3" fill="#9FE1CB" stroke="#1D9E75" stroke-width="1.5"/><rect x="70" y="10" width="52" height="52" rx="3" fill="#ED93B1" stroke="#D4537E" stroke-width="1.5"/><line x1="70" y1="10" x2="122" y2="62" stroke="#D4537E" stroke-width="1" opacity="0.4"/><line x1="122" y1="10" x2="70" y2="62" stroke="#D4537E" stroke-width="1" opacity="0.4"/><rect x="130" y="10" width="52" height="52" rx="3" fill="#85B7EB" stroke="#378ADD" stroke-width="1.5"/><circle cx="156" cy="36" r="16" fill="#378ADD" opacity="0.4"/><rect x="190" y="10" width="52" height="52" rx="3" fill="#EF9F27" stroke="#BA7517" stroke-width="1.5"/><rect x="196" y="16" width="10" height="10" rx="1" fill="#BA7517" opacity="0.6"/><rect x="212" y="16" width="10" height="10" rx="1" fill="#BA7517" opacity="0.6"/><rect x="196" y="32" width="16" height="16" rx="1" fill="#BA7517" opacity="0.5"/><rect x="250" y="10" width="52" height="52" rx="3" fill="#97C459" stroke="#639922" stroke-width="1.5"/><rect x="256" y="16" width="40" height="4" rx="2" fill="#639922" opacity="0.5"/><rect x="256" y="26" width="28" height="4" rx="2" fill="#639922" opacity="0.5"/><rect x="256" y="36" width="36" height="4" rx="2" fill="#639922" opacity="0.5"/><rect x="310" y="10" width="60" height="52" rx="3" fill="#F0997B" stroke="#D85A30" stroke-width="1.5"/><text x="190" y="100" text-anchor="middle" font-size="11" fill="#888">40–42 squares per pack — all coordinated, no cutting needed</text></svg></div>',
 layout:'<div class="diag"><div class="diag-lbl">Plan your layout — arrange before sewing, then photograph it</div><svg viewBox="0 0 380 155" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:155px;"><rect x="10" y="10" width="52" height="40" rx="2" fill="#9FE1CB" stroke="white" stroke-width="2"/><rect x="66" y="10" width="52" height="40" rx="2" fill="#ED93B1" stroke="white" stroke-width="2"/><rect x="122" y="10" width="52" height="40" rx="2" fill="#85B7EB" stroke="white" stroke-width="2"/><rect x="178" y="10" width="52" height="40" rx="2" fill="#EF9F27" stroke="white" stroke-width="2"/><rect x="234" y="10" width="52" height="40" rx="2" fill="#97C459" stroke="white" stroke-width="2"/><rect x="290" y="10" width="80" height="40" rx="2" fill="#F0997B" stroke="white" stroke-width="2"/><rect x="10" y="54" width="52" height="40" rx="2" fill="#F0997B" stroke="white" stroke-width="2"/><rect x="66" y="54" width="52" height="40" rx="2" fill="#9FE1CB" stroke="white" stroke-width="2"/><rect x="122" y="54" width="52" height="40" rx="2" fill="#ED93B1" stroke="white" stroke-width="2"/><rect x="178" y="54" width="52" height="40" rx="2" fill="#85B7EB" stroke="white" stroke-width="2"/><rect x="234" y="54" width="52" height="40" rx="2" fill="#EF9F27" stroke="white" stroke-width="2"/><rect x="290" y="54" width="80" height="40" rx="2" fill="#97C459" stroke="white" stroke-width="2"/><rect x="10" y="98" width="52" height="40" rx="2" fill="#85B7EB" stroke="white" stroke-width="2"/><rect x="66" y="98" width="52" height="40" rx="2" fill="#EF9F27" stroke="white" stroke-width="2"/><rect x="122" y="98" width="52" height="40" rx="2" fill="#97C459" stroke="white" stroke-width="2"/><rect x="178" y="98" width="52" height="40" rx="2" fill="#9FE1CB" stroke="white" stroke-width="2"/><rect x="234" y="98" width="52" height="40" rx="2" fill="#F0997B" stroke="white" stroke-width="2"/><rect x="290" y="98" width="80" height="40" rx="2" fill="#ED93B1" stroke="white" stroke-width="2"/><text x="185" y="150" text-anchor="middle" font-size="12" fill="#888">Spread lights and darks evenly — step back and squint to check</text></svg></div>',
 chainsewing:'<div class="diag"><div class="diag-lbl">Chain piecing — sew pairs back-to-back without cutting thread</div><svg viewBox="0 0 380 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:100px;"><rect x="10" y="18" width="44" height="44" rx="2" fill="#9FE1CB" stroke="#1D9E75" stroke-width="1.5"/><rect x="58" y="18" width="44" height="44" rx="2" fill="#ED93B1" stroke="#D4537E" stroke-width="1.5"/><text x="53" y="45" text-anchor="middle" font-size="14" fill="#888">+</text><path d="M105 40 Q118 40 118 55 Q118 68 130 68 L250 68" stroke="#1D9E75" stroke-width="1.5" fill="none" stroke-dasharray="5 3"/><rect x="130" y="18" width="44" height="44" rx="2" fill="#85B7EB" stroke="#378ADD" stroke-width="1.5"/><rect x="178" y="18" width="44" height="44" rx="2" fill="#EF9F27" stroke="#BA7517" stroke-width="1.5"/><text x="173" y="45" text-anchor="middle" font-size="14" fill="#888">+</text><rect x="250" y="18" width="44" height="44" rx="2" fill="#97C459" stroke="#639922" stroke-width="1.5"/><rect x="298" y="18" width="44" height="44" rx="2" fill="#F0997B" stroke="#D85A30" stroke-width="1.5"/><text x="293" y="45" text-anchor="middle" font-size="14" fill="#888">+</text><text x="190" y="92" text-anchor="middle" font-size="12" fill="#888">Feed pair 1, don\'t cut, feed pair 2, pair 3 — snip apart at end</text></svg></div>',
-seamnesting:'<div class="diag"><div class="diag-lbl">Nesting seams — alternate press direction so corners lie flat</div><svg viewBox="0 0 380 138" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:138px;"><rect x="10" y="8" width="170" height="34" rx="2" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1.5"/><text x="95" y="30" text-anchor="middle" font-size="11" fill="#085041">Row 1 — press seams LEFT</text><polygon points="55,46 44,54 66,54" fill="#1D9E75" opacity="0.8"/><rect x="10" y="54" width="170" height="34" rx="2" fill="#FAECE7" stroke="#D85A30" stroke-width="1.5"/><text x="95" y="76" text-anchor="middle" font-size="11" fill="#4A1B0C">Row 2 — press seams RIGHT</text><polygon points="135,92 146,100 124,100" fill="#D85A30" opacity="0.8"/><rect x="10" y="100" width="170" height="34" rx="2" fill="#E6F1FB" stroke="#378ADD" stroke-width="1.5"/><text x="95" y="122" text-anchor="middle" font-size="11" fill="#042C53">Row 3 — press seams LEFT</text><rect x="200" y="8" width="170" height="126" rx="3" fill="none" stroke="#ccc" stroke-width="0.5"/><rect x="200" y="8" width="42" height="42" fill="#9FE1CB" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="242" y="8" width="42" height="42" fill="#5DCAA5" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="284" y="8" width="42" height="42" fill="#9FE1CB" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="326" y="8" width="44" height="42" fill="#5DCAA5" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="200" y="50" width="42" height="42" fill="#F0997B" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="242" y="50" width="42" height="42" fill="#D85A30" opacity="0.5" stroke="white" stroke-width="1.5"/><rect x="284" y="50" width="42" height="42" fill="#F0997B" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="326" y="50" width="44" height="42" fill="#D85A30" opacity="0.5" stroke="white" stroke-width="1.5"/><rect x="200" y="92" width="42" height="42" fill="#85B7EB" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="242" y="92" width="42" height="42" fill="#378ADD" opacity="0.5" stroke="white" stroke-width="1.5"/><rect x="284" y="92" width="42" height="42" fill="#85B7EB" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="326" y="92" width="44" height="42" fill="#378ADD" opacity="0.5" stroke="white" stroke-width="1.5"/><text x="285" y="124" text-anchor="middle" font-size="10" fill="#888">Seams interlock = flat corners</text></svg></div>',
-sandwich:'<div class="diag"><div class="diag-lbl">The quilt sandwich — three layers, backing face-down on the bottom</div><svg viewBox="0 0 380 135" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:135px;"><rect x="20" y="92" width="340" height="30" rx="3" fill="#C0DD97" stroke="#639922" stroke-width="1.5"/><text x="190" y="112" text-anchor="middle" font-size="12" fill="#27500A">Backing fabric — face DOWN, 4–6" larger all around</text><rect x="30" y="60" width="320" height="28" rx="3" fill="#D3D1C7" stroke="#5F5E5A" stroke-width="1"/><text x="190" y="78" text-anchor="middle" font-size="12" fill="#2C2C2A">Batting (the fluffy middle layer)</text><rect x="45" y="22" width="290" height="34" rx="3" fill="#9FE1CB" stroke="#1D9E75" stroke-width="1.5"/><text x="190" y="43" text-anchor="middle" font-size="12" fill="#085041">Quilt top — face UP</text><text x="190" y="128" text-anchor="middle" font-size="11" fill="#888">Safety pin every 4–6" from center outward</text></svg></div>',
-binding:'<div class="diag"><div class="diag-lbl">Binding — sew to front, fold over edge, hand-stitch to back</div><svg viewBox="0 0 380 125" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:125px;"><rect x="20" y="18" width="180" height="90" rx="3" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1.5"/><text x="110" y="68" text-anchor="middle" font-size="12" fill="#085041">Quilt front</text><rect x="200" y="18" width="22" height="90" rx="2" fill="#ED93B1" stroke="#D4537E" stroke-width="1"/><path d="M222 18 Q235 18 235 30 L235 96 Q235 108 222 108" fill="none" stroke="#D4537E" stroke-width="1.5" stroke-dasharray="5 3"/><text x="260" y="42" font-size="12" fill="#72243E">1. Sew to front</text><text x="260" y="62" font-size="12" fill="#72243E">2. Fold to back</text><text x="260" y="82" font-size="12" fill="#72243E">3. Hand-stitch</text><text x="190" y="118" text-anchor="middle" font-size="11" fill="#888">Miter the corners — Melanie shows this in Part 5</text></svg></div>'
+seamnesting:'<div class="diag"><div class="diag-lbl">Nesting seams — alternate press direction so corners lie flat</div><svg viewBox="0 0 380 138" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:138px;"><rect x="10" y="8" width="170" height="34" rx="2" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1.5"/><text x="95" y="30" text-anchor="middle" font-size="11" fill="#085041">Row 1 — press seams LEFT</text><polygon points="55,46 44,54 66,54" fill="#1D9E75" opacity="0.8"/><rect x="10" y="54" width="170" height="34" rx="2" fill="#FAECE7" stroke="#D85A30" stroke-width="1.5"/><text x="95" y="76" text-anchor="middle" font-size="11" fill="#4A1B0C">Row 2 — press seams RIGHT</text><polygon points="135,92 146,100 124,100" fill="#D85A30" opacity="0.8"/><rect x="10" y="100" width="170" height="34" rx="2" fill="#E6F1FB" stroke="#378ADD" stroke-width="1.5"/><text x="95" y="122" text-anchor="middle" font-size="11" fill="#042C53">Row 3 — press seams LEFT</text><rect x="200" y="8" width="170" height="126" rx="3" fill="none" stroke="#ccc" stroke-width="0.5"/><rect x="200" y="8" width="42" height="42" fill="#9FE1CB" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="242" y="8" width="42" height="42" fill="#5DCAA5" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="284" y="8" width="42" height="42" fill="#9FE1CB" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="326" y="8" width="44" height="42" fill="#5DCAA5" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="200" y="50" width="42" height="42" fill="#F0997B" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="242" y="50" width="42" height="42" fill="#D85A30" opacity="0.5" stroke="white" stroke-width="1.5"/><rect x="284" y="50" width="42" height="42" fill="#F0997B" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="326" y="50" width="44" height="42" fill="#D85A30" opacity="0.5" stroke="white" stroke-width="1.5"/><rect x="200" y="92" width="42" height="42" fill="#85B7EB" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="242" y="92" width="42" height="42" fill="#378ADD" opacity="0.5" stroke="white" stroke-width="1.5"/><rect x="284" y="92" width="42" height="42" fill="#85B7EB" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="326" y="92" width="44" height="42" fill="#378ADD" opacity="0.5" stroke="white" stroke-width="1.5"/></svg></div>',
+sandwich:'<div class="diag"><div class="diag-lbl">The quilt sandwich — three layers, backing face-down on the bottom</div><svg viewBox="0 0 380 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:130px;"><rect x="20" y="88" width="340" height="30" rx="3" fill="#C0DD97" stroke="#639922" stroke-width="1.5"/><text x="190" y="108" text-anchor="middle" font-size="12" fill="#27500A">Backing fabric — face DOWN, 4–6" larger all around</text><rect x="30" y="56" width="320" height="28" rx="3" fill="#D3D1C7" stroke="#5F5E5A" stroke-width="1"/><text x="190" y="74" text-anchor="middle" font-size="12" fill="#2C2C2A">Batting (the fluffy middle layer)</text><rect x="45" y="18" width="290" height="34" rx="3" fill="#9FE1CB" stroke="#1D9E75" stroke-width="1.5"/><text x="190" y="39" text-anchor="middle" font-size="12" fill="#085041">Quilt top — face UP</text></svg></div>',
+binding:'<div class="diag"><div class="diag-lbl">Binding — sew to front, fold over edge, hand-stitch to back</div><svg viewBox="0 0 380 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:120px;"><rect x="20" y="15" width="180" height="90" rx="3" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1.5"/><text x="110" y="65" text-anchor="middle" font-size="12" fill="#085041">Quilt front</text><rect x="200" y="15" width="22" height="90" rx="2" fill="#ED93B1" stroke="#D4537E" stroke-width="1"/><path d="M222 15 Q235 15 235 27 L235 93 Q235 105 222 105" fill="none" stroke="#D4537E" stroke-width="1.5" stroke-dasharray="5 3"/><text x="255" y="40" font-size="12" fill="#72243E">1. Sew to front</text><text x="255" y="60" font-size="12" fill="#72243E">2. Fold to back</text><text x="255" y="80" font-size="12" fill="#72243E">3. Hand-stitch</text></svg></div>'
 };
 
-function getSummary(){
-  var cols=Math.floor(pv.width/pv.blockSize),rows=Math.floor(pv.height/pv.blockSize),total=cols*rows;
-  return {cols:cols,rows:rows,total:total,perColor:Math.ceil(total/pv.colors)};
-}
+function getSummary(){var cols=Math.floor(pv.width/pv.blockSize),rows=Math.floor(pv.height/pv.blockSize),total=cols*rows;return{cols:cols,rows:rows,total:total,perColor:Math.ceil(total/pv.colors)};}
 function mkPlannerCalc(){
   var s=getSummary();
   return '<div class="calc-card"><div class="calc-title">Quilt planner — how many squares do you need?</div><div class="cg"><div class="cf"><label>Quilt width (inches)</label><input type="number" id="pw" value="'+pv.width+'" oninput="upPlanner()"></div><div class="cf"><label>Quilt height (inches)</label><input type="number" id="ph" value="'+pv.height+'" oninput="upPlanner()"></div><div class="cf"><label>Charm square size (inches)</label><input type="number" id="pbs" value="'+pv.blockSize+'" step="0.5" oninput="upPlanner()"></div><div class="cf"><label>Number of fabric colors</label><input type="number" id="pc" value="'+pv.colors+'" min="1" oninput="upPlanner()"></div></div><div class="cres" id="pres"><div class="cr"><div class="rl">Columns</div><div class="rv">'+s.cols+'</div></div><div class="cr"><div class="rl">Rows</div><div class="rv">'+s.rows+'</div></div><div class="cr"><div class="rl">Total squares</div><div class="rv">'+s.total+'</div></div></div><div style="margin-top:8px;padding:0.6rem 0.75rem;background:#f5f5f0;border-radius:8px;"><div class="rl">Squares per color (approx)</div><div class="rv" id="ppc">'+s.perColor+'</div></div></div>';
 }
 function upPlanner(){
-  pv.width=parseFloat(document.getElementById('pw').value)||50;
-  pv.height=parseFloat(document.getElementById('ph').value)||65;
-  pv.blockSize=parseFloat(document.getElementById('pbs').value)||5;
-  pv.colors=parseInt(document.getElementById('pc').value)||3;
+  pv.width=parseFloat(document.getElementById('pw').value)||50;pv.height=parseFloat(document.getElementById('ph').value)||65;
+  pv.blockSize=parseFloat(document.getElementById('pbs').value)||5;pv.colors=parseInt(document.getElementById('pc').value)||3;
   var s=getSummary();
   var el=document.getElementById('pres');
-  if(el) el.innerHTML='<div class="cr"><div class="rl">Columns</div><div class="rv">'+s.cols+'</div></div><div class="cr"><div class="rl">Rows</div><div class="rv">'+s.rows+'</div></div><div class="cr"><div class="rl">Total squares</div><div class="rv">'+s.total+'</div></div>';
-  var p=document.getElementById('ppc'); if(p) p.textContent=s.perColor;
+  if(el)el.innerHTML='<div class="cr"><div class="rl">Columns</div><div class="rv">'+s.cols+'</div></div><div class="cr"><div class="rl">Rows</div><div class="rv">'+s.rows+'</div></div><div class="cr"><div class="rl">Total squares</div><div class="rv">'+s.total+'</div></div>';
+  var p=document.getElementById('ppc');if(p)p.textContent=s.perColor;
 }
-function mkSummary(){
-  var s=getSummary(); if(!s.total) return '';
-  return '<div class="summary">Your plan: <strong>'+s.total+' squares</strong> in a '+s.cols+'×'+s.rows+' grid ('+pv.width+'"×'+pv.height+'") — about <strong>'+s.perColor+' per color</strong> across '+pv.colors+' fabrics.</div>';
+function mkSummaryBanner(){
+  var s=getSummary();if(!s.total)return'';
+  return'<div class="summary">Your plan: <strong>'+s.total+' squares</strong> in a '+s.cols+'×'+s.rows+' grid ('+pv.width+'"×'+pv.height+'") — about <strong>'+s.perColor+' per color</strong> across '+pv.colors+' fabrics.</div>';
 }
 function mkBackingCalc(){
   var bw=Math.round(pv.width+8),bh=Math.round(pv.height+8),yds=((bw*bh)/1296*1.1).toFixed(2);
-  return '<div class="calc-card"><div class="calc-title">Batting & backing calculator</div><div class="cg"><div class="cf"><label>Quilt top width (inches)</label><input type="number" id="bw" value="'+pv.width+'" oninput="upBacking()"></div><div class="cf"><label>Quilt top height (inches)</label><input type="number" id="bh" value="'+pv.height+'" oninput="upBacking()"></div></div><div class="cres" id="bres"><div class="cr"><div class="rl">Batting size</div><div class="rv">'+bw+'×'+bh+'<span class="ru">"</span></div></div><div class="cr"><div class="rl">Backing size</div><div class="rv">'+bw+'×'+bh+'<span class="ru">"</span></div></div><div class="cr"><div class="rl">Backing yardage</div><div class="rv">'+yds+'<span class="ru"> yd</span></div></div></div></div>';
+  return'<div class="calc-card"><div class="calc-title">Batting & backing calculator</div><div class="cg"><div class="cf"><label>Quilt top width (inches)</label><input type="number" id="bw" value="'+pv.width+'" oninput="upBacking()"></div><div class="cf"><label>Quilt top height (inches)</label><input type="number" id="bh" value="'+pv.height+'" oninput="upBacking()"></div></div><div class="cres" id="bres"><div class="cr"><div class="rl">Batting size</div><div class="rv">'+bw+'×'+bh+'<span class="ru">"</span></div></div><div class="cr"><div class="rl">Backing size</div><div class="rv">'+bw+'×'+bh+'<span class="ru">"</span></div></div><div class="cr"><div class="rl">Backing yardage</div><div class="rv">'+yds+'<span class="ru"> yd</span></div></div></div></div>';
 }
 function upBacking(){
   var w=parseFloat(document.getElementById('bw').value)||pv.width,h=parseFloat(document.getElementById('bh').value)||pv.height;
   var bw=Math.round(w+8),bh=Math.round(h+8),yds=((bw*bh)/1296*1.1).toFixed(2);
   var el=document.getElementById('bres');
-  if(el) el.innerHTML='<div class="cr"><div class="rl">Batting size</div><div class="rv">'+bw+'×'+bh+'<span class="ru">"</span></div></div><div class="cr"><div class="rl">Backing size</div><div class="rv">'+bw+'×'+bh+'<span class="ru">"</span></div></div><div class="cr"><div class="rl">Backing yardage</div><div class="rv">'+yds+'<span class="ru"> yd</span></div></div>';
+  if(el)el.innerHTML='<div class="cr"><div class="rl">Batting size</div><div class="rv">'+bw+'×'+bh+'<span class="ru">"</span></div></div><div class="cr"><div class="rl">Backing size</div><div class="rv">'+bw+'×'+bh+'<span class="ru">"</span></div></div><div class="cr"><div class="rl">Backing yardage</div><div class="rv">'+yds+'<span class="ru"> yd</span></div></div>';
 }
 function mkChecklist(items,si){
-  if(!chkd[si]) chkd[si]={};
-  return '<ul class="checklist">'+items.map(function(item,i){var on=chkd[si][i];return '<li class="'+(on?'li-done':'')+'" onclick="toggle('+si+','+i+')"><div class="chk '+(on?'on':'')+'"></div><span>'+item+'</span></li>';}).join('')+'</ul>';
+  if(!chkd[si])chkd[si]={};
+  return'<ul class="checklist">'+items.map(function(item,i){var on=chkd[si][i];return'<li class="'+(on?'li-done':'')+'" onclick="toggle('+si+','+i+')"><div class="chk '+(on?'on':'')+'"></div><span>'+item+'</span></li>';}).join('')+'</ul>';
 }
-function toggle(si,ii){if(!chkd[si])chkd[si]={};chkd[si][ii]=!chkd[si][ii];render();}
+function toggle(si,ii){if(!chkd[si])chkd[si]={};chkd[si][ii]=!chkd[si][ii];renderGuide();}
 function mkAIPanel(){
-  var pre=uploadedImage?'<div class="upload-zone has-img" onclick="triggerUp()"><img class="preview-img" src="'+uploadedImage+'"/></div>':'<div class="upload-zone" onclick="triggerUp()"><div style="font-size:32px;opacity:0.3;margin-bottom:0.5rem">📷</div><div class="upload-hint">Tap to upload a photo of your layout</div><div class="upload-sub">Taken from directly above works best</div></div>';
+  var pre=uploadedImage?'<div class="upload-zone has-img" onclick="triggerUp()"><img class="preview-img" src="'+uploadedImage+'"/></div>':'<div class="upload-zone" onclick="triggerUp()"><div style="font-size:28px;opacity:0.4;margin-bottom:0.5rem">📷</div><div class="upload-hint">Tap to upload a photo of your layout</div><div class="upload-sub">Taken from directly above works best</div></div>';
   var fb=feedbackCache?renderFB(feedbackCache):'';
   var dis=(!uploadedImage||feedbackCache)?'disabled':'';
   var lbl=feedbackCache?'Feedback received':'Analyze my layout';
-  return '<div class="ai-panel"><div class="ai-hdr"><div class="ai-dot"></div><span class="ai-hdr-txt">AI layout feedback</span><span class="ai-hdr-sub">Powered by Claude</span></div><div class="ai-body" id="ai-body">'+pre+'<input type="file" id="fup" accept="image/*" style="display:none" onchange="handleFile(event)"><button class="analyze-btn" id="abtn" onclick="analyze()" '+dis+'>'+lbl+'</button>'+fb+'</div></div>';
+  return'<div class="ai-panel"><div class="ai-hdr"><div class="ai-dot"></div><span class="ai-hdr-txt">AI layout feedback</span><span class="ai-hdr-sub">Powered by Claude</span></div><div class="ai-body" id="ai-body">'+pre+'<input type="file" id="fup" accept="image/*" style="display:none" onchange="handleFile(event)"><button class="analyze-btn" id="abtn" onclick="analyze()" '+dis+'>'+lbl+'</button>'+fb+'</div></div>';
 }
 function triggerUp(){document.getElementById('fup').click();}
-function handleFile(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(ev){uploadedImage=ev.target.result;feedbackCache=null;render();};r.readAsDataURL(f);}
+function handleFile(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(ev){uploadedImage=ev.target.result;feedbackCache=null;renderGuide();};r.readAsDataURL(f);}
 function renderFB(d){
   var secs=[{k:'colorBalance',l:'Color balance',c:'#1D9E75'},{k:'visualRhythm',l:'Pattern & rhythm',c:'#378ADD'},{k:'contrast',l:'Contrast',c:'#BA7517'},{k:'suggestions',l:'Suggestions',c:'#D4537E'}];
-  return '<div class="fb-sections">'+secs.map(function(s){return '<div class="fb-sec"><div class="fb-lbl"><div class="fb-dot" style="background:'+s.c+'"></div>'+s.l+'</div><div class="fb-txt">'+(d[s.k]||'')+'</div></div>';}).join('')+'</div><button class="retry-btn" onclick="retryAI()">Try a different photo</button>';
+  return'<div class="fb-sections">'+secs.map(function(s){return'<div class="fb-sec"><div class="fb-lbl"><div class="fb-dot" style="background:'+s.c+'"></div>'+s.l+'</div><div class="fb-txt">'+(d[s.k]||'')+'</div></div>';}).join('')+'</div><button class="retry-btn" onclick="retryAI()">Try a different photo</button>';
 }
 async function analyze(){
   if(!uploadedImage)return;
@@ -163,58 +1126,175 @@ async function analyze(){
   body.innerHTML='<div class="upload-zone has-img"><img class="preview-img" src="'+uploadedImage+'"/></div><div class="loading"><span></span><span></span><span></span></div>';
   var b64=uploadedImage.split(',')[1],mt=uploadedImage.split(';')[0].split(':')[1];
   try{
-    var r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:mt,data:b64}},{type:'text',text:'You are a friendly, encouraging quilting expert. Analyze this photo of a quilt block layout and respond in JSON only — no preamble, no markdown, no backticks. Use exactly this structure:\n{\n  "colorBalance": "2-3 sentences on color distribution and balance",\n  "visualRhythm": "2-3 sentences on pattern repetition and visual rhythm",\n  "contrast": "2-3 sentences on light vs dark contrast",\n  "suggestions": "2-3 specific actionable suggestions for improving the layout before sewing"\n}\nBe warm, specific, and practical. Speak directly to a beginner quilter.'}]}]})});
+    var r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:mt,data:b64}},{type:'text',text:'You are a friendly, encouraging quilting expert. Analyze this quilt block layout photo and respond in JSON only — no preamble, no markdown, no backticks:\n{\n  "colorBalance": "2-3 sentences on color distribution",\n  "visualRhythm": "2-3 sentences on pattern and visual rhythm",\n  "contrast": "2-3 sentences on light vs dark contrast",\n  "suggestions": "2-3 specific actionable suggestions for improvement"\n}\nBe warm and practical. Speak to a beginner quilter.'}]}]})});
     var data=await r.json();
     var txt=data.content.map(function(b){return b.text||'';}).join('');
     feedbackCache=JSON.parse(txt.replace(/```json|```/g,'').trim());
-    render();
+    renderGuide();
   }catch(e){
     var b2=document.getElementById('ai-body');
     if(b2)b2.innerHTML='<div class="upload-zone has-img"><img class="preview-img" src="'+uploadedImage+'"/></div><p style="padding:1rem;font-size:14px;color:#888">Something went wrong. Please try again.</p><button class="analyze-btn" onclick="analyze()">Try again</button>';
   }
 }
-function retryAI(){feedbackCache=null;uploadedImage=null;render();}
+function retryAI(){feedbackCache=null;uploadedImage=null;renderGuide();}
 function openVid(n){window.open(YT[n],'_blank');}
 
 var steps=[
-{phase:'Step 1 — Planning',title:'Plan your quilt size & block count',body:'Before buying anything, figure out exactly how many squares you need. Enter your desired quilt dimensions, your charm square size, and how many fabric colors you\'re planning — and the calculator will tell you your grid and how many squares to buy per color.',tip:'Tip: A standard charm pack has 40–42 squares at 5". A good beginner lap quilt is around 50"×65", which needs about 130 squares — roughly 3 charm packs.',calc:'planner',checklist:['Decide on your finished quilt size','Choose your charm square size (5" is standard)','Note how many squares per color you need to buy']},
-{phase:'Step 2 — Getting started',title:'Choose your charm pack',body:'Melanie recommends starting with a charm pack — pre-cut 5" fabric squares that coordinate perfectly. No rotary cutter required! Browse your local quilt shop or search "charm pack" online for bundles in colors you love.',tip:'Tip: Pick a charm pack with a mix of lights and darks — contrast is what makes the patchwork pop.',video:1,vlabel:'Part 1: Intro & charm packs',diag:'charmpack',checklist:['Buy the right number of charm packs based on your plan above','Look for a mix of lights, mediums, and darks','Pre-wash optional — Melanie skips this step for charm packs']},
-{phase:'Step 3 — Planning',title:'Arrange your layout',body:'Lay all your squares on a flat surface in a grid before sewing a single stitch. Shuffle until lights and darks feel balanced. Take a photo when happy — then use the AI feedback tool below to get aesthetic suggestions before committing.',tip:'Tip: Squint your eyes at the layout — the blurry view shows contrast at a glance and makes problem spots obvious.',video:1,vlabel:'Part 1: Planning layout',diag:'layout',aiFeedback:true,checklist:['Lay all squares out in a grid on the floor or a bed','Shuffle until lights and darks are spread evenly','Get AI feedback on your layout (below)','Photograph your final layout before picking it up','Stack squares in row order (row 1 on top, last row at bottom)']},
-{phase:'Step 4 — Sewing',title:'Chain piece your squares into rows',body:'Sew squares in pairs using a ¼" seam allowance, right sides facing. Use chain piecing — feed the next pair through immediately after the last without cutting the thread. Snip apart after, then join pairs into full rows.',tip:'Tip: Set stitch length to 2.0–2.5mm. Shorter stitches are much harder to unpick if you make a mistake!',video:1,vlabel:'Part 1: Chain piecing',diag:'chainsewing'},
-{phase:'Step 5 — Pressing',title:'Press seams and join the rows',body:'Press seams in each row in alternating directions — row 1 left, row 2 right, row 3 left. This is called nesting seams. When you join the rows, the seam allowances interlock, giving you perfectly flat patchwork corners.',tip:'Tip: Use a dry iron and press (lift and place) rather than dragging — dragging stretches the fabric.',video:1,vlabel:'Part 1: Joining rows',diag:'seamnesting',checklist:['Press row 1 seams left, row 2 right, row 3 left, alternating','Pin rows together matching every seam junction','Sew rows together one at a time','Press the finished quilt top flat','Measure your quilt top and write down the dimensions']},
-{phase:'Step 6 — Quilt sandwich',title:'Prepare batting & backing',body:'Your quilt has three layers: the pieced top, fluffy batting in the middle, and backing fabric behind. Both batting and backing must be 4–6" larger than your quilt top on every side. The calculator pre-fills from your plan in step 1.',tip:'Tip: Melanie recommends Warm and White or Warm and Natural batting for beginners — easy to find and easy to sew through.',video:2,vlabel:'Part 2: Quilt sandwich',diag:'sandwich',calc:'backing'},
-{phase:'Step 7 — Basting',title:'Baste the three layers',body:'Tape the backing face-down to a hard floor. Layer batting on top. Lay your quilt top face-up and smooth from center out. Safety-pin baste every 4–6" across the whole quilt.',tip:'Tip: Start pinning from the center and work outward — this prevents the layers from shifting at the edges.',video:2,vlabel:'Part 2: Basting method',checklist:['Tape backing face-down to floor with painters tape','Center batting on top and smooth flat','Lay quilt top face-up and smooth from center outward','Safety-pin every 4–6" across entire surface','Remove tape from edges when done']},
-{phase:'Step 8 — Quilting',title:'Stitch all three layers together',body:'Now you "quilt" the sandwich — sewing through all three layers. Melanie teaches echo quilting: stitch alongside existing seam lines using the presser foot edge as a guide. Forgiving, beautiful, great drape.',tip:'Tip: A walking foot feeds all three layers evenly and prevents puckering on the back.',video:3,vlabel:'Part 3: Echo quilting technique',checklist:['Attach walking foot if your machine has one','Start quilting from the center outward','Stitch alongside seam lines using presser foot as guide','Check the back occasionally for puckers','Press the finished quilted piece lightly']},
-{phase:'Step 9 — Squaring up',title:'Trim and make the binding',body:'Once quilted, trim all four edges so corners are perfectly square. Cut binding strips 2.5" wide, join end-to-end, and press in half lengthwise.',tip:'Tip: Cut a little at a time — you can always take more off, but you cannot put it back!',video:4,vlabel:'Part 4: Squaring up & binding strips',checklist:['Trim all four edges to square up corners','Check corners with a square ruler','Cut binding strips 2.5" wide across the fabric width','Join strips end-to-end at a 45° angle','Press strip in half lengthwise (wrong sides together)']},
-{phase:'Step 10 — Binding',title:'Attach the binding',body:'Sew the binding to the front of the quilt with a ¼" seam, mitering each corner neatly. Then fold it over to the back and hand-stitch all the way around.',tip:'Tip: Use binding clips or hair clips to hold the folded binding to the back while you hand-stitch.',video:5,vlabel:'Part 5: Attaching the binding',diag:'binding',checklist:['Sew binding to front edge with ¼" seam','Miter each corner (watch Melanie\'s video)','Fold binding to the back','Hand-stitch all the way around','Secure the start and end join neatly']},
-{phase:'Step 11 — Finishing!',title:'Label and wash your quilt',body:'You did it! Add a fabric label to the back corner with your name and the date. Then give the quilt its first wash — this softens the batting and gives it that wonderful crinkly feel.',tip:'Tip: Wash cold, gentle cycle. Dry on low heat with wool dryer balls to fluff the batting evenly.',video:6,vlabel:'Part 6: Labeling & washing',checklist:['Write your name and date on a fabric scrap','Sew or fuse the label to the back corner','Wash on gentle, cold water','Dry on low heat with dryer balls','Take a photo and add your quilt to your catalogue!']}
+{phase:'Step 1 — Planning',title:'Plan your quilt size & block count',body:'Before buying anything, figure out exactly how many squares you need. Enter your desired quilt dimensions, charm square size, and number of fabric colors — the calculator will give you your grid and squares per color.',tip:'Tip: A standard charm pack has 40–42 squares at 5". A good beginner lap quilt is around 50"×65", which needs about 130 squares — roughly 3 charm packs.',calc:'planner',checklist:['Decide on your finished quilt size','Choose your charm square size (5" is standard)','Note how many squares per color you need to buy']},
+{phase:'Step 2 — Getting started',title:'Choose your charm pack',body:'Melanie recommends starting with a charm pack — pre-cut 5" fabric squares that coordinate perfectly. No rotary cutter required! Browse your local quilt shop or search "charm pack" online for bundles in colors you love.',tip:'Tip: Pick a charm pack with a mix of lights and darks — contrast is what makes the patchwork pop.',video:1,vlabel:'Part 1: Intro & charm packs',diag:'charmpack',checklist:['Buy the right number of charm packs based on your plan','Look for a mix of lights, mediums, and darks','Pre-wash optional — Melanie skips this for charm packs']},
+{phase:'Step 3 — Planning',title:'Arrange your layout',body:'Lay all your squares on a flat surface in a grid before sewing. Shuffle until lights and darks feel balanced. Take a photo when happy — then use the AI feedback tool below to get suggestions before committing.',tip:'Tip: Squint your eyes at the layout — the blurry view shows contrast at a glance and makes problem spots obvious.',video:1,vlabel:'Part 1: Planning layout',diag:'layout',aiFeedback:true,checklist:['Lay all squares out in a grid','Shuffle until lights and darks are spread evenly','Get AI feedback on your layout (below)','Photograph your final layout','Stack squares in row order before picking up']},
+{phase:'Step 4 — Sewing',title:'Chain piece your squares into rows',body:'Sew squares in pairs using a ¼" seam allowance, right sides facing. Use chain piecing — feed the next pair through immediately after the last without cutting thread. Snip apart after, then join pairs into full rows.',tip:'Tip: Set stitch length to 2.0–2.5mm. Shorter stitches are much harder to unpick!',video:1,vlabel:'Part 1: Chain piecing',diag:'chainsewing'},
+{phase:'Step 5 — Pressing',title:'Press seams and join the rows',body:'Press seams in each row in alternating directions — row 1 left, row 2 right, row 3 left. This is called nesting seams. When you join the rows, the seam allowances interlock, giving you perfectly flat corners.',tip:'Tip: Use a dry iron and press (lift and place) rather than dragging — dragging stretches the fabric.',video:1,vlabel:'Part 1: Joining rows',diag:'seamnesting',checklist:['Press row 1 left, row 2 right, row 3 left, alternating','Pin rows together matching every seam junction','Sew rows together one at a time','Press the finished quilt top flat']},
+{phase:'Step 6 — Quilt sandwich',title:'Prepare batting & backing',body:'Your quilt has three layers: the pieced top, fluffy batting in the middle, and backing fabric behind. Both batting and backing must be 4–6" larger than your quilt top on every side.',tip:'Tip: Melanie recommends Warm and White or Warm and Natural batting for beginners.',video:2,vlabel:'Part 2: Quilt sandwich',diag:'sandwich',calc:'backing'},
+{phase:'Step 7 — Basting',title:'Baste the three layers',body:'Tape the backing face-down to a hard floor. Layer batting on top. Lay your quilt top face-up and smooth from center out. Safety-pin baste every 4–6" across the whole quilt.',tip:'Tip: Start pinning from the center and work outward to prevent the layers from shifting.',video:2,vlabel:'Part 2: Basting method',checklist:['Tape backing face-down to floor','Center batting on top and smooth flat','Lay quilt top face-up and smooth from center out','Safety-pin every 4–6" across entire surface']},
+{phase:'Step 8 — Quilting',title:'Stitch all three layers together',body:'Now you "quilt" the sandwich — sewing through all three layers. Melanie teaches echo quilting: stitch alongside existing seam lines using the presser foot edge as a guide.',tip:'Tip: A walking foot feeds all three layers evenly and prevents puckering on the back.',video:3,vlabel:'Part 3: Echo quilting',checklist:['Attach walking foot if your machine has one','Start quilting from the center outward','Stitch alongside seam lines','Check the back occasionally for puckers']},
+{phase:'Step 9 — Squaring up',title:'Trim and make the binding',body:'Once quilted, trim all four edges so corners are perfectly square. Cut binding strips 2.5" wide, join end-to-end, and press in half lengthwise.',tip:'Tip: Cut a little at a time — you can always take more off but not put it back!',video:4,vlabel:'Part 4: Squaring up & binding',checklist:['Trim all four edges to square up corners','Cut binding strips 2.5" wide','Join strips end-to-end at a 45° angle','Press in half lengthwise, wrong sides together']},
+{phase:'Step 10 — Binding',title:'Attach the binding',body:'Sew the binding to the front with a ¼" seam, mitering each corner neatly. Then fold it over to the back and hand-stitch all the way around.',tip:'Tip: Use binding clips or hair clips to hold the folded binding while you hand-stitch.',video:5,vlabel:'Part 5: Attaching the binding',diag:'binding',checklist:['Sew binding to front edge with ¼" seam','Miter each corner (watch Melanie\'s video)','Fold binding to the back','Hand-stitch all the way around']},
+{phase:'Step 11 — Finishing!',title:'Label, wash, and catalogue your quilt',body:'You did it! Add a fabric label to the back corner. Give the quilt its first wash to soften the batting. Then flip over to the My Quilts tab to add it to your personal catalogue.',tip:'Tip: Wash cold, gentle cycle. Dry on low with wool dryer balls to fluff the batting evenly.',video:6,vlabel:'Part 6: Labeling & washing',checklist:['Write your name and date on a fabric scrap','Sew or fuse the label to the back corner','Wash on gentle, cold water','Dry on low heat with dryer balls']}
 ];
 
-function renderProg(){document.getElementById('prog').innerHTML=steps.map(function(_,i){return '<div class="pseg '+(i<cur?'done':i===cur?'active':'')+'"></div>';}).join('');}
-function render(){
-  if(cur>=steps.length){
-    document.getElementById('content').innerHTML='<div class="done"><div style="font-size:48px;margin-bottom:1rem">🧵</div><h2>Your first quilt is done!</h2><p>You have completed all 11 steps of Melanie Ham\'s beginner series. Time to save this moment!</p><div class="done-btns"><button class="btn" onclick="cur=0;render();renderProg()">Start over</button></div></div>';
-    document.getElementById('nav').style.display='none';
+function renderProg(){document.getElementById('prog').innerHTML=steps.map(function(_,i){return'<div class="pseg '+(i<gcur?'done':i===gcur?'active':'')+'"></div>';}).join('');}
+function renderGuide(){
+  if(gcur>=steps.length){
+    document.getElementById('gcontent').innerHTML='<div class="done"><div style="width:70px;height:70px;margin:0 auto 1.25rem;background:linear-gradient(135deg,#e4f5f0,#e8f4fc);border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid #daeae6;"><svg width="36" height="36" viewBox="0 0 26 26" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.8"/><rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="18" y="1" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.8"/><rect x="1" y="9.5" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="9.5" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.8"/><rect x="18" y="9.5" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="1" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="9.5" y="18" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.8"/><rect x="18" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/></svg></div><h2>Your first quilt is done!</h2><p>Head over to the <strong>My Quilts</strong> tab to add it to your personal catalogue!</p><div class="done-btns"><button class="btn" onclick="gcur=0;renderGuide();renderProg()">Start guide over</button><button class="btn btn-p" onclick="switchTab(\'cat\');openAddModal()">Add to catalogue →</button></div></div>';
+    document.getElementById('gnav').style.display='none';
     return;
   }
-  document.getElementById('nav').style.display='flex';
-  var s=steps[cur];
-  document.getElementById('ctr').textContent=(cur+1)+' of '+steps.length;
-  document.getElementById('bbk').disabled=cur===0;
-  document.getElementById('bfwd').textContent=cur===steps.length-1?'Finish':'Continue';
+  document.getElementById('gnav').style.display='flex';
+  var s=steps[gcur];
+  document.getElementById('ctr').textContent=(gcur+1)+' of '+steps.length;
+  document.getElementById('bbk').disabled=gcur===0;
+  document.getElementById('bfwd').textContent=gcur===steps.length-1?'Finish':'Continue';
   var h='<div class="phase-tag">'+s.phase+'</div><div class="step-title">'+s.title+'</div><div class="step-body">'+s.body+'</div>';
-  if(s.video) h+='<button class="vbtn" onclick="openVid('+s.video+')"><div class="vico"></div><div class="vlbl"><strong>Watch: '+s.vlabel+'</strong><span>Melanie Ham on YouTube</span></div></button>';
-  if(s.tip) h+='<div class="tip"><strong>Quilter\'s tip:</strong> '+s.tip+'</div>';
-  if(s.diag) h+=DIAGS[s.diag]||'';
-  if(s.calc==='planner') h+=mkPlannerCalc();
-  if(s.calc==='backing') h+=mkBackingCalc();
-  if(s.aiFeedback) h+=mkAIPanel();
-  if(s.checklist) h+=mkChecklist(s.checklist,cur);
-  if(cur===0) h+=mkSummary();
-  document.getElementById('content').innerHTML=h;
+  if(s.video)h+='<button class="vbtn" onclick="openVid('+s.video+')"><div class="vico"></div><div class="vlbl"><strong>Watch: '+s.vlabel+'</strong><span>Melanie Ham on YouTube</span></div></button>';
+  if(s.tip)h+='<div class="tip"><strong>Quilter\'s tip:</strong> '+s.tip+'</div>';
+  if(s.diag)h+=DIAGS[s.diag]||'';
+  if(s.calc==='planner')h+=mkPlannerCalc();
+  if(s.calc==='backing')h+=mkBackingCalc();
+  if(s.aiFeedback)h+=mkAIPanel();
+  if(s.checklist)h+=mkChecklist(s.checklist,gcur);
+  if(gcur===0)h+=mkSummaryBanner();
+  document.getElementById('gcontent').innerHTML=h;
 }
-function go(d){cur=Math.max(0,Math.min(steps.length,cur+d));render();renderProg();window.scrollTo(0,0);}
-renderProg();render();
+function go(d){gcur=Math.max(0,Math.min(steps.length,gcur+d));renderGuide();renderProg();window.scrollTo(0,0);}
+
+// ── UTILS ─────────────────────────────────────────────
+function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function formatDate(d){if(!d)return'';try{var dt=new Date(d+'T00:00:00');return dt.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});}catch(e){return d;}}
+
+// ── INSPO ─────────────────────────────────────────────
+function loadInspo(){try{var d=localStorage.getItem('inspo_v1');return d?JSON.parse(d):[];}catch(e){return[];}}
+function saveInspoData(items){try{localStorage.setItem('inspo_v1',JSON.stringify(items));}catch(e){}}
+
+function renderInspo(){
+  var items=loadInspo();
+  var el=document.getElementById('inspo-list');
+  if(!el)return;
+  if(!items.length){
+    el.innerHTML='<div class="empty-state"><div class="empty-icon" style="margin:0 auto 1rem;"><svg width="32" height="32" viewBox="0 0 26 26" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="18" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="1" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="9.5" y="9.5" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="18" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="1" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="9.5" y="18" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="18" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/></svg></div><p>No inspiration saved yet!<br>Add photos, links, or notes about quilts<br>you love or want to make someday.</p></div>';
+    return;
+  }
+  var html='<div class="inspo-grid">';
+  items.forEach(function(item,i){
+    var imgHTML=item.photo
+      ? '<img src="'+item.photo+'" alt="'+escHtml(item.title||'')+'">'
+      : '<div class="inspo-no-photo"><svg width="32" height="32" viewBox="0 0 26 26" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.4"/><rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.3"/><rect x="18" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.4"/><rect x="1" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.3"/><rect x="9.5" y="9.5" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.4"/><rect x="18" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.3"/><rect x="1" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.4"/><rect x="9.5" y="18" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.3"/><rect x="18" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.4"/></svg></div>';
+    var tag=item.tag||'Inspiration';
+    html+='<div class="inspo-card" onclick="openInspoDetail('+i+')"><div class="inspo-img">'+imgHTML+'</div><div class="inspo-body"><div class="inspo-card-title">'+escHtml(item.title||'Untitled')+'</div><span class="inspo-tag">'+escHtml(tag)+'</span>'+(item.link?'<div class="inspo-link-badge">🔗 Has link</div>':'')+'</div></div>';
+  });
+  html+='</div>';
+  el.innerHTML=html;
+}
+
+function openInspoDetail(i){
+  var items=loadInspo(); var item=items[i]; if(!item)return;
+  document.getElementById('panel-inspo').style.display='none';
+  var dv=document.getElementById('inspo-detail-view'); dv.style.display='block';
+  var imgHTML=item.photo
+    ? '<img class="detail-photo" src="'+item.photo+'" alt="'+escHtml(item.title||'')+'">'
+    : '<div class="detail-photo-placeholder"><svg width="60" height="60" viewBox="0 0 26 26" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.3"/><rect x="18" y="1" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="1" y="9.5" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.3"/><rect x="9.5" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="18" y="9.5" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.3"/><rect x="1" y="18" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="9.5" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.3"/><rect x="18" y="18" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/></svg></div>';
+  var linkHTML=item.link ? '<div class="detail-section"><div class="detail-section-label">Link</div><div class="detail-section-val"><a href="'+escHtml(item.link)+'" target="_blank" style="color:var(--teal-mid);word-break:break-all;">'+escHtml(item.link)+'</a></div></div>' : '';
+  var notesHTML=item.notes ? '<div class="detail-section"><div class="detail-section-label">Notes</div><div class="detail-section-val">'+escHtml(item.notes)+'</div></div>' : '';
+  document.getElementById('inspo-detail-content').innerHTML=imgHTML+'<div class="detail-title">'+escHtml(item.title||'Untitled')+'</div><div class="detail-meta" style="color:var(--teal)">'+escHtml(item.tag||'Inspiration')+'</div>'+linkHTML+notesHTML+'<div class="detail-actions"><button class="btn btn-p" onclick="openEditInspo('+i+')">Edit</button><button class="btn btn-danger" onclick="deleteInspoConfirm('+i+')">Delete</button></div>';
+}
+
+function closeInspoDetail(){
+  document.getElementById('inspo-detail-view').style.display='none';
+  document.getElementById('panel-inspo').style.display='block';
+  renderInspo();
+}
+
+var inspoPhoto=null, inspoEditIdx=-1;
+function openAddInspo(){
+  inspoEditIdx=-1; inspoPhoto=null;
+  document.getElementById('im-title').textContent='Add inspiration';
+  document.getElementById('idb-del').style.display='none';
+  document.getElementById('if-title').value='';
+  document.getElementById('if-tag').value='';
+  document.getElementById('if-link').value='';
+  document.getElementById('if-notes').value='';
+  resetInspoPhoto();
+  document.getElementById('inspo-modal').style.display='flex';
+}
+function openEditInspo(i){
+  var items=loadInspo(); var item=items[i]; if(!item)return;
+  inspoEditIdx=i; inspoPhoto=item.photo||null;
+  document.getElementById('im-title').textContent='Edit inspiration';
+  document.getElementById('idb-del').style.display='block';
+  document.getElementById('if-title').value=item.title||'';
+  document.getElementById('if-tag').value=item.tag||'';
+  document.getElementById('if-link').value=item.link||'';
+  document.getElementById('if-notes').value=item.notes||'';
+  if(inspoPhoto){
+    document.getElementById('inspo-photo-zone').className='photo-upload has-photo';
+    document.getElementById('inspo-photo-wrap').innerHTML='<img class="photo-thumb" src="'+inspoPhoto+'">';
+  } else {resetInspoPhoto();}
+  document.getElementById('inspo-modal').style.display='flex';
+}
+function closeInspoModal(){document.getElementById('inspo-modal').style.display='none';}
+function handleInspoPhoto(e){
+  var f=e.target.files[0]; if(!f)return;
+  var r=new FileReader();
+  r.onload=function(ev){
+    inspoPhoto=ev.target.result;
+    document.getElementById('inspo-photo-zone').className='photo-upload has-photo';
+    document.getElementById('inspo-photo-wrap').innerHTML='<img class="photo-thumb" src="'+inspoPhoto+'">';
+  };
+  r.readAsDataURL(f);
+}
+function resetInspoPhoto(){
+  inspoPhoto=null;
+  document.getElementById('inspo-photo-zone').className='photo-upload';
+  document.getElementById('inspo-photo-wrap').innerHTML='<div style="font-size:28px;opacity:0.4;margin-bottom:0.5rem">📷</div><div style="font-size:14px;color:#6b8080">Tap to add a photo</div>';
+}
+function saveInspoItem(){
+  var items=loadInspo();
+  var item={
+    title:document.getElementById('if-title').value.trim()||'Untitled',
+    tag:document.getElementById('if-tag').value.trim(),
+    link:document.getElementById('if-link').value.trim(),
+    notes:document.getElementById('if-notes').value.trim(),
+    photo:inspoPhoto,
+    savedAt:new Date().toISOString()
+  };
+  if(inspoEditIdx>=0){items[inspoEditIdx]=item;} else {items.unshift(item);}
+  saveInspoData(items); closeInspoModal(); renderInspo();
+}
+function deleteInspoConfirm(i){
+  if(!confirm('Remove this from your inspiration board?'))return;
+  var items=loadInspo(); items.splice(i,1); saveInspoData(items); closeInspoDetail();
+}
+function deleteInspoFromModal(){
+  if(inspoEditIdx<0)return;
+  if(!confirm('Remove this from your inspiration board?'))return;
+  var items=loadInspo(); items.splice(inspoEditIdx,1); saveInspoData(items); closeInspoModal(); renderInspo();
+}
+
+// ── INIT ──────────────────────────────────────────────
+renderProg();
+renderGuide();
+renderCat();
+
 </script>
 </body>
 </html>
