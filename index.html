@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your First Quilt — Step by Step Guide</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:system-ui,sans-serif;background:#fafaf8;color:#1a1a18;padding:1rem;}
+.app{max-width:660px;margin:0 auto;padding:1rem 0 4rem;}
+.prog-wrap{display:flex;gap:5px;margin-bottom:2rem;}
+.pseg{flex:1;height:4px;border-radius:2px;background:#e0e0d8;transition:background 0.4s;}
+.pseg.done{background:#1D9E75;}.pseg.active{background:#5DCAA5;}
+.phase-tag{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#888;margin-bottom:0.4rem;}
+.step-title{font-size:21px;font-weight:500;margin-bottom:0.75rem;}
+.step-body{font-size:15px;color:#555;line-height:1.75;margin-bottom:1.25rem;}
+.tip{background:#f0faf5;border-left:3px solid #5DCAA5;border-radius:0 8px 8px 0;padding:0.7rem 1rem;margin-bottom:1.25rem;font-size:14px;color:#555;}
+.tip strong{color:#1a1a18;font-weight:500;}
+.vbtn{display:flex;align-items:center;gap:10px;padding:10px 16px;font-size:14px;border-radius:8px;border:1px solid #ddd;background:transparent;cursor:pointer;margin-bottom:1.25rem;width:100%;text-align:left;}
+.vbtn:hover{background:#f5f5f0;}
+.vico{width:30px;height:30px;min-width:30px;background:#ff0000;border-radius:6px;display:flex;align-items:center;justify-content:center;}
+.vico::after{content:'';border-style:solid;border-width:5px 0 5px 11px;border-color:transparent transparent transparent white;margin-left:2px;}
+.vlbl{display:flex;flex-direction:column;}
+.vlbl strong{font-weight:500;font-size:14px;}
+.vlbl span{font-size:11px;color:#888;}
+.diag{background:#f5f5f0;border-radius:12px;padding:1rem;margin-bottom:1.25rem;}
+.diag-lbl{font-size:12px;color:#888;text-align:center;margin-bottom:0.5rem;}
+.calc-card{background:#fff;border:1px solid #e8e8e0;border-radius:12px;padding:1.25rem;margin-bottom:1.25rem;}
+.calc-title{font-size:14px;font-weight:500;margin-bottom:1rem;}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1rem;}
+.cf label{display:block;font-size:12px;color:#888;margin-bottom:4px;}
+.cf input{width:100%;padding:7px 10px;font-size:14px;border:1px solid #ddd;border-radius:8px;background:#f9f9f6;}
+.cres{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.cr{background:#f5f5f0;border-radius:8px;padding:0.6rem 0.75rem;}
+.rl{font-size:11px;color:#888;margin-bottom:2px;}
+.rv{font-size:18px;font-weight:500;}
+.ru{font-size:11px;color:#888;}
+.summary{background:#f0faf5;border:1px solid #c0e8d0;border-radius:8px;padding:0.75rem 1rem;margin-bottom:1.25rem;font-size:14px;color:#555;}
+.summary strong{color:#1a1a18;}
+.checklist{list-style:none;margin-bottom:1.25rem;}
+.checklist li{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid #eee;font-size:14px;cursor:pointer;}
+.checklist li:last-child{border-bottom:none;}
+.chk{width:18px;height:18px;min-width:18px;border:1.5px solid #ccc;border-radius:4px;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all 0.2s;}
+.chk.on{background:#1D9E75;border-color:#1D9E75;}
+.chk.on::after{content:'';display:block;width:5px;height:9px;border:2px solid white;border-top:none;border-left:none;transform:rotate(45deg) translateY(-1px);}
+.li-done span{color:#aaa;text-decoration:line-through;}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;}
+.btn{padding:9px 20px;font-size:14px;border-radius:8px;border:1px solid #ddd;background:transparent;cursor:pointer;transition:background 0.15s;}
+.btn:hover{background:#f5f5f0;}
+.btn-p{background:#1D9E75;border-color:#1D9E75;color:white;}
+.btn-p:hover{background:#0F6E56;}
+.btn:disabled{opacity:0.35;cursor:default;background:transparent;}
+.ctr-b{font-size:12px;color:#888;background:#f5f5f0;padding:4px 12px;border-radius:99px;border:1px solid #e0e0d8;}
+.done{text-align:center;padding:2.5rem 1rem;}
+.done h2{font-size:24px;font-weight:500;margin-bottom:0.75rem;}
+.done p{color:#555;font-size:15px;line-height:1.7;margin-bottom:2rem;}
+.done-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.ai-panel{border:1px solid #e8e8e0;border-radius:12px;overflow:hidden;margin-bottom:1.25rem;}
+.ai-hdr{display:flex;align-items:center;gap:10px;padding:0.9rem 1.25rem;background:#f5f5f0;border-bottom:1px solid #e8e8e0;}
+.ai-dot{width:8px;height:8px;border-radius:50%;background:#1D9E75;}
+.ai-hdr-txt{font-size:14px;font-weight:500;}
+.ai-hdr-sub{font-size:12px;color:#888;margin-left:auto;}
+.ai-body{padding:1.25rem;}
+.upload-zone{border:1.5px dashed #ccc;border-radius:8px;padding:2rem 1rem;text-align:center;cursor:pointer;margin-bottom:1rem;transition:all 0.2s;}
+.upload-zone:hover{border-color:#5DCAA5;background:#f0faf5;}
+.upload-zone.has-img{border-style:solid;border-color:#1D9E75;padding:0.5rem;}
+.upload-hint{font-size:14px;color:#888;margin-bottom:0.25rem;}
+.upload-sub{font-size:12px;color:#aaa;}
+.preview-img{width:100%;border-radius:8px;display:block;max-height:280px;object-fit:contain;}
+.analyze-btn{width:100%;padding:10px;font-size:14px;font-weight:500;border-radius:8px;border:none;background:#1D9E75;color:white;cursor:pointer;margin-bottom:1rem;}
+.analyze-btn:hover{background:#0F6E56;}
+.analyze-btn:disabled{opacity:0.5;cursor:default;}
+.fb-sections{display:flex;flex-direction:column;gap:12px;}
+.fb-sec{background:#f5f5f0;border-radius:8px;padding:0.9rem 1rem;}
+.fb-lbl{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:#888;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:0.5rem;}
+.fb-dot{width:7px;height:7px;border-radius:50%;}
+.fb-txt{font-size:14px;line-height:1.65;}
+.loading{display:flex;gap:5px;justify-content:center;padding:1.5rem 0;}
+.loading span{width:8px;height:8px;border-radius:50%;background:#5DCAA5;animation:bop 1.2s infinite;}
+.loading span:nth-child(2){animation-delay:0.2s;}
+.loading span:nth-child(3){animation-delay:0.4s;}
+@keyframes bop{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-8px)}}
+.retry-btn{font-size:13px;color:#888;background:transparent;border:1px solid #ddd;padding:6px 14px;border-radius:8px;cursor:pointer;margin-top:0.75rem;}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="prog-wrap" id="prog"></div>
+  <div id="content"></div>
+  <div class="nav" id="nav">
+    <button class="btn" id="bbk" onclick="go(-1)">Back</button>
+    <span class="ctr-b" id="ctr"></span>
+    <button class="btn btn-p" id="bfwd" onclick="go(1)">Continue</button>
+  </div>
+</div>
+<script>
+var YT={1:'https://www.youtube.com/watch?v=-TyihOEvJ8E',2:'https://www.youtube.com/watch?v=YayeZcs3FsQ',3:'https://www.youtube.com/watch?v=R7EdVJailUQ',4:'https://www.youtube.com/watch?v=wPEY9VhSL6U',5:'https://www.youtube.com/watch?v=3Yb0xOgc098',6:'https://www.youtube.com/watch?v=efE87vCVo6U'};
+var cur=0,chkd={},uploadedImage=null,feedbackCache=null;
+var pv={width:50,height:65,blockSize:5,colors:3};
+
+var DIAGS={
+charmpack:'<div class="diag"><div class="diag-lbl">A charm pack — coordinating 5" pre-cut squares, ready to sew</div><svg viewBox="0 0 380 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:110px;"><rect x="10" y="10" width="52" height="52" rx="3" fill="#9FE1CB" stroke="#1D9E75" stroke-width="1.5"/><rect x="70" y="10" width="52" height="52" rx="3" fill="#ED93B1" stroke="#D4537E" stroke-width="1.5"/><line x1="70" y1="10" x2="122" y2="62" stroke="#D4537E" stroke-width="1" opacity="0.4"/><line x1="122" y1="10" x2="70" y2="62" stroke="#D4537E" stroke-width="1" opacity="0.4"/><rect x="130" y="10" width="52" height="52" rx="3" fill="#85B7EB" stroke="#378ADD" stroke-width="1.5"/><circle cx="156" cy="36" r="16" fill="#378ADD" opacity="0.4"/><rect x="190" y="10" width="52" height="52" rx="3" fill="#EF9F27" stroke="#BA7517" stroke-width="1.5"/><rect x="196" y="16" width="10" height="10" rx="1" fill="#BA7517" opacity="0.6"/><rect x="212" y="16" width="10" height="10" rx="1" fill="#BA7517" opacity="0.6"/><rect x="196" y="32" width="16" height="16" rx="1" fill="#BA7517" opacity="0.5"/><rect x="250" y="10" width="52" height="52" rx="3" fill="#97C459" stroke="#639922" stroke-width="1.5"/><rect x="256" y="16" width="40" height="4" rx="2" fill="#639922" opacity="0.5"/><rect x="256" y="26" width="28" height="4" rx="2" fill="#639922" opacity="0.5"/><rect x="256" y="36" width="36" height="4" rx="2" fill="#639922" opacity="0.5"/><rect x="310" y="10" width="60" height="52" rx="3" fill="#F0997B" stroke="#D85A30" stroke-width="1.5"/><text x="190" y="100" text-anchor="middle" font-size="11" fill="#888">40–42 squares per pack — all coordinated, no cutting needed</text></svg></div>',
+layout:'<div class="diag"><div class="diag-lbl">Plan your layout — arrange before sewing, then photograph it</div><svg viewBox="0 0 380 155" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:155px;"><rect x="10" y="10" width="52" height="40" rx="2" fill="#9FE1CB" stroke="white" stroke-width="2"/><rect x="66" y="10" width="52" height="40" rx="2" fill="#ED93B1" stroke="white" stroke-width="2"/><rect x="122" y="10" width="52" height="40" rx="2" fill="#85B7EB" stroke="white" stroke-width="2"/><rect x="178" y="10" width="52" height="40" rx="2" fill="#EF9F27" stroke="white" stroke-width="2"/><rect x="234" y="10" width="52" height="40" rx="2" fill="#97C459" stroke="white" stroke-width="2"/><rect x="290" y="10" width="80" height="40" rx="2" fill="#F0997B" stroke="white" stroke-width="2"/><rect x="10" y="54" width="52" height="40" rx="2" fill="#F0997B" stroke="white" stroke-width="2"/><rect x="66" y="54" width="52" height="40" rx="2" fill="#9FE1CB" stroke="white" stroke-width="2"/><rect x="122" y="54" width="52" height="40" rx="2" fill="#ED93B1" stroke="white" stroke-width="2"/><rect x="178" y="54" width="52" height="40" rx="2" fill="#85B7EB" stroke="white" stroke-width="2"/><rect x="234" y="54" width="52" height="40" rx="2" fill="#EF9F27" stroke="white" stroke-width="2"/><rect x="290" y="54" width="80" height="40" rx="2" fill="#97C459" stroke="white" stroke-width="2"/><rect x="10" y="98" width="52" height="40" rx="2" fill="#85B7EB" stroke="white" stroke-width="2"/><rect x="66" y="98" width="52" height="40" rx="2" fill="#EF9F27" stroke="white" stroke-width="2"/><rect x="122" y="98" width="52" height="40" rx="2" fill="#97C459" stroke="white" stroke-width="2"/><rect x="178" y="98" width="52" height="40" rx="2" fill="#9FE1CB" stroke="white" stroke-width="2"/><rect x="234" y="98" width="52" height="40" rx="2" fill="#F0997B" stroke="white" stroke-width="2"/><rect x="290" y="98" width="80" height="40" rx="2" fill="#ED93B1" stroke="white" stroke-width="2"/><text x="185" y="150" text-anchor="middle" font-size="12" fill="#888">Spread lights and darks evenly — step back and squint to check</text></svg></div>',
+chainsewing:'<div class="diag"><div class="diag-lbl">Chain piecing — sew pairs back-to-back without cutting thread</div><svg viewBox="0 0 380 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:100px;"><rect x="10" y="18" width="44" height="44" rx="2" fill="#9FE1CB" stroke="#1D9E75" stroke-width="1.5"/><rect x="58" y="18" width="44" height="44" rx="2" fill="#ED93B1" stroke="#D4537E" stroke-width="1.5"/><text x="53" y="45" text-anchor="middle" font-size="14" fill="#888">+</text><path d="M105 40 Q118 40 118 55 Q118 68 130 68 L250 68" stroke="#1D9E75" stroke-width="1.5" fill="none" stroke-dasharray="5 3"/><rect x="130" y="18" width="44" height="44" rx="2" fill="#85B7EB" stroke="#378ADD" stroke-width="1.5"/><rect x="178" y="18" width="44" height="44" rx="2" fill="#EF9F27" stroke="#BA7517" stroke-width="1.5"/><text x="173" y="45" text-anchor="middle" font-size="14" fill="#888">+</text><rect x="250" y="18" width="44" height="44" rx="2" fill="#97C459" stroke="#639922" stroke-width="1.5"/><rect x="298" y="18" width="44" height="44" rx="2" fill="#F0997B" stroke="#D85A30" stroke-width="1.5"/><text x="293" y="45" text-anchor="middle" font-size="14" fill="#888">+</text><text x="190" y="92" text-anchor="middle" font-size="12" fill="#888">Feed pair 1, don\'t cut, feed pair 2, pair 3 — snip apart at end</text></svg></div>',
+seamnesting:'<div class="diag"><div class="diag-lbl">Nesting seams — alternate press direction so corners lie flat</div><svg viewBox="0 0 380 138" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:138px;"><rect x="10" y="8" width="170" height="34" rx="2" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1.5"/><text x="95" y="30" text-anchor="middle" font-size="11" fill="#085041">Row 1 — press seams LEFT</text><polygon points="55,46 44,54 66,54" fill="#1D9E75" opacity="0.8"/><rect x="10" y="54" width="170" height="34" rx="2" fill="#FAECE7" stroke="#D85A30" stroke-width="1.5"/><text x="95" y="76" text-anchor="middle" font-size="11" fill="#4A1B0C">Row 2 — press seams RIGHT</text><polygon points="135,92 146,100 124,100" fill="#D85A30" opacity="0.8"/><rect x="10" y="100" width="170" height="34" rx="2" fill="#E6F1FB" stroke="#378ADD" stroke-width="1.5"/><text x="95" y="122" text-anchor="middle" font-size="11" fill="#042C53">Row 3 — press seams LEFT</text><rect x="200" y="8" width="170" height="126" rx="3" fill="none" stroke="#ccc" stroke-width="0.5"/><rect x="200" y="8" width="42" height="42" fill="#9FE1CB" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="242" y="8" width="42" height="42" fill="#5DCAA5" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="284" y="8" width="42" height="42" fill="#9FE1CB" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="326" y="8" width="44" height="42" fill="#5DCAA5" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="200" y="50" width="42" height="42" fill="#F0997B" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="242" y="50" width="42" height="42" fill="#D85A30" opacity="0.5" stroke="white" stroke-width="1.5"/><rect x="284" y="50" width="42" height="42" fill="#F0997B" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="326" y="50" width="44" height="42" fill="#D85A30" opacity="0.5" stroke="white" stroke-width="1.5"/><rect x="200" y="92" width="42" height="42" fill="#85B7EB" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="242" y="92" width="42" height="42" fill="#378ADD" opacity="0.5" stroke="white" stroke-width="1.5"/><rect x="284" y="92" width="42" height="42" fill="#85B7EB" opacity="0.7" stroke="white" stroke-width="1.5"/><rect x="326" y="92" width="44" height="42" fill="#378ADD" opacity="0.5" stroke="white" stroke-width="1.5"/><text x="285" y="124" text-anchor="middle" font-size="10" fill="#888">Seams interlock = flat corners</text></svg></div>',
+sandwich:'<div class="diag"><div class="diag-lbl">The quilt sandwich — three layers, backing face-down on the bottom</div><svg viewBox="0 0 380 135" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:135px;"><rect x="20" y="92" width="340" height="30" rx="3" fill="#C0DD97" stroke="#639922" stroke-width="1.5"/><text x="190" y="112" text-anchor="middle" font-size="12" fill="#27500A">Backing fabric — face DOWN, 4–6" larger all around</text><rect x="30" y="60" width="320" height="28" rx="3" fill="#D3D1C7" stroke="#5F5E5A" stroke-width="1"/><text x="190" y="78" text-anchor="middle" font-size="12" fill="#2C2C2A">Batting (the fluffy middle layer)</text><rect x="45" y="22" width="290" height="34" rx="3" fill="#9FE1CB" stroke="#1D9E75" stroke-width="1.5"/><text x="190" y="43" text-anchor="middle" font-size="12" fill="#085041">Quilt top — face UP</text><text x="190" y="128" text-anchor="middle" font-size="11" fill="#888">Safety pin every 4–6" from center outward</text></svg></div>',
+binding:'<div class="diag"><div class="diag-lbl">Binding — sew to front, fold over edge, hand-stitch to back</div><svg viewBox="0 0 380 125" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:125px;"><rect x="20" y="18" width="180" height="90" rx="3" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1.5"/><text x="110" y="68" text-anchor="middle" font-size="12" fill="#085041">Quilt front</text><rect x="200" y="18" width="22" height="90" rx="2" fill="#ED93B1" stroke="#D4537E" stroke-width="1"/><path d="M222 18 Q235 18 235 30 L235 96 Q235 108 222 108" fill="none" stroke="#D4537E" stroke-width="1.5" stroke-dasharray="5 3"/><text x="260" y="42" font-size="12" fill="#72243E">1. Sew to front</text><text x="260" y="62" font-size="12" fill="#72243E">2. Fold to back</text><text x="260" y="82" font-size="12" fill="#72243E">3. Hand-stitch</text><text x="190" y="118" text-anchor="middle" font-size="11" fill="#888">Miter the corners — Melanie shows this in Part 5</text></svg></div>'
+};
+
+function getSummary(){
+  var cols=Math.floor(pv.width/pv.blockSize),rows=Math.floor(pv.height/pv.blockSize),total=cols*rows;
+  return {cols:cols,rows:rows,total:total,perColor:Math.ceil(total/pv.colors)};
+}
+function mkPlannerCalc(){
+  var s=getSummary();
+  return '<div class="calc-card"><div class="calc-title">Quilt planner — how many squares do you need?</div><div class="cg"><div class="cf"><label>Quilt width (inches)</label><input type="number" id="pw" value="'+pv.width+'" oninput="upPlanner()"></div><div class="cf"><label>Quilt height (inches)</label><input type="number" id="ph" value="'+pv.height+'" oninput="upPlanner()"></div><div class="cf"><label>Charm square size (inches)</label><input type="number" id="pbs" value="'+pv.blockSize+'" step="0.5" oninput="upPlanner()"></div><div class="cf"><label>Number of fabric colors</label><input type="number" id="pc" value="'+pv.colors+'" min="1" oninput="upPlanner()"></div></div><div class="cres" id="pres"><div class="cr"><div class="rl">Columns</div><div class="rv">'+s.cols+'</div></div><div class="cr"><div class="rl">Rows</div><div class="rv">'+s.rows+'</div></div><div class="cr"><div class="rl">Total squares</div><div class="rv">'+s.total+'</div></div></div><div style="margin-top:8px;padding:0.6rem 0.75rem;background:#f5f5f0;border-radius:8px;"><div class="rl">Squares per color (approx)</div><div class="rv" id="ppc">'+s.perColor+'</div></div></div>';
+}
+function upPlanner(){
+  pv.width=parseFloat(document.getElementById('pw').value)||50;
+  pv.height=parseFloat(document.getElementById('ph').value)||65;
+  pv.blockSize=parseFloat(document.getElementById('pbs').value)||5;
+  pv.colors=parseInt(document.getElementById('pc').value)||3;
+  var s=getSummary();
+  var el=document.getElementById('pres');
+  if(el) el.innerHTML='<div class="cr"><div class="rl">Columns</div><div class="rv">'+s.cols+'</div></div><div class="cr"><div class="rl">Rows</div><div class="rv">'+s.rows+'</div></div><div class="cr"><div class="rl">Total squares</div><div class="rv">'+s.total+'</div></div>';
+  var p=document.getElementById('ppc'); if(p) p.textContent=s.perColor;
+}
+function mkSummary(){
+  var s=getSummary(); if(!s.total) return '';
+  return '<div class="summary">Your plan: <strong>'+s.total+' squares</strong> in a '+s.cols+'×'+s.rows+' grid ('+pv.width+'"×'+pv.height+'") — about <strong>'+s.perColor+' per color</strong> across '+pv.colors+' fabrics.</div>';
+}
+function mkBackingCalc(){
+  var bw=Math.round(pv.width+8),bh=Math.round(pv.height+8),yds=((bw*bh)/1296*1.1).toFixed(2);
+  return '<div class="calc-card"><div class="calc-title">Batting & backing calculator</div><div class="cg"><div class="cf"><label>Quilt top width (inches)</label><input type="number" id="bw" value="'+pv.width+'" oninput="upBacking()"></div><div class="cf"><label>Quilt top height (inches)</label><input type="number" id="bh" value="'+pv.height+'" oninput="upBacking()"></div></div><div class="cres" id="bres"><div class="cr"><div class="rl">Batting size</div><div class="rv">'+bw+'×'+bh+'<span class="ru">"</span></div></div><div class="cr"><div class="rl">Backing size</div><div class="rv">'+bw+'×'+bh+'<span class="ru">"</span></div></div><div class="cr"><div class="rl">Backing yardage</div><div class="rv">'+yds+'<span class="ru"> yd</span></div></div></div></div>';
+}
+function upBacking(){
+  var w=parseFloat(document.getElementById('bw').value)||pv.width,h=parseFloat(document.getElementById('bh').value)||pv.height;
+  var bw=Math.round(w+8),bh=Math.round(h+8),yds=((bw*bh)/1296*1.1).toFixed(2);
+  var el=document.getElementById('bres');
+  if(el) el.innerHTML='<div class="cr"><div class="rl">Batting size</div><div class="rv">'+bw+'×'+bh+'<span class="ru">"</span></div></div><div class="cr"><div class="rl">Backing size</div><div class="rv">'+bw+'×'+bh+'<span class="ru">"</span></div></div><div class="cr"><div class="rl">Backing yardage</div><div class="rv">'+yds+'<span class="ru"> yd</span></div></div>';
+}
+function mkChecklist(items,si){
+  if(!chkd[si]) chkd[si]={};
+  return '<ul class="checklist">'+items.map(function(item,i){var on=chkd[si][i];return '<li class="'+(on?'li-done':'')+'" onclick="toggle('+si+','+i+')"><div class="chk '+(on?'on':'')+'"></div><span>'+item+'</span></li>';}).join('')+'</ul>';
+}
+function toggle(si,ii){if(!chkd[si])chkd[si]={};chkd[si][ii]=!chkd[si][ii];render();}
+function mkAIPanel(){
+  var pre=uploadedImage?'<div class="upload-zone has-img" onclick="triggerUp()"><img class="preview-img" src="'+uploadedImage+'"/></div>':'<div class="upload-zone" onclick="triggerUp()"><div style="font-size:32px;opacity:0.3;margin-bottom:0.5rem">📷</div><div class="upload-hint">Tap to upload a photo of your layout</div><div class="upload-sub">Taken from directly above works best</div></div>';
+  var fb=feedbackCache?renderFB(feedbackCache):'';
+  var dis=(!uploadedImage||feedbackCache)?'disabled':'';
+  var lbl=feedbackCache?'Feedback received':'Analyze my layout';
+  return '<div class="ai-panel"><div class="ai-hdr"><div class="ai-dot"></div><span class="ai-hdr-txt">AI layout feedback</span><span class="ai-hdr-sub">Powered by Claude</span></div><div class="ai-body" id="ai-body">'+pre+'<input type="file" id="fup" accept="image/*" style="display:none" onchange="handleFile(event)"><button class="analyze-btn" id="abtn" onclick="analyze()" '+dis+'>'+lbl+'</button>'+fb+'</div></div>';
+}
+function triggerUp(){document.getElementById('fup').click();}
+function handleFile(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(ev){uploadedImage=ev.target.result;feedbackCache=null;render();};r.readAsDataURL(f);}
+function renderFB(d){
+  var secs=[{k:'colorBalance',l:'Color balance',c:'#1D9E75'},{k:'visualRhythm',l:'Pattern & rhythm',c:'#378ADD'},{k:'contrast',l:'Contrast',c:'#BA7517'},{k:'suggestions',l:'Suggestions',c:'#D4537E'}];
+  return '<div class="fb-sections">'+secs.map(function(s){return '<div class="fb-sec"><div class="fb-lbl"><div class="fb-dot" style="background:'+s.c+'"></div>'+s.l+'</div><div class="fb-txt">'+(d[s.k]||'')+'</div></div>';}).join('')+'</div><button class="retry-btn" onclick="retryAI()">Try a different photo</button>';
+}
+async function analyze(){
+  if(!uploadedImage)return;
+  var body=document.getElementById('ai-body');
+  body.innerHTML='<div class="upload-zone has-img"><img class="preview-img" src="'+uploadedImage+'"/></div><div class="loading"><span></span><span></span><span></span></div>';
+  var b64=uploadedImage.split(',')[1],mt=uploadedImage.split(';')[0].split(':')[1];
+  try{
+    var r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:mt,data:b64}},{type:'text',text:'You are a friendly, encouraging quilting expert. Analyze this photo of a quilt block layout and respond in JSON only — no preamble, no markdown, no backticks. Use exactly this structure:\n{\n  "colorBalance": "2-3 sentences on color distribution and balance",\n  "visualRhythm": "2-3 sentences on pattern repetition and visual rhythm",\n  "contrast": "2-3 sentences on light vs dark contrast",\n  "suggestions": "2-3 specific actionable suggestions for improving the layout before sewing"\n}\nBe warm, specific, and practical. Speak directly to a beginner quilter.'}]}]})});
+    var data=await r.json();
+    var txt=data.content.map(function(b){return b.text||'';}).join('');
+    feedbackCache=JSON.parse(txt.replace(/```json|```/g,'').trim());
+    render();
+  }catch(e){
+    var b2=document.getElementById('ai-body');
+    if(b2)b2.innerHTML='<div class="upload-zone has-img"><img class="preview-img" src="'+uploadedImage+'"/></div><p style="padding:1rem;font-size:14px;color:#888">Something went wrong. Please try again.</p><button class="analyze-btn" onclick="analyze()">Try again</button>';
+  }
+}
+function retryAI(){feedbackCache=null;uploadedImage=null;render();}
+function openVid(n){window.open(YT[n],'_blank');}
+
+var steps=[
+{phase:'Step 1 — Planning',title:'Plan your quilt size & block count',body:'Before buying anything, figure out exactly how many squares you need. Enter your desired quilt dimensions, your charm square size, and how many fabric colors you\'re planning — and the calculator will tell you your grid and how many squares to buy per color.',tip:'Tip: A standard charm pack has 40–42 squares at 5". A good beginner lap quilt is around 50"×65", which needs about 130 squares — roughly 3 charm packs.',calc:'planner',checklist:['Decide on your finished quilt size','Choose your charm square size (5" is standard)','Note how many squares per color you need to buy']},
+{phase:'Step 2 — Getting started',title:'Choose your charm pack',body:'Melanie recommends starting with a charm pack — pre-cut 5" fabric squares that coordinate perfectly. No rotary cutter required! Browse your local quilt shop or search "charm pack" online for bundles in colors you love.',tip:'Tip: Pick a charm pack with a mix of lights and darks — contrast is what makes the patchwork pop.',video:1,vlabel:'Part 1: Intro & charm packs',diag:'charmpack',checklist:['Buy the right number of charm packs based on your plan above','Look for a mix of lights, mediums, and darks','Pre-wash optional — Melanie skips this step for charm packs']},
+{phase:'Step 3 — Planning',title:'Arrange your layout',body:'Lay all your squares on a flat surface in a grid before sewing a single stitch. Shuffle until lights and darks feel balanced. Take a photo when happy — then use the AI feedback tool below to get aesthetic suggestions before committing.',tip:'Tip: Squint your eyes at the layout — the blurry view shows contrast at a glance and makes problem spots obvious.',video:1,vlabel:'Part 1: Planning layout',diag:'layout',aiFeedback:true,checklist:['Lay all squares out in a grid on the floor or a bed','Shuffle until lights and darks are spread evenly','Get AI feedback on your layout (below)','Photograph your final layout before picking it up','Stack squares in row order (row 1 on top, last row at bottom)']},
+{phase:'Step 4 — Sewing',title:'Chain piece your squares into rows',body:'Sew squares in pairs using a ¼" seam allowance, right sides facing. Use chain piecing — feed the next pair through immediately after the last without cutting the thread. Snip apart after, then join pairs into full rows.',tip:'Tip: Set stitch length to 2.0–2.5mm. Shorter stitches are much harder to unpick if you make a mistake!',video:1,vlabel:'Part 1: Chain piecing',diag:'chainsewing'},
+{phase:'Step 5 — Pressing',title:'Press seams and join the rows',body:'Press seams in each row in alternating directions — row 1 left, row 2 right, row 3 left. This is called nesting seams. When you join the rows, the seam allowances interlock, giving you perfectly flat patchwork corners.',tip:'Tip: Use a dry iron and press (lift and place) rather than dragging — dragging stretches the fabric.',video:1,vlabel:'Part 1: Joining rows',diag:'seamnesting',checklist:['Press row 1 seams left, row 2 right, row 3 left, alternating','Pin rows together matching every seam junction','Sew rows together one at a time','Press the finished quilt top flat','Measure your quilt top and write down the dimensions']},
+{phase:'Step 6 — Quilt sandwich',title:'Prepare batting & backing',body:'Your quilt has three layers: the pieced top, fluffy batting in the middle, and backing fabric behind. Both batting and backing must be 4–6" larger than your quilt top on every side. The calculator pre-fills from your plan in step 1.',tip:'Tip: Melanie recommends Warm and White or Warm and Natural batting for beginners — easy to find and easy to sew through.',video:2,vlabel:'Part 2: Quilt sandwich',diag:'sandwich',calc:'backing'},
+{phase:'Step 7 — Basting',title:'Baste the three layers',body:'Tape the backing face-down to a hard floor. Layer batting on top. Lay your quilt top face-up and smooth from center out. Safety-pin baste every 4–6" across the whole quilt.',tip:'Tip: Start pinning from the center and work outward — this prevents the layers from shifting at the edges.',video:2,vlabel:'Part 2: Basting method',checklist:['Tape backing face-down to floor with painters tape','Center batting on top and smooth flat','Lay quilt top face-up and smooth from center outward','Safety-pin every 4–6" across entire surface','Remove tape from edges when done']},
+{phase:'Step 8 — Quilting',title:'Stitch all three layers together',body:'Now you "quilt" the sandwich — sewing through all three layers. Melanie teaches echo quilting: stitch alongside existing seam lines using the presser foot edge as a guide. Forgiving, beautiful, great drape.',tip:'Tip: A walking foot feeds all three layers evenly and prevents puckering on the back.',video:3,vlabel:'Part 3: Echo quilting technique',checklist:['Attach walking foot if your machine has one','Start quilting from the center outward','Stitch alongside seam lines using presser foot as guide','Check the back occasionally for puckers','Press the finished quilted piece lightly']},
+{phase:'Step 9 — Squaring up',title:'Trim and make the binding',body:'Once quilted, trim all four edges so corners are perfectly square. Cut binding strips 2.5" wide, join end-to-end, and press in half lengthwise.',tip:'Tip: Cut a little at a time — you can always take more off, but you cannot put it back!',video:4,vlabel:'Part 4: Squaring up & binding strips',checklist:['Trim all four edges to square up corners','Check corners with a square ruler','Cut binding strips 2.5" wide across the fabric width','Join strips end-to-end at a 45° angle','Press strip in half lengthwise (wrong sides together)']},
+{phase:'Step 10 — Binding',title:'Attach the binding',body:'Sew the binding to the front of the quilt with a ¼" seam, mitering each corner neatly. Then fold it over to the back and hand-stitch all the way around.',tip:'Tip: Use binding clips or hair clips to hold the folded binding to the back while you hand-stitch.',video:5,vlabel:'Part 5: Attaching the binding',diag:'binding',checklist:['Sew binding to front edge with ¼" seam','Miter each corner (watch Melanie\'s video)','Fold binding to the back','Hand-stitch all the way around','Secure the start and end join neatly']},
+{phase:'Step 11 — Finishing!',title:'Label and wash your quilt',body:'You did it! Add a fabric label to the back corner with your name and the date. Then give the quilt its first wash — this softens the batting and gives it that wonderful crinkly feel.',tip:'Tip: Wash cold, gentle cycle. Dry on low heat with wool dryer balls to fluff the batting evenly.',video:6,vlabel:'Part 6: Labeling & washing',checklist:['Write your name and date on a fabric scrap','Sew or fuse the label to the back corner','Wash on gentle, cold water','Dry on low heat with dryer balls','Take a photo and add your quilt to your catalogue!']}
+];
+
+function renderProg(){document.getElementById('prog').innerHTML=steps.map(function(_,i){return '<div class="pseg '+(i<cur?'done':i===cur?'active':'')+'"></div>';}).join('');}
+function render(){
+  if(cur>=steps.length){
+    document.getElementById('content').innerHTML='<div class="done"><div style="font-size:48px;margin-bottom:1rem">🧵</div><h2>Your first quilt is done!</h2><p>You have completed all 11 steps of Melanie Ham\'s beginner series. Time to save this moment!</p><div class="done-btns"><button class="btn" onclick="cur=0;render();renderProg()">Start over</button></div></div>';
+    document.getElementById('nav').style.display='none';
+    return;
+  }
+  document.getElementById('nav').style.display='flex';
+  var s=steps[cur];
+  document.getElementById('ctr').textContent=(cur+1)+' of '+steps.length;
+  document.getElementById('bbk').disabled=cur===0;
+  document.getElementById('bfwd').textContent=cur===steps.length-1?'Finish':'Continue';
+  var h='<div class="phase-tag">'+s.phase+'</div><div class="step-title">'+s.title+'</div><div class="step-body">'+s.body+'</div>';
+  if(s.video) h+='<button class="vbtn" onclick="openVid('+s.video+')"><div class="vico"></div><div class="vlbl"><strong>Watch: '+s.vlabel+'</strong><span>Melanie Ham on YouTube</span></div></button>';
+  if(s.tip) h+='<div class="tip"><strong>Quilter\'s tip:</strong> '+s.tip+'</div>';
+  if(s.diag) h+=DIAGS[s.diag]||'';
+  if(s.calc==='planner') h+=mkPlannerCalc();
+  if(s.calc==='backing') h+=mkBackingCalc();
+  if(s.aiFeedback) h+=mkAIPanel();
+  if(s.checklist) h+=mkChecklist(s.checklist,cur);
+  if(cur===0) h+=mkSummary();
+  document.getElementById('content').innerHTML=h;
+}
+function go(d){cur=Math.max(0,Math.min(steps.length,cur+d));render();renderProg();window.scrollTo(0,0);}
+renderProg();render();
+</script>
+</body>
+</html>
