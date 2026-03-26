@@ -931,20 +931,20 @@ function goHome(){
 // ── SUPABASE CONFIG ───────────────────────────────────
 const SUPA_URL = 'https://rxrbqkekbpbubvzkdizy.supabase.co';
 const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ4cmJxa2VrYnBidWJ2emtkaXp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1NDU1MzAsImV4cCI6MjA5MDEyMTUzMH0.qioTo7hfC3GymwXzHgjK1nZMQE3ZUsQ3wOrSZ90f7fQ';
-let supabase = null;
+let sb = null;
 let currentUser = null;
 
 async function initSupabase() {
   const { createClient } = window.supabase;
-  supabase = createClient(SUPA_URL, SUPA_KEY);
-  const { data: { session } } = await supabase.auth.getSession();
+  sb = createClient(SUPA_URL, SUPA_KEY);
+  const { data: { session } } = await sb.auth.getSession();
   if (session) {
     currentUser = session.user;
     showApp();
   } else {
     showAuth();
   }
-  supabase.auth.onAuthStateChange(function(event, session) {
+  sb.auth.onAuthStateChange(function(event, session) {
     if (session) { currentUser = session.user; }
     else { currentUser = null; }
   });
@@ -983,10 +983,10 @@ async function doLogin() {
   var err = document.getElementById('auth-error');
   if (!email || !password) { err.textContent = 'Please enter your email and password.'; return; }
   btn.disabled = true; btn.textContent = 'Signing in...'; err.textContent = '';
-  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  const { error } = await sb.auth.signInWithPassword({ email, password });
   btn.disabled = false; btn.textContent = 'Sign in';
   if (error) { err.textContent = error.message; return; }
-  const { data: { session } } = await supabase.auth.getSession();
+  const { data: { session } } = await sb.auth.getSession();
   currentUser = session.user;
   showApp();
 }
@@ -1001,7 +1001,7 @@ async function doSignup() {
   if (password.length < 6) { err.textContent = 'Password must be at least 6 characters.'; return; }
   if (password !== confirm) { err.textContent = 'Passwords do not match.'; return; }
   btn.disabled = true; btn.textContent = 'Creating account...'; err.textContent = '';
-  const { error } = await supabase.auth.signUp({ email, password });
+  const { error } = await sb.auth.signUp({ email, password });
   btn.disabled = false; btn.textContent = 'Create account';
   if (error) { err.textContent = error.message; return; }
   err.style.color = 'rgba(180,255,200,1)';
@@ -1009,17 +1009,17 @@ async function doSignup() {
 }
 
 async function doSignOut() {
-  await supabase.auth.signOut();
+  await sb.auth.signOut();
   currentUser = null;
   showAuth();
 }
 
 // ── CLOUD CATALOGUE ───────────────────────────────────
 async function loadQuilts() {
-  if (!supabase || !currentUser) {
+  if (!sb || !currentUser) {
     try { var d=localStorage.getItem('quilts_v1'); return d?JSON.parse(d):[]; } catch(e) { return []; }
   }
-  const { data, error } = await supabase.from('quilts').select('*').order('saved_at', {ascending: false});
+  const { data, error } = await sb.from('quilts').select('*').order('saved_at', {ascending: false});
   if (error) { console.error(error); return []; }
   return (data||[]).map(function(r) {
     return {
@@ -1035,7 +1035,7 @@ async function saveQuilts(quilts) {
 }
 
 async function saveQuiltRecord(q, existingId) {
-  if (!supabase || !currentUser) {
+  if (!sb || !currentUser) {
     var existing = [];
     try { existing = JSON.parse(localStorage.getItem('quilts_v1')||'[]'); } catch(e) {}
     if (existingId) {
@@ -1051,29 +1051,29 @@ async function saveQuiltRecord(q, existingId) {
     gifted: q.gifted, giftee: q.giftee, occasion: q.occasion
   };
   if (existingId) {
-    await supabase.from('quilts').update(record).eq('id', existingId);
+    await sb.from('quilts').update(record).eq('id', existingId);
   } else {
-    await supabase.from('quilts').insert(record);
+    await sb.from('quilts').insert(record);
   }
 }
 
 async function deleteQuiltRecord(id) {
-  if (!supabase || !currentUser) {
+  if (!sb || !currentUser) {
     var existing = [];
     try { existing = JSON.parse(localStorage.getItem('quilts_v1')||'[]'); } catch(e) {}
     existing = existing.filter(function(x){return x.id!==id;});
     localStorage.setItem('quilts_v1', JSON.stringify(existing));
     return;
   }
-  await supabase.from('quilts').delete().eq('id', id);
+  await sb.from('quilts').delete().eq('id', id);
 }
 
 // ── CLOUD INSPO ───────────────────────────────────────
 async function loadInspo() {
-  if (!supabase || !currentUser) {
+  if (!sb || !currentUser) {
     try { var d=localStorage.getItem('inspo_v1'); return d?JSON.parse(d):[]; } catch(e) { return []; }
   }
-  const { data, error } = await supabase.from('inspo').select('*').order('saved_at', {ascending: false});
+  const { data, error } = await sb.from('inspo').select('*').order('saved_at', {ascending: false});
   if (error) { console.error(error); return []; }
   return (data||[]).map(function(r) {
     return { id: r.id, title: r.title, tag: r.tag, link: r.link, notes: r.notes, photo: r.photo, savedAt: r.saved_at };
@@ -1085,7 +1085,7 @@ async function saveInspoData(items) {
 }
 
 async function saveInspoRecord(item, existingId) {
-  if (!supabase || !currentUser) {
+  if (!sb || !currentUser) {
     var existing = [];
     try { existing = JSON.parse(localStorage.getItem('inspo_v1')||'[]'); } catch(e) {}
     if (existingId) {
@@ -1100,21 +1100,21 @@ async function saveInspoRecord(item, existingId) {
     link: item.link, notes: item.notes, photo: item.photo
   };
   if (existingId) {
-    await supabase.from('inspo').update(record).eq('id', existingId);
+    await sb.from('inspo').update(record).eq('id', existingId);
   } else {
-    await supabase.from('inspo').insert(record);
+    await sb.from('inspo').insert(record);
   }
 }
 
 async function deleteInspoRecord(id) {
-  if (!supabase || !currentUser) {
+  if (!sb || !currentUser) {
     var existing = [];
     try { existing = JSON.parse(localStorage.getItem('inspo_v1')||'[]'); } catch(e) {}
     existing = existing.filter(function(x){return x.id!==id;});
     localStorage.setItem('inspo_v1', JSON.stringify(existing));
     return;
   }
-  await supabase.from('inspo').delete().eq('id', id);
+  await sb.from('inspo').delete().eq('id', id);
 }
 
 
