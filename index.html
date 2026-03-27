@@ -1029,7 +1029,6 @@ async function saveInspoRecord(item, existingId) {
     const { data, error } = await sb.from('inspo').insert(record).select();
     console.log('inspo insert result:', data, error);
     if (error) { alert('Error saving: ' + error.message); console.error('inspo insert error:', error); return; }
-    if (!data || data.length === 0) { alert('Saved but no data returned — possible RLS issue. Check Supabase dashboard.'); }
   }
 }
 
@@ -1447,33 +1446,21 @@ function resetInspoPhoto(){
   document.getElementById('inspo-photo-wrap').innerHTML='<div style="font-size:28px;opacity:0.4;margin-bottom:0.5rem">📷</div><div style="font-size:14px;color:#6b8080">Tap to add a photo</div>';
 }
 async function saveInspoItem(){
-  try {
-    console.log('saveInspoItem: step 1 - building item');
-    var item={
-      title:document.getElementById('if-title').value.trim()||'Untitled',
-      tag:document.getElementById('if-tag').value.trim(),
-      link:document.getElementById('if-link').value.trim(),
-      notes:document.getElementById('if-notes').value.trim(),
-      photo:inspoPhoto,
-      savedAt:new Date().toISOString()
-    };
-    console.log('saveInspoItem: step 2 - item built:', item.title);
-    var existingId = null;
-    if(inspoEditIdx>=0){
-      var items=await loadInspo();
-      existingId=(items[inspoEditIdx]||{}).id||null;
-    }
-    console.log('saveInspoItem: step 3 - calling saveInspoRecord, existingId:', existingId);
-    await saveInspoRecord(item, existingId);
-    console.log('saveInspoItem: step 4 - save done, closing modal');
-    closeInspoModal();
-    console.log('saveInspoItem: step 5 - modal closed, rendering inspo');
-    await renderInspo();
-    console.log('saveInspoItem: step 6 - done!');
-  } catch(e) {
-    console.error('saveInspoItem error:', e);
-    alert('Could not save: ' + e.message);
-  }
+  var item={
+    title:document.getElementById('if-title').value.trim()||'Untitled',
+    tag:document.getElementById('if-tag').value.trim(),
+    link:document.getElementById('if-link').value.trim(),
+    notes:document.getElementById('if-notes').value.trim(),
+    photo:inspoPhoto
+  };
+  var existingId=null;
+  if(inspoEditIdx>=0){var all=await loadInspo();existingId=(all[inspoEditIdx]||{}).id||null;}
+  await saveInspoRecord(item,existingId);
+  // Close modal
+  var modal=document.getElementById('inspo-modal');
+  if(modal) modal.style.display='none';
+  // Force switch to inspo tab and reload
+  switchTab('inspo');
 }
 async function deleteInspoConfirm(i){
   if(!confirm('Remove this from your inspiration board?'))return;
