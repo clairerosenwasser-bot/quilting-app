@@ -51,7 +51,7 @@ body{
 .app-header{
   background:linear-gradient(135deg,var(--forest) 0%,var(--teal) 55%,var(--blue) 100%);
   padding:1rem 1.25rem 0;
-  position:sticky;top:0;z-index:20;
+  position:sticky;top:0;z-index:19;
   box-shadow:0 2px 12px rgba(13,79,70,0.18);
 }
 .header-top{
@@ -362,7 +362,7 @@ body{
   background:rgba(13,40,36,0.5);
   backdrop-filter:blur(3px);
   display:flex;align-items:center;justify-content:center;
-  z-index:100;padding:1rem;
+  z-index:1000;padding:1rem;
 }
 .modal{
   background:var(--surface-card);border-radius:18px;
@@ -1399,6 +1399,9 @@ function closeInspoDetail(){
 var inspoPhoto=null, inspoEditIdx=-1;
 function openAddInspo(){
   inspoEditIdx=-1; inspoPhoto=null;
+  var m=document.getElementById('inspo-modal');
+  console.log('openAddInspo: modal element=', m);
+  if(!m){console.error('inspo-modal missing from DOM!'); return;}
   document.getElementById('im-title').textContent='Add inspiration';
   document.getElementById('idb-del').style.display='none';
   document.getElementById('if-title').value='';
@@ -1406,7 +1409,7 @@ function openAddInspo(){
   document.getElementById('if-link').value='';
   document.getElementById('if-notes').value='';
   resetInspoPhoto();
-  document.getElementById('inspo-modal').style.display='flex';
+  m.style.display='flex';
 }
 async function openEditInspo(i){
   var items=await loadInspo(); var item=items[i]; if(!item)return;
@@ -1423,7 +1426,11 @@ async function openEditInspo(i){
   } else {resetInspoPhoto();}
   document.getElementById('inspo-modal').style.display='flex';
 }
-function closeInspoModal(){document.getElementById('inspo-modal').style.display='none';}
+function closeInspoModal(){
+  var m=document.getElementById('inspo-modal');
+  if(m) m.style.display='none';
+  else console.warn('inspo-modal not found in DOM');
+}
 function handleInspoPhoto(e){
   var f=e.target.files[0]; if(!f)return;
   var r=new FileReader();
@@ -1441,6 +1448,7 @@ function resetInspoPhoto(){
 }
 async function saveInspoItem(){
   try {
+    console.log('saveInspoItem: step 1 - building item');
     var item={
       title:document.getElementById('if-title').value.trim()||'Untitled',
       tag:document.getElementById('if-tag').value.trim(),
@@ -1449,14 +1457,19 @@ async function saveInspoItem(){
       photo:inspoPhoto,
       savedAt:new Date().toISOString()
     };
+    console.log('saveInspoItem: step 2 - item built:', item.title);
     var existingId = null;
     if(inspoEditIdx>=0){
       var items=await loadInspo();
       existingId=(items[inspoEditIdx]||{}).id||null;
     }
+    console.log('saveInspoItem: step 3 - calling saveInspoRecord, existingId:', existingId);
     await saveInspoRecord(item, existingId);
+    console.log('saveInspoItem: step 4 - save done, closing modal');
     closeInspoModal();
+    console.log('saveInspoItem: step 5 - modal closed, rendering inspo');
     await renderInspo();
+    console.log('saveInspoItem: step 6 - done!');
   } catch(e) {
     console.error('saveInspoItem error:', e);
     alert('Could not save: ' + e.message);
