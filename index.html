@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stitch &amp; Story v9</title>
+<title>Stitch &amp; Story v10</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -1180,7 +1180,7 @@ async function renderCat(){
     var stars=q.rating?'&#9733;'.repeat(q.rating):'';
     var photo=q.photo?'<img src="'+q.photo+'" alt="'+escHtml(q.name)+'" style="width:100%;height:190px;object-fit:cover;display:block;">':'<div style="width:100%;height:190px;background:linear-gradient(135deg,var(--teal-wash),var(--blue-wash));display:flex;align-items:center;justify-content:center;font-size:32px;color:var(--ink-faint);">🧵</div>';
     var tags='';
-    if(q.gifted)tags+='<span class="tag gift">🎁 '+escHtml(q.giftee||'Gifted')+'</span>';
+    if(q.gifted)tags+='<span class="tag gift">&#127873; '+escHtml(q.giftee||'Gifted')+'</span>';
     if(q.rating)tags+='<span class="tag"><span style="color:var(--gold)">'+stars+'</span></span>';
     html+='<div class="quilt-card" onclick="openDetail(\''+q.id+'\')"><div class="qc-photo">'+photo+'</div><div class="qc-body"><div class="qc-name">'+escHtml(q.name||'Untitled')+'</div><div class="qc-meta">'+formatDate(q.date)+'</div>'+(tags?'<div class="qc-tags">'+tags+'</div>':'')+'</div></div>';
   });
@@ -1198,7 +1198,7 @@ async function openDetail(id){
   var gift=q.gifted?'<div class="detail-gift">🎁 Gifted to <strong>'+escHtml(q.giftee||'')+'</strong>'+(q.occasion?' for '+escHtml(q.occasion):'')+'</div>':'';
   var notes=q.notes?'<div class="detail-section"><div class="detail-section-label">Notes</div><div class="detail-section-val">'+escHtml(q.notes)+'</div></div>':'';
   var stars=q.rating?'&#9733;'.repeat(q.rating)+'&#9734;'.repeat(5-q.rating):'No rating';
-  document.getElementById('detail-content').innerHTML=photo+'<div class="detail-title">'+escHtml(q.name||'Untitled')+'</div><div class="detail-meta">'+formatDate(q.date)+'</div><div style="margin-bottom:1rem;font-size:18px;color:var(--gold)">'+stars+'</div>'+gift+notes+'<div class="detail-actions"><button class="btn btn-p" onclick="openEditModal(''+id+'')">Edit</button><button class="btn btn-danger" onclick="confirmDelete(''+id+'')">Delete</button></div>';
+  document.getElementById('detail-content').innerHTML=photo+'<div class="detail-title">'+escHtml(q.name||'Untitled')+'</div><div class="detail-meta">'+formatDate(q.date)+'</div><div style="margin-bottom:1rem;font-size:18px;color:var(--gold)">'+stars+'</div>'+gift+notes+'<div class="detail-actions"><button class="btn btn-p" onclick="openEditModal(\''+id+'\')">Edit</button><button class="btn btn-danger" onclick="confirmDelete(\''+id+'\')">Delete</button></div>';
 }
 
 function closeDetail(){
@@ -1307,7 +1307,7 @@ async function openInspoDetail(id){
   var photo=item.photo?'<img class="detail-photo" src="'+item.photo+'" alt="'+escHtml(item.title)+'">':'<div class="detail-photo-placeholder">✨</div>';
   var link=item.link?'<div class="detail-section"><div class="detail-section-label">Link</div><div class="detail-section-val"><a href="'+escHtml(item.link)+'" target="_blank" style="color:var(--teal-mid);word-break:break-all;">'+escHtml(item.link)+'</a></div></div>':'';
   var notes=item.notes?'<div class="detail-section"><div class="detail-section-label">Notes</div><div class="detail-section-val">'+escHtml(item.notes)+'</div></div>':'';
-  document.getElementById('inspo-detail-content').innerHTML=photo+'<div class="detail-title">'+escHtml(item.title||'Untitled')+'</div><div class="detail-meta" style="color:var(--teal)">'+escHtml(item.tag||'Inspiration')+'</div>'+link+notes+'<div class="detail-actions"><button class="btn btn-p" onclick="openEditInspo(''+id+'')">Edit</button><button class="btn btn-danger" onclick="confirmDeleteInspo(''+id+'')">Delete</button></div>';
+  document.getElementById('inspo-detail-content').innerHTML=photo+'<div class="detail-title">'+escHtml(item.title||'Untitled')+'</div><div class="detail-meta" style="color:var(--teal)">'+escHtml(item.tag||'Inspiration')+'</div>'+link+notes+'<div class="detail-actions"><button class="btn btn-p" onclick="openEditInspo(\''+id+'\')">Edit</button><button class="btn btn-danger" onclick="confirmDeleteInspo(\''+id+'\')">Delete</button></div>';
 }
 
 function closeInspoDetail(){
