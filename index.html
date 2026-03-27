@@ -1358,9 +1358,14 @@ function loadInspo(){try{var d=localStorage.getItem('inspo_v1');return d?JSON.pa
 function saveInspoData(items){try{localStorage.setItem('inspo_v1',JSON.stringify(items));}catch(e){}}
 
 async function renderInspo(){
+  // Make sure inspo panel is visible
+  var panel=document.getElementById('panel-inspo');
+  if(panel && panel.classList.contains('active')){
+    // panel is active, good
+  }
   var items=await loadInspo();
   var el=document.getElementById('inspo-list');
-  if(!el)return;
+  if(!el){console.warn('inspo-list not found');return;}
   if(!items.length){
     el.innerHTML='<div class="empty-state"><div class="empty-icon" style="margin:0 auto 1rem;"><svg width="32" height="32" viewBox="0 0 26 26" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="18" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="1" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="9.5" y="9.5" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="18" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="1" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="9.5" y="18" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="18" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/></svg></div><p>No inspiration saved yet!<br>Add photos, links, or notes about quilts<br>you love or want to make someday.</p></div>';
     return;
@@ -1456,11 +1461,16 @@ async function saveInspoItem(){
   var existingId=null;
   if(inspoEditIdx>=0){var all=await loadInspo();existingId=(all[inspoEditIdx]||{}).id||null;}
   await saveInspoRecord(item,existingId);
-  // Close modal
   var modal=document.getElementById('inspo-modal');
   if(modal) modal.style.display='none';
-  // Force switch to inspo tab and reload
-  switchTab('inspo');
+  // Activate inspo tab explicitly
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});
+  var tab=document.getElementById('tab-inspo');
+  var panel=document.getElementById('panel-inspo');
+  if(tab) tab.classList.add('active');
+  if(panel) panel.classList.add('active');
+  await renderInspo();
 }
 async function deleteInspoConfirm(i){
   if(!confirm('Remove this from your inspiration board?'))return;
