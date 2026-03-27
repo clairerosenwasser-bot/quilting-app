@@ -1363,11 +1363,23 @@ function handleInspoPhoto(e){
 }
 
 async function saveInspoItem(){
-  var item={title:document.getElementById('if-title').value.trim()||'Untitled',tag:document.getElementById('if-tag').value.trim(),link:document.getElementById('if-link').value.trim(),notes:document.getElementById('if-notes').value.trim(),photo:inspoPhoto};
-  var ok=await dbSaveInspo(item,inspoEditId);
-  if(ok){
+  try {
+    var title=document.getElementById('if-title').value.trim()||'Untitled';
+    alert('Saving "'+title+'" to Supabase...');
+    var item={title:title,tag:document.getElementById('if-tag').value.trim(),link:document.getElementById('if-link').value.trim(),notes:document.getElementById('if-notes').value.trim(),photo:inspoPhoto};
+    if(!sb){alert('ERROR: Supabase not connected!');return;}
+    if(!currentUser){alert('ERROR: Not logged in!');return;}
+    var rec={user_id:currentUser.id,title:item.title,tag:item.tag,link:item.link,notes:item.notes,photo:item.photo};
+    alert('Inserting record for user: '+currentUser.email);
+    var result=await sb.from('inspo').insert(rec).select();
+    alert('Result: data='+JSON.stringify(result.data)+' error='+JSON.stringify(result.error));
+    if(result.error){alert('SAVE FAILED: '+result.error.message);return;}
     document.getElementById('inspo-modal').style.display='none';
-    renderInspo();
+    alert('Saved! Now refreshing list...');
+    await renderInspo();
+    alert('Done! You should see your item now.');
+  } catch(e) {
+    alert('EXCEPTION: '+e.message);
   }
 }
 
