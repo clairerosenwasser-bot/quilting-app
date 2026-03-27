@@ -1051,9 +1051,11 @@ async function saveQuiltRecord(q, existingId) {
     gifted: q.gifted, giftee: q.giftee, occasion: q.occasion
   };
   if (existingId) {
-    await sb.from('quilts').update(record).eq('id', existingId);
+    const { error } = await sb.from('quilts').update(record).eq('id', existingId);
+    if (error) { alert('Error saving quilt: ' + error.message); console.error('quilt update error:', error); return; }
   } else {
-    await sb.from('quilts').insert(record);
+    const { error } = await sb.from('quilts').insert(record);
+    if (error) { alert('Error saving quilt: ' + error.message); console.error('quilt insert error:', error); return; }
   }
 }
 
@@ -1100,9 +1102,13 @@ async function saveInspoRecord(item, existingId) {
     link: item.link, notes: item.notes, photo: item.photo
   };
   if (existingId) {
-    await sb.from('inspo').update(record).eq('id', existingId);
+    const { error } = await sb.from('inspo').update(record).eq('id', existingId);
+    if (error) { alert('Error saving: ' + error.message); console.error('inspo update error:', error); return; }
   } else {
-    await sb.from('inspo').insert(record);
+    const { data, error } = await sb.from('inspo').insert(record).select();
+    console.log('inspo insert result:', data, error);
+    if (error) { alert('Error saving: ' + error.message); console.error('inspo insert error:', error); return; }
+    if (!data || data.length === 0) { alert('Saved but no data returned — possible RLS issue. Check Supabase dashboard.'); }
   }
 }
 
@@ -1513,21 +1519,27 @@ function resetInspoPhoto(){
   document.getElementById('inspo-photo-wrap').innerHTML='<div style="font-size:28px;opacity:0.4;margin-bottom:0.5rem">📷</div><div style="font-size:14px;color:#6b8080">Tap to add a photo</div>';
 }
 async function saveInspoItem(){
-  var item={
-    title:document.getElementById('if-title').value.trim()||'Untitled',
-    tag:document.getElementById('if-tag').value.trim(),
-    link:document.getElementById('if-link').value.trim(),
-    notes:document.getElementById('if-notes').value.trim(),
-    photo:inspoPhoto,
-    savedAt:new Date().toISOString()
-  };
-  var existingId = null;
-  if(inspoEditIdx>=0){
-    var items=await loadInspo();
-    existingId=(items[inspoEditIdx]||{}).id||null;
+  try {
+    var item={
+      title:document.getElementById('if-title').value.trim()||'Untitled',
+      tag:document.getElementById('if-tag').value.trim(),
+      link:document.getElementById('if-link').value.trim(),
+      notes:document.getElementById('if-notes').value.trim(),
+      photo:inspoPhoto,
+      savedAt:new Date().toISOString()
+    };
+    var existingId = null;
+    if(inspoEditIdx>=0){
+      var items=await loadInspo();
+      existingId=(items[inspoEditIdx]||{}).id||null;
+    }
+    await saveInspoRecord(item, existingId);
+    closeInspoModal();
+    await renderInspo();
+  } catch(e) {
+    console.error('saveInspoItem error:', e);
+    alert('Could not save: ' + e.message);
   }
-  await saveInspoRecord(item, existingId);
-  closeInspoModal(); renderInspo();
 }
 async function deleteInspoConfirm(i){
   if(!confirm('Remove this from your inspiration board?'))return;
