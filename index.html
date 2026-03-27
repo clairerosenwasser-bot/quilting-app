@@ -840,85 +840,6 @@ body{
   </div>
 </div>
 
-<!-- CATALOGUE MODAL -->
-<div class="modal-bg" id="modal" style="display:none">
-  <div class="modal">
-    <div class="modal-hdr"><h3 id="modal-title">Add a quilt</h3><button class="close-btn" onclick="closeModal()">✕</button></div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label>Photo</label>
-        <div class="photo-upload" id="photo-upload-zone" onclick="document.getElementById('photo-file').click()">
-          <div id="photo-preview-wrap"><div style="font-size:28px;opacity:0.4;margin-bottom:0.5rem">📷</div><div style="font-size:14px;color:#6b8080">Tap to add a photo</div></div>
-        </div>
-        <input type="file" id="photo-file" accept="image/*" style="display:none" onchange="handlePhotoUpload(event)">
-      </div>
-      <div class="form-group"><label>Pattern name</label><input type="text" id="f-name" placeholder="e.g. Charm Pack Patchwork"></div>
-      <div class="form-group"><label>Date completed</label><input type="date" id="f-date"></div>
-      <div class="form-group"><label>Notes</label><textarea id="f-notes" placeholder="What did you learn? What would you do differently?"></textarea></div>
-      <div class="form-group">
-        <label>Rating</label>
-        <div class="star-picker" id="star-picker">
-          <button class="star-btn" onclick="setRating(1)">★</button>
-          <button class="star-btn" onclick="setRating(2)">★</button>
-          <button class="star-btn" onclick="setRating(3)">★</button>
-          <button class="star-btn" onclick="setRating(4)">★</button>
-          <button class="star-btn" onclick="setRating(5)">★</button>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="gift-row">
-          <button class="toggle" id="gift-toggle" onclick="toggleGift()"></button>
-          <label style="margin:0;cursor:pointer" onclick="toggleGift()">This quilt was gifted to someone</label>
-        </div>
-        <div class="gift-fields" id="gift-fields" style="display:none">
-          <div class="form-group" style="margin-bottom:0.75rem"><label>Gifted to</label><input type="text" id="f-giftee" placeholder="e.g. Grandma, Sarah's baby shower"></div>
-          <div class="form-group" style="margin-bottom:0"><label>Occasion</label><input type="text" id="f-occasion" placeholder="e.g. Birthday, Christmas, New baby"></div>
-        </div>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-danger" id="delete-btn" onclick="deleteQuilt()" style="display:none;margin-right:auto">Delete</button>
-      <button class="btn" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-p" onclick="saveQuilt()">Save quilt</button>
-    </div>
-  </div>
-</div>
-
-<!-- INSPO MODAL -->
-<div class="modal-bg" id="inspo-modal" style="display:none">
-  <div class="modal">
-    <div class="modal-hdr"><h3 id="im-title">Add inspiration</h3><button class="close-btn" onclick="closeInspoModal()">✕</button></div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label>Photo</label>
-        <div class="photo-upload" id="inspo-photo-zone" onclick="document.getElementById('inspo-photo-file').click()">
-          <div id="inspo-photo-wrap"><div style="font-size:28px;opacity:0.4;margin-bottom:0.5rem">📷</div><div style="font-size:14px;color:#6b8080">Tap to add a photo</div></div>
-        </div>
-        <input type="file" id="inspo-photo-file" accept="image/*" style="display:none" onchange="handleInspoPhoto(event)">
-      </div>
-      <div class="form-group"><label>Title</label><input type="text" id="if-title" placeholder="e.g. Blue log cabin pattern"></div>
-      <div class="form-group">
-        <label>Category</label>
-        <input type="text" id="if-tag" placeholder="e.g. Want to make, Color inspo, Pattern idea" list="tag-suggestions">
-        <datalist id="tag-suggestions">
-          <option value="Want to make">
-          <option value="Color inspo">
-          <option value="Pattern idea">
-          <option value="Gift idea">
-          <option value="Technique to try">
-          <option value="Fabric inspo">
-        </datalist>
-      </div>
-      <div class="form-group"><label>Link (optional)</label><input type="url" id="if-link" placeholder="https://..."></div>
-      <div class="form-group"><label>Notes</label><textarea id="if-notes" placeholder="What do you love about it? Any ideas for adapting it?"></textarea></div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-danger" id="idb-del" onclick="deleteInspoFromModal()" style="display:none;margin-right:auto">Remove</button>
-      <button class="btn" onclick="closeInspoModal()">Cancel</button>
-      <button class="btn btn-p" onclick="saveInspoItem()">Save</button>
-    </div>
-  </div>
-</div>
 
 <script>
 function goHome(){
@@ -1558,5 +1479,86 @@ initSupabase();
 
 
 </script>
+
+<!-- CATALOGUE MODAL -->
+<div class="modal-bg" id="modal" style="display:none">
+  <div class="modal">
+    <div class="modal-hdr"><h3 id="modal-title">Add a quilt</h3><button class="close-btn" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Photo</label>
+        <div class="photo-upload" id="photo-upload-zone" onclick="document.getElementById('photo-file').click()">
+          <div id="photo-preview-wrap"><div style="font-size:28px;opacity:0.4;margin-bottom:0.5rem">📷</div><div style="font-size:14px;color:#6b8080">Tap to add a photo</div></div>
+        </div>
+        <input type="file" id="photo-file" accept="image/*" style="display:none" onchange="handlePhotoUpload(event)">
+      </div>
+      <div class="form-group"><label>Pattern name</label><input type="text" id="f-name" placeholder="e.g. Charm Pack Patchwork"></div>
+      <div class="form-group"><label>Date completed</label><input type="date" id="f-date"></div>
+      <div class="form-group"><label>Notes</label><textarea id="f-notes" placeholder="What did you learn? What would you do differently?"></textarea></div>
+      <div class="form-group">
+        <label>Rating</label>
+        <div class="star-picker" id="star-picker">
+          <button class="star-btn" onclick="setRating(1)">★</button>
+          <button class="star-btn" onclick="setRating(2)">★</button>
+          <button class="star-btn" onclick="setRating(3)">★</button>
+          <button class="star-btn" onclick="setRating(4)">★</button>
+          <button class="star-btn" onclick="setRating(5)">★</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="gift-row">
+          <button class="toggle" id="gift-toggle" onclick="toggleGift()"></button>
+          <label style="margin:0;cursor:pointer" onclick="toggleGift()">This quilt was gifted to someone</label>
+        </div>
+        <div class="gift-fields" id="gift-fields" style="display:none">
+          <div class="form-group" style="margin-bottom:0.75rem"><label>Gifted to</label><input type="text" id="f-giftee" placeholder="e.g. Grandma, Sarah's baby shower"></div>
+          <div class="form-group" style="margin-bottom:0"><label>Occasion</label><input type="text" id="f-occasion" placeholder="e.g. Birthday, Christmas, New baby"></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger" id="delete-btn" onclick="deleteQuilt()" style="display:none;margin-right:auto">Delete</button>
+      <button class="btn" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-p" onclick="saveQuilt()">Save quilt</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- INSPO MODAL -->
+<div class="modal-bg" id="inspo-modal" style="display:none">
+  <div class="modal">
+    <div class="modal-hdr"><h3 id="im-title">Add inspiration</h3><button class="close-btn" onclick="closeInspoModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Photo</label>
+        <div class="photo-upload" id="inspo-photo-zone" onclick="document.getElementById('inspo-photo-file').click()">
+          <div id="inspo-photo-wrap"><div style="font-size:28px;opacity:0.4;margin-bottom:0.5rem">📷</div><div style="font-size:14px;color:#6b8080">Tap to add a photo</div></div>
+        </div>
+        <input type="file" id="inspo-photo-file" accept="image/*" style="display:none" onchange="handleInspoPhoto(event)">
+      </div>
+      <div class="form-group"><label>Title</label><input type="text" id="if-title" placeholder="e.g. Blue log cabin pattern"></div>
+      <div class="form-group">
+        <label>Category</label>
+        <input type="text" id="if-tag" placeholder="e.g. Want to make, Color inspo, Pattern idea" list="tag-suggestions">
+        <datalist id="tag-suggestions">
+          <option value="Want to make">
+          <option value="Color inspo">
+          <option value="Pattern idea">
+          <option value="Gift idea">
+          <option value="Technique to try">
+          <option value="Fabric inspo">
+        </datalist>
+      </div>
+      <div class="form-group"><label>Link (optional)</label><input type="url" id="if-link" placeholder="https://..."></div>
+      <div class="form-group"><label>Notes</label><textarea id="if-notes" placeholder="What do you love about it? Any ideas for adapting it?"></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger" id="idb-del" onclick="deleteInspoFromModal()" style="display:none;margin-right:auto">Remove</button>
+      <button class="btn" onclick="closeInspoModal()">Cancel</button>
+      <button class="btn btn-p" onclick="saveInspoItem()">Save</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
