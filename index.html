@@ -11,6 +11,7 @@
 <style>
 
 
+
 :root{
   --teal:#1a7a6e;
   --teal-mid:#2496a0;
@@ -655,11 +656,56 @@ body{
 }
 .signout-btn:hover{background:rgba(255,255,255,0.2);}
 
+
+
+.landing{min-height:100vh;background:linear-gradient(160deg,var(--forest) 0%,var(--teal) 45%,var(--blue) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;text-align:center;}
+.landing-logo{width:80px;height:80px;background:rgba(255,255,255,0.15);border-radius:22px;border:1px solid rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
+.landing h1{font-family:'Lora',serif;font-size:32px;font-weight:600;color:white;margin-bottom:0.4rem;letter-spacing:-0.02em;}
+.landing-sub{font-size:15px;color:rgba(255,255,255,0.7);margin-bottom:3rem;line-height:1.5;}
+.landing-cards{display:flex;flex-direction:column;gap:14px;width:100%;max-width:340px;}
+.landing-card{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:16px;padding:1.25rem 1.5rem;cursor:pointer;text-align:left;transition:all 0.2s;display:flex;align-items:center;gap:16px;backdrop-filter:blur(8px);}
+.landing-card:hover{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.4);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.15);}
+.landing-card-icon{width:48px;height:48px;min-width:48px;background:rgba(255,255,255,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;}
+.landing-card-title{font-size:16px;font-weight:500;color:white;margin-bottom:2px;font-family:'Lora',serif;}
+.landing-card-desc{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.4;}
+.landing-footer{margin-top:2.5rem;font-size:12px;color:rgba(255,255,255,0.4);}
+.auth-screen{min-height:100vh;background:linear-gradient(160deg,var(--forest) 0%,var(--teal) 45%,var(--blue) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;}
+.auth-card{width:100%;max-width:360px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:20px;padding:2rem;backdrop-filter:blur(12px);text-align:center;}
+.auth-logo{width:72px;height:72px;margin:0 auto 1.25rem;background:rgba(255,255,255,0.15);border-radius:18px;border:1px solid rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;}
+.auth-title{font-family:'Lora',serif;font-size:24px;font-weight:600;color:white;margin-bottom:0.3rem;}
+.auth-sub{font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:1.75rem;}
+.auth-tabs{display:flex;gap:0;margin-bottom:1.5rem;background:rgba(0,0,0,0.15);border-radius:10px;padding:3px;}
+.auth-tab{flex:1;padding:8px;font-size:13px;font-weight:500;color:rgba(255,255,255,0.6);cursor:pointer;border-radius:8px;transition:all 0.2s;border:none;background:transparent;font-family:inherit;}
+.auth-tab.active{background:rgba(255,255,255,0.2);color:white;}
+.auth-field{margin-bottom:1rem;text-align:left;}
+.auth-field label{display:block;font-size:11px;font-weight:500;color:rgba(255,255,255,0.6);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.07em;}
+.auth-field input{width:100%;padding:11px 14px;font-size:15px;font-family:inherit;border:1.5px solid rgba(255,255,255,0.2);border-radius:10px;background:rgba(255,255,255,0.1);color:white;transition:border-color 0.15s;}
+.auth-field input::placeholder{color:rgba(255,255,255,0.35);}
+.auth-field input:focus{outline:none;border-color:rgba(255,255,255,0.5);}
+.auth-btn{width:100%;padding:13px;font-size:15px;font-weight:500;font-family:inherit;border-radius:10px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.2);color:white;cursor:pointer;transition:all 0.2s;margin-top:0.25rem;}
+.auth-btn:hover{background:rgba(255,255,255,0.3);}
+.auth-btn:disabled{opacity:0.5;cursor:default;}
+.auth-error{font-size:13px;color:rgba(255,180,180,1);margin-bottom:0.75rem;min-height:18px;text-align:left;}
+.auth-footer{font-size:12px;color:rgba(255,255,255,0.35);margin-top:1.25rem;}
+.user-badge{display:flex;align-items:center;gap:8px;margin-left:auto;}
+.signout-btn{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.75);border-radius:7px;padding:5px 10px;font-size:11px;cursor:pointer;font-family:inherit;white-space:nowrap;}
+.signout-btn:hover{background:rgba(255,255,255,0.2);}
+.inspo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px;margin-bottom:2rem;}
+.inspo-card{background:var(--surface-card);border:1.5px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s;}
+.inspo-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(26,122,110,0.1);border-color:var(--teal-light);}
+.inspo-img{width:100%;height:130px;background:linear-gradient(135deg,var(--teal-wash),var(--blue-wash));overflow:hidden;}
+.inspo-img img{width:100%;height:130px;object-fit:cover;display:block;}
+.inspo-no-photo{width:100%;height:130px;background:linear-gradient(135deg,var(--teal-wash),var(--blue-wash));display:flex;align-items:center;justify-content:center;}
+.inspo-body{padding:0.7rem 0.75rem;}
+.inspo-card-title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.inspo-tag{font-size:10px;padding:2px 8px;border-radius:99px;background:var(--teal-wash);color:var(--teal);border:1px solid var(--border);display:inline-block;}
+.inspo-link-badge{font-size:10px;color:var(--blue-mid);margin-top:4px;}
+
 </style>
 </head>
 <body>
 
-<!-- AUTH SCREEN -->
+<!-- AUTH -->
 <div id="auth-screen" style="display:flex;flex-direction:column;">
   <div class="auth-screen">
     <div class="auth-card">
@@ -685,15 +731,11 @@ body{
         <button class="auth-tab" id="auth-tab-signup" onclick="switchAuthTab('signup')">Create account</button>
       </div>
       <div id="auth-error" class="auth-error"></div>
-
-      <!-- LOGIN FORM -->
       <div id="auth-form-login">
         <div class="auth-field"><label>Email</label><input type="email" id="login-email" placeholder="you@example.com" onkeydown="if(event.key==='Enter')doLogin()"></div>
         <div class="auth-field"><label>Password</label><input type="password" id="login-password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
         <button class="auth-btn" id="login-btn" onclick="doLogin()">Sign in</button>
       </div>
-
-      <!-- SIGNUP FORM -->
       <div id="auth-form-signup" style="display:none">
         <div class="auth-field"><label>Email</label><input type="email" id="signup-email" placeholder="you@example.com"></div>
         <div class="auth-field"><label>Password</label><input type="password" id="signup-password" placeholder="At least 6 characters"></div>
@@ -705,7 +747,7 @@ body{
   </div>
 </div>
 
-<!-- LANDING SCREEN -->
+<!-- LANDING -->
 <div id="landing" style="display:none;">
   <div class="landing">
     <div class="landing-logo"><svg width="26" height="26" viewBox="0 0 26 26" fill="none">
@@ -728,24 +770,15 @@ body{
     <div class="landing-cards">
       <div class="landing-card" onclick="switchTab('guide')">
         <div class="landing-card-icon">📖</div>
-        <div class="landing-card-text">
-          <div class="landing-card-title">Build a new quilt</div>
-          <div class="landing-card-desc">Step-by-step guide with videos, diagrams &amp; calculators</div>
-        </div>
+        <div><div class="landing-card-title">Build a new quilt</div><div class="landing-card-desc">Step-by-step guide with videos, diagrams &amp; calculators</div></div>
       </div>
       <div class="landing-card" onclick="switchTab('cat')">
         <div class="landing-card-icon">🧵</div>
-        <div class="landing-card-text">
-          <div class="landing-card-title">My quilt projects</div>
-          <div class="landing-card-desc">Your personal catalogue of finished quilts</div>
-        </div>
+        <div><div class="landing-card-title">My quilt projects</div><div class="landing-card-desc">Your personal catalogue of finished quilts</div></div>
       </div>
       <div class="landing-card" onclick="switchTab('inspo')">
         <div class="landing-card-icon">✨</div>
-        <div class="landing-card-text">
-          <div class="landing-card-title">Quilt inspo</div>
-          <div class="landing-card-desc">Save photos &amp; links of quilts you love or want to make</div>
-        </div>
+        <div><div class="landing-card-title">Quilt inspo</div><div class="landing-card-desc">Save photos &amp; links of quilts you love or want to make</div></div>
       </div>
     </div>
     <div class="landing-footer">Tap any section to get started</div>
@@ -756,8 +789,7 @@ body{
 <div id="main-app" style="display:none;">
   <header class="app-header">
     <div class="header-top">
-      <div class="app-logo" onclick="goHome()" style="cursor:pointer;">
-        <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+      <div class="app-logo" onclick="goHome()" style="cursor:pointer;"><svg width="26" height="26" viewBox="0 0 26 26" fill="none">
   <rect x="1" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
   <rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.5)"/>
   <rect x="18" y="1" width="7" height="7" rx="1.5" fill="rgba(255,255,255,0.9)"/>
@@ -771,15 +803,12 @@ body{
   <line x1="17.5" y1="1" x2="17.5" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
   <line x1="1" y1="8" x2="25" y2="8" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
   <line x1="1" y1="17.5" x2="25" y2="17.5" stroke="rgba(255,255,255,0.3)" stroke-width="0.75"/>
-</svg>
-      </div>
+</svg></div>
       <div>
         <div class="app-name">Stitch &amp; Story</div>
         <div class="app-tagline" id="user-email-display">Your quilting companion</div>
       </div>
-      <div class="user-badge">
-        <button class="signout-btn" onclick="doSignOut()">Sign out</button>
-      </div>
+      <div class="user-badge"><button class="signout-btn" onclick="doSignOut()">Sign out</button></div>
     </div>
     <div class="tab-bar">
       <div class="tab active" id="tab-guide" onclick="switchTab('guide')">📖 Guide</div>
@@ -787,8 +816,6 @@ body{
       <div class="tab" id="tab-inspo" onclick="switchTab('inspo')">✨ Inspo</div>
     </div>
   </header>
-
-  <!-- GUIDE TAB -->
   <div class="tab-panel active" id="panel-guide">
     <div class="app">
       <div class="prog-wrap" id="prog"></div>
@@ -800,439 +827,96 @@ body{
       </div>
     </div>
   </div>
-
-  <!-- CATALOGUE TAB -->
   <div class="tab-panel" id="panel-cat">
     <div class="app">
-      <div class="cat-header">
-        <h2>My Quilts</h2>
-        <button class="btn btn-p" onclick="openAddModal()">+ Add quilt</button>
-      </div>
+      <div class="cat-header"><h2>My Quilts</h2><button class="btn btn-p" onclick="openAddModal()">+ Add quilt</button></div>
       <div id="cat-list"></div>
     </div>
   </div>
-
-  <!-- INSPO TAB -->
   <div class="tab-panel" id="panel-inspo">
     <div class="app">
-      <div class="cat-header">
-        <h2>Quilt Inspo</h2>
-        <button class="btn btn-p" onclick="openAddInspo()">+ Add inspo</button>
-      </div>
+      <div class="cat-header"><h2>Quilt Inspo</h2><button class="btn btn-p" onclick="openAddInspo()">+ Add inspo</button></div>
       <div id="inspo-list"></div>
     </div>
   </div>
 </div>
 
-<!-- CATALOGUE DETAIL VIEW -->
-<div id="detail-view" style="display:none">
-  <div class="app">
-    <button class="detail-back" onclick="closeDetail()">← Back to my quilts</button>
-    <div id="detail-content"></div>
+<!-- DETAIL VIEWS -->
+<div id="detail-view" style="display:none"><div class="app"><button class="detail-back" onclick="closeDetail()">← Back to my quilts</button><div id="detail-content"></div></div></div>
+<div id="inspo-detail-view" style="display:none"><div class="app"><button class="detail-back" onclick="closeInspoDetail()">← Back to inspo board</button><div id="inspo-detail-content"></div></div></div>
+
+<!-- CATALOGUE MODAL -->
+<div class="modal-bg" id="modal" style="display:none;z-index:1000;">
+  <div class="modal">
+    <div class="modal-hdr"><h3 id="modal-title">Add a quilt</h3><button class="close-btn" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>Photo</label>
+        <div class="photo-upload" id="photo-upload-zone" onclick="document.getElementById('photo-file').click()">
+          <div id="photo-preview-wrap"><div style="font-size:28px;opacity:0.4;margin-bottom:0.5rem">📷</div><div style="font-size:14px;color:#6b8080">Tap to add a photo</div></div>
+        </div>
+        <input type="file" id="photo-file" accept="image/*" style="display:none" onchange="handlePhotoUpload(event)">
+      </div>
+      <div class="form-group"><label>Pattern name</label><input type="text" id="f-name" placeholder="e.g. Charm Pack Patchwork"></div>
+      <div class="form-group"><label>Date completed</label><input type="date" id="f-date"></div>
+      <div class="form-group"><label>Notes</label><textarea id="f-notes" placeholder="What did you learn? What would you do differently?"></textarea></div>
+      <div class="form-group"><label>Rating</label>
+        <div class="star-picker">
+          <button class="star-btn" onclick="setRating(1)">★</button>
+          <button class="star-btn" onclick="setRating(2)">★</button>
+          <button class="star-btn" onclick="setRating(3)">★</button>
+          <button class="star-btn" onclick="setRating(4)">★</button>
+          <button class="star-btn" onclick="setRating(5)">★</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="gift-row">
+          <button class="toggle" id="gift-toggle" onclick="toggleGift()"></button>
+          <label style="margin:0;cursor:pointer" onclick="toggleGift()">This quilt was gifted to someone</label>
+        </div>
+        <div class="gift-fields" id="gift-fields" style="display:none">
+          <div class="form-group" style="margin-bottom:0.75rem"><label>Gifted to</label><input type="text" id="f-giftee" placeholder="e.g. Grandma"></div>
+          <div class="form-group" style="margin-bottom:0"><label>Occasion</label><input type="text" id="f-occasion" placeholder="e.g. Birthday, Christmas"></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger" id="delete-btn" onclick="deleteQuilt()" style="display:none;margin-right:auto">Delete</button>
+      <button class="btn" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-p" onclick="saveQuilt()">Save quilt</button>
+    </div>
   </div>
 </div>
 
-<!-- INSPO DETAIL VIEW -->
-<div id="inspo-detail-view" style="display:none">
-  <div class="app">
-    <button class="detail-back" onclick="closeInspoDetail()">← Back to inspo board</button>
-    <div id="inspo-detail-content"></div>
+<!-- INSPO MODAL -->
+<div class="modal-bg" id="inspo-modal" style="display:none;z-index:1000;">
+  <div class="modal">
+    <div class="modal-hdr"><h3 id="im-title">Add inspiration</h3><button class="close-btn" onclick="closeInspoModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>Photo</label>
+        <div class="photo-upload" id="inspo-photo-zone" onclick="document.getElementById('inspo-photo-file').click()">
+          <div id="inspo-photo-wrap"><div style="font-size:28px;opacity:0.4;margin-bottom:0.5rem">📷</div><div style="font-size:14px;color:#6b8080">Tap to add a photo</div></div>
+        </div>
+        <input type="file" id="inspo-photo-file" accept="image/*" style="display:none" onchange="handleInspoPhoto(event)">
+      </div>
+      <div class="form-group"><label>Title</label><input type="text" id="if-title" placeholder="e.g. Blue log cabin pattern"></div>
+      <div class="form-group"><label>Category</label>
+        <input type="text" id="if-tag" placeholder="e.g. Want to make, Color inspo" list="tag-suggestions">
+        <datalist id="tag-suggestions">
+          <option value="Want to make"><option value="Color inspo"><option value="Pattern idea"><option value="Gift idea"><option value="Technique to try"><option value="Fabric inspo">
+        </datalist>
+      </div>
+      <div class="form-group"><label>Link (optional)</label><input type="url" id="if-link" placeholder="https://..."></div>
+      <div class="form-group"><label>Notes</label><textarea id="if-notes" placeholder="What do you love about it?"></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger" id="idb-del" onclick="deleteInspoFromModal()" style="display:none;margin-right:auto">Remove</button>
+      <button class="btn" onclick="closeInspoModal()">Cancel</button>
+      <button class="btn btn-p" onclick="saveInspoItem()">Save</button>
+    </div>
   </div>
 </div>
-
 
 <script>
-function goHome(){
-  document.getElementById('main-app').style.display='none';
-  document.getElementById('landing').style.display='block';
-  document.getElementById('detail-view').style.display='none';
-  document.getElementById('inspo-detail-view').style.display='none';
-}
-
-// ── SUPABASE CONFIG ───────────────────────────────────
-const SUPA_URL = 'https://rxrbqkekbpbubvzkdizy.supabase.co';
-const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ4cmJxa2VrYnBidWJ2emtkaXp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1NDU1MzAsImV4cCI6MjA5MDEyMTUzMH0.qioTo7hfC3GymwXzHgjK1nZMQE3ZUsQ3wOrSZ90f7fQ';
-let sb = null;
-let currentUser = null;
-
-async function initSupabase() {
-  const { createClient } = window.supabase;
-  sb = createClient(SUPA_URL, SUPA_KEY);
-  const { data: { session } } = await sb.auth.getSession();
-  if (session) {
-    currentUser = session.user;
-    showApp();
-  } else {
-    showAuth();
-  }
-  sb.auth.onAuthStateChange(function(event, session) {
-    if (session) { currentUser = session.user; }
-    else { currentUser = null; }
-  });
-}
-
-function showAuth() {
-  document.getElementById('auth-screen').style.display = 'flex';
-  document.getElementById('landing').style.display = 'none';
-  document.getElementById('main-app').style.display = 'none';
-}
-
-function showApp() {
-  document.getElementById('auth-screen').style.display = 'none';
-  document.getElementById('landing').style.display = 'block';
-  document.getElementById('main-app').style.display = 'none';
-  updateUserBadge();
-}
-
-function updateUserBadge() {
-  var el = document.getElementById('user-email-display');
-  if (el && currentUser) el.textContent = currentUser.email;
-}
-
-function switchAuthTab(t) {
-  document.querySelectorAll('.auth-tab').forEach(function(b){b.classList.remove('active');});
-  document.getElementById('auth-tab-'+t).classList.add('active');
-  document.getElementById('auth-form-login').style.display = t==='login'?'block':'none';
-  document.getElementById('auth-form-signup').style.display = t==='signup'?'block':'none';
-  document.getElementById('auth-error').textContent = '';
-}
-
-async function doLogin() {
-  var email = document.getElementById('login-email').value.trim();
-  var password = document.getElementById('login-password').value;
-  var btn = document.getElementById('login-btn');
-  var err = document.getElementById('auth-error');
-  if (!email || !password) { err.textContent = 'Please enter your email and password.'; return; }
-  btn.disabled = true; btn.textContent = 'Signing in...'; err.textContent = '';
-  const { error } = await sb.auth.signInWithPassword({ email, password });
-  btn.disabled = false; btn.textContent = 'Sign in';
-  if (error) { err.textContent = error.message; return; }
-  const { data: { session } } = await sb.auth.getSession();
-  currentUser = session.user;
-  showApp();
-}
-
-async function doSignup() {
-  var email = document.getElementById('signup-email').value.trim();
-  var password = document.getElementById('signup-password').value;
-  var confirm = document.getElementById('signup-confirm').value;
-  var btn = document.getElementById('signup-btn');
-  var err = document.getElementById('auth-error');
-  if (!email || !password) { err.textContent = 'Please enter your email and password.'; return; }
-  if (password.length < 6) { err.textContent = 'Password must be at least 6 characters.'; return; }
-  if (password !== confirm) { err.textContent = 'Passwords do not match.'; return; }
-  btn.disabled = true; btn.textContent = 'Creating account...'; err.textContent = '';
-  const { error } = await sb.auth.signUp({ email, password });
-  btn.disabled = false; btn.textContent = 'Create account';
-  if (error) { err.textContent = error.message; return; }
-  err.style.color = 'rgba(180,255,200,1)';
-  err.textContent = 'Account created! Check your email to confirm, then sign in.';
-}
-
-async function doSignOut() {
-  await sb.auth.signOut();
-  currentUser = null;
-  showAuth();
-}
-
-// ── CLOUD CATALOGUE ───────────────────────────────────
-async function loadQuilts() {
-  if (!sb || !currentUser) {
-    try { var d=localStorage.getItem('quilts_v1'); return d?JSON.parse(d):[]; } catch(e) { return []; }
-  }
-  const { data, error } = await sb.from('quilts').select('*').order('saved_at', {ascending: false});
-  if (error) { console.error(error); return []; }
-  return (data||[]).map(function(r) {
-    return {
-      id: r.id, name: r.name, date: r.date, notes: r.notes,
-      rating: r.rating, photo: r.photo, gifted: r.gifted,
-      giftee: r.giftee, occasion: r.occasion, savedAt: r.saved_at
-    };
-  });
-}
-
-async function saveQuilts(quilts) {
-  // not used in cloud mode — individual saves handle it
-}
-
-async function saveQuiltRecord(q, existingId) {
-  if (!sb || !currentUser) {
-    var existing = [];
-    try { existing = JSON.parse(localStorage.getItem('quilts_v1')||'[]'); } catch(e) {}
-    if (existingId) {
-      var idx = existing.findIndex(function(x){return x.id===existingId;});
-      if (idx>=0) existing[idx]=q; else existing.unshift(q);
-    } else { existing.unshift(q); }
-    localStorage.setItem('quilts_v1', JSON.stringify(existing));
-    return;
-  }
-  var record = {
-    user_id: currentUser.id, name: q.name, date: q.date,
-    notes: q.notes, rating: q.rating, photo: q.photo,
-    gifted: q.gifted, giftee: q.giftee, occasion: q.occasion
-  };
-  if (existingId) {
-    const { error } = await sb.from('quilts').update(record).eq('id', existingId);
-    if (error) { alert('Error saving quilt: ' + error.message); console.error('quilt update error:', error); return; }
-  } else {
-    const { error } = await sb.from('quilts').insert(record);
-    if (error) { alert('Error saving quilt: ' + error.message); console.error('quilt insert error:', error); return; }
-  }
-}
-
-async function deleteQuiltRecord(id) {
-  if (!sb || !currentUser) {
-    var existing = [];
-    try { existing = JSON.parse(localStorage.getItem('quilts_v1')||'[]'); } catch(e) {}
-    existing = existing.filter(function(x){return x.id!==id;});
-    localStorage.setItem('quilts_v1', JSON.stringify(existing));
-    return;
-  }
-  await sb.from('quilts').delete().eq('id', id);
-}
-
-// ── CLOUD INSPO ───────────────────────────────────────
-async function loadInspo() {
-  if (!sb || !currentUser) {
-    try { var d=localStorage.getItem('inspo_v1'); return d?JSON.parse(d):[]; } catch(e) { return []; }
-  }
-  const { data, error } = await sb.from('inspo').select('*').order('saved_at', {ascending: false});
-  if (error) { console.error(error); return []; }
-  return (data||[]).map(function(r) {
-    return { id: r.id, title: r.title, tag: r.tag, link: r.link, notes: r.notes, photo: r.photo, savedAt: r.saved_at };
-  });
-}
-
-async function saveInspoData(items) {
-  // not used in cloud mode
-}
-
-async function saveInspoRecord(item, existingId) {
-  if (!sb || !currentUser) {
-    var existing = [];
-    try { existing = JSON.parse(localStorage.getItem('inspo_v1')||'[]'); } catch(e) {}
-    if (existingId) {
-      var idx = existing.findIndex(function(x){return x.id===existingId;});
-      if (idx>=0) existing[idx]=item; else existing.unshift(item);
-    } else { existing.unshift(item); }
-    localStorage.setItem('inspo_v1', JSON.stringify(existing));
-    return;
-  }
-  var record = {
-    user_id: currentUser.id, title: item.title, tag: item.tag,
-    link: item.link, notes: item.notes, photo: item.photo
-  };
-  if (existingId) {
-    const { error } = await sb.from('inspo').update(record).eq('id', existingId);
-    if (error) { alert('Error saving: ' + error.message); console.error('inspo update error:', error); return; }
-  } else {
-    const { data, error } = await sb.from('inspo').insert(record).select();
-    console.log('inspo insert result:', data, error);
-    if (error) { alert('Error saving: ' + error.message); console.error('inspo insert error:', error); return; }
-  }
-}
-
-async function deleteInspoRecord(id) {
-  if (!sb || !currentUser) {
-    var existing = [];
-    try { existing = JSON.parse(localStorage.getItem('inspo_v1')||'[]'); } catch(e) {}
-    existing = existing.filter(function(x){return x.id!==id;});
-    localStorage.setItem('inspo_v1', JSON.stringify(existing));
-    return;
-  }
-  await sb.from('inspo').delete().eq('id', id);
-}
-
-
-function goHome(){
-  document.getElementById('main-app').style.display='none';
-  document.getElementById('landing').style.display='block';
-  document.getElementById('detail-view').style.display='none';
-  document.getElementById('inspo-detail-view').style.display='none';
-}
-
-// ── TABS ──────────────────────────────────────────────
-function switchTab(t){
-  document.getElementById('landing').style.display='none';
-  document.getElementById('main-app').style.display='block';
-  document.querySelectorAll('.tab').forEach(function(el){el.classList.remove('active');});
-  document.querySelectorAll('.tab-panel').forEach(function(el){el.classList.remove('active');});
-  document.getElementById('tab-'+t).classList.add('active');
-  document.getElementById('panel-'+t).classList.add('active');
-  if(t==='cat'){closeDetail();renderCat();}
-  if(t==='inspo'){renderInspo();}
-}
-
-// ── STORAGE ───────────────────────────────────────────
-function loadQuilts(){try{var d=localStorage.getItem('quilts_v1');return d?JSON.parse(d):[];}catch(e){return[];}}
-function saveQuilts(q){try{localStorage.setItem('quilts_v1',JSON.stringify(q));}catch(e){}}
-
-// ── CATALOGUE ─────────────────────────────────────────
-async function renderCat(){
-  var quilts=await loadQuilts();
-  var el=document.getElementById('cat-list');
-  if(!el)return;
-  if(!quilts.length){
-    el.innerHTML='<div class="empty-state"><div class="empty-icon"><svg width="32" height="32" viewBox="0 0 26 26" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.6"/><rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="18" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.6"/><rect x="1" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="9.5" y="9.5" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.6"/><rect x="18" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="1" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.6"/><rect x="9.5" y="18" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="18" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.6"/></svg></div><p>No quilts yet!<br>Finish your first quilt and add it here<br>to start your personal catalogue.</p></div>';
-    return;
-  }
-  var html='<div class="quilt-grid">';
-  quilts.forEach(function(q,i){
-    var stars=q.rating?'★'.repeat(q.rating):'';
-    var photoHTML=q.photo?'<img src="'+q.photo+'" alt="'+q.name+'">':"<div style='width:100%;height:190px;background:linear-gradient(135deg,#e4f5f0,#e8f4fc);display:flex;align-items:center;justify-content:center;'><svg width='44' height='44' viewBox='0 0 26 26' fill='none'><rect x='1' y='1' width='7' height='7' rx='1.5' fill='#1a7a6e' opacity='0.4'/><rect x='9.5' y='1' width='7' height='7' rx='1.5' fill='#2496a0' opacity='0.3'/><rect x='18' y='1' width='7' height='7' rx='1.5' fill='#1a7a6e' opacity='0.4'/><rect x='1' y='9.5' width='7' height='7' rx='1.5' fill='#2496a0' opacity='0.3'/><rect x='9.5' y='9.5' width='7' height='7' rx='1.5' fill='#1a7a6e' opacity='0.4'/><rect x='18' y='9.5' width='7' height='7' rx='1.5' fill='#2496a0' opacity='0.3'/><rect x='1' y='18' width='7' height='7' rx='1.5' fill='#1a7a6e' opacity='0.4'/><rect x='9.5' y='18' width='7' height='7' rx='1.5' fill='#2496a0' opacity='0.3'/><rect x='18' y='18' width='7' height='7' rx='1.5' fill='#1a7a6e' opacity='0.4'/></svg></div>";
-    var tags='';
-    if(q.gifted) tags+='<span class="tag gift">🎁 Gifted to '+q.giftee+'</span>';
-    if(q.rating) tags+='<span class="tag"><span class="stars">'+stars+'</span></span>';
-    html+='<div class="quilt-card" onclick="openDetail('+i+')">';
-    html+='<div class="qc-photo">'+photoHTML+'</div>';
-    html+='<div class="qc-body">';
-    html+='<div class="qc-name">'+escHtml(q.name||'Untitled quilt')+'</div>';
-    html+='<div class="qc-meta">'+(q.date?formatDate(q.date):'No date')+'</div>';
-    if(tags) html+='<div class="qc-tags">'+tags+'</div>';
-    html+='</div></div>';
-  });
-  html+='</div>';
-  el.innerHTML=html;
-}
-
-async function openDetail(i){
-  var quilts=await loadQuilts();
-  var q=quilts[i];
-  if(!q)return;
-  document.getElementById('panel-cat').style.display='none';
-  var dv=document.getElementById('detail-view');
-  dv.style.display='block';
-  var stars=q.rating?'★'.repeat(q.rating)+'☆'.repeat(5-q.rating):'Not rated';
-  var photoHTML=q.photo?'<img class="detail-photo" src="'+q.photo+'" alt="'+escHtml(q.name)+'">':"<div class='detail-photo-placeholder'><svg width='60' height='60' viewBox='0 0 26 26' fill='none'><rect x='1' y='1' width='7' height='7' rx='1.5' fill='#1a7a6e' opacity='0.4'/><rect x='9.5' y='1' width='7' height='7' rx='1.5' fill='#2496a0' opacity='0.3'/><rect x='18' y='1' width='7' height='7' rx='1.5' fill='#1a7a6e' opacity='0.4'/><rect x='1' y='9.5' width='7' height='7' rx='1.5' fill='#2496a0' opacity='0.3'/><rect x='9.5' y='9.5' width='7' height='7' rx='1.5' fill='#1a7a6e' opacity='0.4'/><rect x='18' y='9.5' width='7' height='7' rx='1.5' fill='#2496a0' opacity='0.3'/><rect x='1' y='18' width='7' height='7' rx='1.5' fill='#1a7a6e' opacity='0.4'/><rect x='9.5' y='18' width='7' height='7' rx='1.5' fill='#2496a0' opacity='0.3'/><rect x='18' y='18' width='7' height='7' rx='1.5' fill='#1a7a6e' opacity='0.4'/></svg></div>";
-  var giftHTML=q.gifted?'<div class="detail-gift">🎁 Gifted to <strong>'+escHtml(q.giftee||'')+'</strong>'+(q.occasion?' for '+escHtml(q.occasion):'')+'</div>':'';
-  var notesHTML=q.notes?'<div class="detail-section"><div class="detail-section-label">Notes</div><div class="detail-section-val">'+escHtml(q.notes)+'</div></div>':'';
-  document.getElementById('detail-content').innerHTML=
-    photoHTML+
-    '<div class="detail-title">'+escHtml(q.name||'Untitled quilt')+'</div>'+
-    '<div class="detail-meta">'+(q.date?formatDate(q.date):'No date added')+'</div>'+
-    '<div style="margin-bottom:1rem"><span class="stars" style="font-size:18px">'+(q.rating?'★'.repeat(q.rating):'')+'</span><span style="color:#ddd;font-size:18px">'+(q.rating?'☆'.repeat(5-q.rating):'No rating')+'</span></div>'+
-    giftHTML+
-    notesHTML+
-    '<div class="detail-actions">'+
-    '<button class="btn btn-p" onclick="openEditModal('+i+')">Edit</button>'+
-    '<button class="btn btn-danger" onclick="confirmDelete('+i+')">Delete</button>'+
-    '</div>';
-}
-
-function closeDetail(){
-  document.getElementById('detail-view').style.display='none';
-  document.getElementById('panel-cat').style.display='block';
-  renderCat();
-}
-
-// ── MODAL ─────────────────────────────────────────────
-var currentRating=0, currentPhoto=null, isGifted=false, editingIndex=-1;
-
-function openAddModal(){
-  editingIndex=-1;
-  currentRating=0;currentPhoto=null;isGifted=false;
-  document.getElementById('modal-title').textContent='Add a quilt';
-  document.getElementById('delete-btn').style.display='none';
-  document.getElementById('f-name').value='';
-  document.getElementById('f-date').value=new Date().toISOString().split('T')[0];
-  document.getElementById('f-notes').value='';
-  document.getElementById('f-giftee').value='';
-  document.getElementById('f-occasion').value='';
-  setRating(0);
-  resetPhotoUpload();
-  document.getElementById('gift-toggle').className='toggle';
-  document.getElementById('gift-fields').style.display='none';
-  document.getElementById('modal').style.display='flex';
-}
-
-async function openEditModal(i){
-  var quilts=await loadQuilts();var q=quilts[i];if(!q)return;
-  editingIndex=i;currentRating=q.rating||0;currentPhoto=q.photo||null;isGifted=q.gifted||false;
-  document.getElementById('modal-title').textContent='Edit quilt';
-  document.getElementById('delete-btn').style.display='block';
-  document.getElementById('f-name').value=q.name||'';
-  document.getElementById('f-date').value=q.date||'';
-  document.getElementById('f-notes').value=q.notes||'';
-  document.getElementById('f-giftee').value=q.giftee||'';
-  document.getElementById('f-occasion').value=q.occasion||'';
-  setRating(currentRating);
-  if(currentPhoto){
-    document.getElementById('photo-upload-zone').className='photo-upload has-photo';
-    document.getElementById('photo-preview-wrap').innerHTML='<img class="photo-thumb" src="'+currentPhoto+'">';
-  } else {resetPhotoUpload();}
-  document.getElementById('gift-toggle').className='toggle'+(isGifted?' on':'');
-  document.getElementById('gift-fields').style.display=isGifted?'block':'none';
-  document.getElementById('modal').style.display='flex';
-}
-
-function closeModal(){document.getElementById('modal').style.display='none';}
-
-function handlePhotoUpload(e){
-  var f=e.target.files[0];if(!f)return;
-  var r=new FileReader();
-  r.onload=function(ev){
-    currentPhoto=ev.target.result;
-    document.getElementById('photo-upload-zone').className='photo-upload has-photo';
-    document.getElementById('photo-preview-wrap').innerHTML='<img class="photo-thumb" src="'+currentPhoto+'">';
-  };
-  r.readAsDataURL(f);
-}
-
-function resetPhotoUpload(){
-  currentPhoto=null;
-  document.getElementById('photo-upload-zone').className='photo-upload';
-  document.getElementById('photo-preview-wrap').innerHTML='<div style="font-size:28px;opacity:0.4;margin-bottom:0.5rem">📷</div><div style="font-size:14px;color:#6b8080">Tap to add a photo</div>';
-}
-
-function setRating(n){
-  currentRating=n;
-  document.querySelectorAll('.star-btn').forEach(function(b,i){b.className='star-btn'+(i<n?' on':'');});
-}
-
-function toggleGift(){
-  isGifted=!isGifted;
-  document.getElementById('gift-toggle').className='toggle'+(isGifted?' on':'');
-  document.getElementById('gift-fields').style.display=isGifted?'block':'none';
-}
-
-async function saveQuilt(){
-  var quilts=await loadQuilts();
-  var q={
-    name:document.getElementById('f-name').value.trim()||'Untitled quilt',
-    date:document.getElementById('f-date').value,
-    notes:document.getElementById('f-notes').value.trim(),
-    rating:currentRating,
-    photo:currentPhoto,
-    gifted:isGifted,
-    giftee:isGifted?document.getElementById('f-giftee').value.trim():'',
-    occasion:isGifted?document.getElementById('f-occasion').value.trim():'',
-    savedAt:new Date().toISOString()
-  };
-  var existingId = editingIndex>=0 ? (quilts[editingIndex]||{}).id : null;
-  await saveQuiltRecord(q, existingId);
-  closeModal();
-  renderCat();
-}
-
-async function deleteQuilt(){
-  if(editingIndex<0)return;
-  if(!confirm('Delete this quilt from your catalogue? This cannot be undone.'))return;
-  var quilts=await loadQuilts();
-  var id = (quilts[editingIndex]||{}).id;
-  await deleteQuiltRecord(id||editingIndex);
-  closeModal();
-  renderCat();
-}
-
-async function confirmDelete(i){
-  if(!confirm('Delete this quilt from your catalogue?'))return;
-  var quilts=await loadQuilts();
-  var id = (quilts[i]||{}).id;
-  await deleteQuiltRecord(id||i);
-  closeDetail();
-}
-
-// ── GUIDE ─────────────────────────────────────────────
 var YT={1:'https://www.youtube.com/watch?v=-TyihOEvJ8E',2:'https://www.youtube.com/watch?v=YayeZcs3FsQ',3:'https://www.youtube.com/watch?v=R7EdVJailUQ',4:'https://www.youtube.com/watch?v=wPEY9VhSL6U',5:'https://www.youtube.com/watch?v=3Yb0xOgc098',6:'https://www.youtube.com/watch?v=efE87vCVo6U'};
 var gcur=0,chkd={},uploadedImage=null,feedbackCache=null;
 var pv={width:50,height:65,blockSize:5,colors:3};
@@ -1353,133 +1037,345 @@ function go(d){gcur=Math.max(0,Math.min(steps.length,gcur+d));renderGuide();rend
 function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function formatDate(d){if(!d)return'';try{var dt=new Date(d+'T00:00:00');return dt.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});}catch(e){return d;}}
 
-// ── INSPO ─────────────────────────────────────────────
-function loadInspo(){try{var d=localStorage.getItem('inspo_v1');return d?JSON.parse(d):[];}catch(e){return[];}}
-function saveInspoData(items){try{localStorage.setItem('inspo_v1',JSON.stringify(items));}catch(e){}}
 
-async function renderInspo(){
-  // Make sure inspo panel is visible
-  var panel=document.getElementById('panel-inspo');
-  if(panel && panel.classList.contains('active')){
-    // panel is active, good
-  }
-  var items=await loadInspo();
-  var el=document.getElementById('inspo-list');
-  if(!el){console.warn('inspo-list not found');return;}
-  if(!items.length){
-    el.innerHTML='<div class="empty-state"><div class="empty-icon" style="margin:0 auto 1rem;"><svg width="32" height="32" viewBox="0 0 26 26" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="18" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="1" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="9.5" y="9.5" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="18" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="1" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="9.5" y="18" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="18" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/></svg></div><p>No inspiration saved yet!<br>Add photos, links, or notes about quilts<br>you love or want to make someday.</p></div>';
+
+// ── SUPABASE ──────────────────────────────────────────
+const SUPA_URL='https://rxrbqkekbpbubvzkdizy.supabase.co';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ4cmJxa2VrYnBidWJ2emtkaXp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1NDU1MzAsImV4cCI6MjA5MDEyMTUzMH0.qioTo7hfC3GymwXzHgjK1nZMQE3ZUsQ3wOrSZ90f7fQ';
+let sb=null, currentUser=null;
+
+async function initSupabase(){
+  sb=window.supabase.createClient(SUPA_URL,SUPA_KEY);
+  const {data:{session}}=await sb.auth.getSession();
+  if(session){currentUser=session.user;showApp();}
+  else{showAuth();}
+  sb.auth.onAuthStateChange(function(_,session){
+    currentUser=session?session.user:null;
+  });
+}
+
+function showAuth(){
+  document.getElementById('auth-screen').style.display='flex';
+  document.getElementById('landing').style.display='none';
+  document.getElementById('main-app').style.display='none';
+}
+function showApp(){
+  document.getElementById('auth-screen').style.display='none';
+  document.getElementById('landing').style.display='block';
+  document.getElementById('main-app').style.display='none';
+  var el=document.getElementById('user-email-display');
+  if(el&&currentUser)el.textContent=currentUser.email;
+}
+function goHome(){
+  document.getElementById('landing').style.display='block';
+  document.getElementById('main-app').style.display='none';
+  document.getElementById('detail-view').style.display='none';
+  document.getElementById('inspo-detail-view').style.display='none';
+}
+function switchTab(t){
+  document.getElementById('landing').style.display='none';
+  document.getElementById('main-app').style.display='block';
+  document.querySelectorAll('.tab').forEach(function(e){e.classList.remove('active');});
+  document.querySelectorAll('.tab-panel').forEach(function(e){e.classList.remove('active');});
+  var tab=document.getElementById('tab-'+t);
+  var panel=document.getElementById('panel-'+t);
+  if(tab)tab.classList.add('active');
+  if(panel)panel.classList.add('active');
+  if(t==='cat'){closeDetail();renderCat();}
+  if(t==='inspo'){renderInspo();}
+}
+
+function switchAuthTab(t){
+  document.querySelectorAll('.auth-tab').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('auth-tab-'+t).classList.add('active');
+  document.getElementById('auth-form-login').style.display=t==='login'?'block':'none';
+  document.getElementById('auth-form-signup').style.display=t==='signup'?'block':'none';
+  document.getElementById('auth-error').textContent='';
+}
+
+async function doLogin(){
+  var email=document.getElementById('login-email').value.trim();
+  var pass=document.getElementById('login-password').value;
+  var btn=document.getElementById('login-btn');
+  var err=document.getElementById('auth-error');
+  if(!email||!pass){err.textContent='Please enter your email and password.';return;}
+  btn.disabled=true;btn.textContent='Signing in...';err.textContent='';
+  var {error}=await sb.auth.signInWithPassword({email:email,password:pass});
+  btn.disabled=false;btn.textContent='Sign in';
+  if(error){err.textContent=error.message;return;}
+  var {data:{session}}=await sb.auth.getSession();
+  currentUser=session.user;
+  showApp();
+}
+
+async function doSignup(){
+  var email=document.getElementById('signup-email').value.trim();
+  var pass=document.getElementById('signup-password').value;
+  var conf=document.getElementById('signup-confirm').value;
+  var btn=document.getElementById('signup-btn');
+  var err=document.getElementById('auth-error');
+  if(!email||!pass){err.textContent='Please enter your email and password.';return;}
+  if(pass.length<6){err.textContent='Password must be at least 6 characters.';return;}
+  if(pass!==conf){err.textContent='Passwords do not match.';return;}
+  btn.disabled=true;btn.textContent='Creating account...';err.textContent='';
+  var {error}=await sb.auth.signUp({email:email,password:pass});
+  btn.disabled=false;btn.textContent='Create account';
+  if(error){err.textContent=error.message;return;}
+  err.style.color='rgba(180,255,200,1)';
+  err.textContent='Account created! You can now sign in.';
+}
+
+async function doSignOut(){
+  await sb.auth.signOut();
+  currentUser=null;
+  showAuth();
+}
+
+// ── DB HELPERS ────────────────────────────────────────
+async function dbLoadQuilts(){
+  if(!sb||!currentUser)return[];
+  var {data,error}=await sb.from('quilts').select('*').order('saved_at',{ascending:false});
+  if(error){console.error('loadQuilts:',error);return[];}
+  return(data||[]).map(function(r){return{id:r.id,name:r.name,date:r.date,notes:r.notes,rating:r.rating,photo:r.photo,gifted:r.gifted,giftee:r.giftee,occasion:r.occasion};}); 
+}
+async function dbSaveQuilt(q,id){
+  var rec={user_id:currentUser.id,name:q.name,date:q.date,notes:q.notes,rating:q.rating,photo:q.photo,gifted:q.gifted,giftee:q.giftee,occasion:q.occasion};
+  if(id){var {error}=await sb.from('quilts').update(rec).eq('id',id);if(error){alert('Error: '+error.message);return false;}}
+  else{var {error}=await sb.from('quilts').insert(rec);if(error){alert('Error: '+error.message);return false;}}
+  return true;
+}
+async function dbDeleteQuilt(id){
+  await sb.from('quilts').delete().eq('id',id);
+}
+async function dbLoadInspo(){
+  if(!sb||!currentUser)return[];
+  var {data,error}=await sb.from('inspo').select('*').order('saved_at',{ascending:false});
+  if(error){console.error('loadInspo:',error);return[];}
+  return(data||[]).map(function(r){return{id:r.id,title:r.title,tag:r.tag,link:r.link,notes:r.notes,photo:r.photo};}); 
+}
+async function dbSaveInspo(item,id){
+  var rec={user_id:currentUser.id,title:item.title,tag:item.tag,link:item.link,notes:item.notes,photo:item.photo};
+  if(id){var {error}=await sb.from('inspo').update(rec).eq('id',id);if(error){alert('Error: '+error.message);return false;}}
+  else{var {error}=await sb.from('inspo').insert(rec);if(error){alert('Error: '+error.message);return false;}}
+  return true;
+}
+async function dbDeleteInspo(id){
+  await sb.from('inspo').delete().eq('id',id);
+}
+
+// ── CATALOGUE ─────────────────────────────────────────
+function escHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function formatDate(d){if(!d)return'';try{return new Date(d+'T00:00:00').toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});}catch(e){return d;}}
+
+async function renderCat(){
+  var quilts=await dbLoadQuilts();
+  var el=document.getElementById('cat-list');
+  if(!el)return;
+  if(!quilts.length){
+    el.innerHTML='<div class="empty-state"><div class="empty-icon"><svg width="32" height="32" viewBox="0 0 26 26" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="18" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="1" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="9.5" y="9.5" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="18" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="1" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="9.5" y="18" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="18" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/></svg></div><p>No quilts yet! Finish your first quilt and add it here.</p></div>';
     return;
   }
-  var html='<div class="inspo-grid">';
-  items.forEach(function(item,i){
-    var imgHTML=item.photo
-      ? '<img src="'+item.photo+'" alt="'+escHtml(item.title||'')+'">'
-      : '<div class="inspo-no-photo"><svg width="32" height="32" viewBox="0 0 26 26" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.4"/><rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.3"/><rect x="18" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.4"/><rect x="1" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.3"/><rect x="9.5" y="9.5" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.4"/><rect x="18" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.3"/><rect x="1" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.4"/><rect x="9.5" y="18" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.3"/><rect x="18" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.4"/></svg></div>';
-    var tag=item.tag||'Inspiration';
-    html+='<div class="inspo-card" onclick="openInspoDetail('+i+')"><div class="inspo-img">'+imgHTML+'</div><div class="inspo-body"><div class="inspo-card-title">'+escHtml(item.title||'Untitled')+'</div><span class="inspo-tag">'+escHtml(tag)+'</span>'+(item.link?'<div class="inspo-link-badge">🔗 Has link</div>':'')+'</div></div>';
+  var html='<div class="quilt-grid">';
+  quilts.forEach(function(q,i){
+    var stars=q.rating?'&#9733;'.repeat(q.rating):'';
+    var photo=q.photo?'<img src="'+q.photo+'" alt="'+escHtml(q.name)+'" style="width:100%;height:190px;object-fit:cover;display:block;">':'<div style="width:100%;height:190px;background:linear-gradient(135deg,var(--teal-wash),var(--blue-wash));display:flex;align-items:center;justify-content:center;font-size:32px;color:var(--ink-faint);">🧵</div>';
+    var tags='';
+    if(q.gifted)tags+='<span class="tag gift">🎁 '+escHtml(q.giftee||'Gifted')+'</span>';
+    if(q.rating)tags+='<span class="tag"><span style="color:var(--gold)">'+stars+'</span></span>';
+    html+='<div class="quilt-card" onclick="openDetail(''+q.id+'')"><div class="qc-photo">'+photo+'</div><div class="qc-body"><div class="qc-name">'+escHtml(q.name||'Untitled')+'</div><div class="qc-meta">'+formatDate(q.date)+'</div>'+(tags?'<div class="qc-tags">'+tags+'</div>':'')+'</div></div>';
   });
   html+='</div>';
   el.innerHTML=html;
 }
 
-async function openInspoDetail(i){
-  var items=await loadInspo(); var item=items[i]; if(!item)return;
-  document.getElementById('panel-inspo').style.display='none';
-  var dv=document.getElementById('inspo-detail-view'); dv.style.display='block';
-  var imgHTML=item.photo
-    ? '<img class="detail-photo" src="'+item.photo+'" alt="'+escHtml(item.title||'')+'">'
-    : '<div class="detail-photo-placeholder"><svg width="60" height="60" viewBox="0 0 26 26" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.3"/><rect x="18" y="1" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="1" y="9.5" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.3"/><rect x="9.5" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="18" y="9.5" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.3"/><rect x="1" y="18" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="9.5" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.3"/><rect x="18" y="18" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/></svg></div>';
-  var linkHTML=item.link ? '<div class="detail-section"><div class="detail-section-label">Link</div><div class="detail-section-val"><a href="'+escHtml(item.link)+'" target="_blank" style="color:var(--teal-mid);word-break:break-all;">'+escHtml(item.link)+'</a></div></div>' : '';
-  var notesHTML=item.notes ? '<div class="detail-section"><div class="detail-section-label">Notes</div><div class="detail-section-val">'+escHtml(item.notes)+'</div></div>' : '';
-  document.getElementById('inspo-detail-content').innerHTML=imgHTML+'<div class="detail-title">'+escHtml(item.title||'Untitled')+'</div><div class="detail-meta" style="color:var(--teal)">'+escHtml(item.tag||'Inspiration')+'</div>'+linkHTML+notesHTML+'<div class="detail-actions"><button class="btn btn-p" onclick="openEditInspo('+i+')">Edit</button><button class="btn btn-danger" onclick="deleteInspoConfirm('+i+')">Delete</button></div>';
+async function openDetail(id){
+  var quilts=await dbLoadQuilts();
+  var q=quilts.find(function(x){return x.id===id;});
+  if(!q)return;
+  document.getElementById('panel-cat').classList.remove('active');
+  document.getElementById('detail-view').style.display='block';
+  var photo=q.photo?'<img class="detail-photo" src="'+q.photo+'" alt="'+escHtml(q.name)+'">':'<div class="detail-photo-placeholder">🧵</div>';
+  var gift=q.gifted?'<div class="detail-gift">🎁 Gifted to <strong>'+escHtml(q.giftee||'')+'</strong>'+(q.occasion?' for '+escHtml(q.occasion):'')+'</div>':'';
+  var notes=q.notes?'<div class="detail-section"><div class="detail-section-label">Notes</div><div class="detail-section-val">'+escHtml(q.notes)+'</div></div>':'';
+  var stars=q.rating?'&#9733;'.repeat(q.rating)+'&#9734;'.repeat(5-q.rating):'No rating';
+  document.getElementById('detail-content').innerHTML=photo+'<div class="detail-title">'+escHtml(q.name||'Untitled')+'</div><div class="detail-meta">'+formatDate(q.date)+'</div><div style="margin-bottom:1rem;font-size:18px;color:var(--gold)">'+stars+'</div>'+gift+notes+'<div class="detail-actions"><button class="btn btn-p" onclick="openEditModal(''+id+'')">Edit</button><button class="btn btn-danger" onclick="confirmDelete(''+id+'')">Delete</button></div>';
+}
+
+function closeDetail(){
+  document.getElementById('detail-view').style.display='none';
+  document.getElementById('panel-cat').classList.add('active');
+  renderCat();
+}
+
+async function confirmDelete(id){
+  if(!confirm('Delete this quilt?'))return;
+  await dbDeleteQuilt(id);
+  closeDetail();
+}
+
+var currentRating=0,currentPhoto=null,isGifted=false,editingId=null;
+
+function openAddModal(){
+  editingId=null;currentRating=0;currentPhoto=null;isGifted=false;
+  document.getElementById('modal-title').textContent='Add a quilt';
+  document.getElementById('delete-btn').style.display='none';
+  document.getElementById('f-name').value='';
+  document.getElementById('f-date').value=new Date().toISOString().split('T')[0];
+  document.getElementById('f-notes').value='';
+  document.getElementById('f-giftee').value='';
+  document.getElementById('f-occasion').value='';
+  setRating(0);resetPhotoUpload();
+  document.getElementById('gift-toggle').className='toggle';
+  document.getElementById('gift-fields').style.display='none';
+  document.getElementById('modal').style.display='flex';
+}
+
+async function openEditModal(id){
+  var quilts=await dbLoadQuilts();
+  var q=quilts.find(function(x){return x.id===id;});
+  if(!q)return;
+  editingId=id;currentRating=q.rating||0;currentPhoto=q.photo||null;isGifted=q.gifted||false;
+  document.getElementById('modal-title').textContent='Edit quilt';
+  document.getElementById('delete-btn').style.display='block';
+  document.getElementById('f-name').value=q.name||'';
+  document.getElementById('f-date').value=q.date||'';
+  document.getElementById('f-notes').value=q.notes||'';
+  document.getElementById('f-giftee').value=q.giftee||'';
+  document.getElementById('f-occasion').value=q.occasion||'';
+  setRating(currentRating);
+  if(currentPhoto){document.getElementById('photo-upload-zone').className='photo-upload has-photo';document.getElementById('photo-preview-wrap').innerHTML='<img class="photo-thumb" src="'+currentPhoto+'">';}
+  else{resetPhotoUpload();}
+  document.getElementById('gift-toggle').className='toggle'+(isGifted?' on':'');
+  document.getElementById('gift-fields').style.display=isGifted?'block':'none';
+  document.getElementById('modal').style.display='flex';
+}
+
+function closeModal(){document.getElementById('modal').style.display='none';}
+
+function handlePhotoUpload(e){
+  var f=e.target.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(ev){currentPhoto=ev.target.result;document.getElementById('photo-upload-zone').className='photo-upload has-photo';document.getElementById('photo-preview-wrap').innerHTML='<img class="photo-thumb" src="'+currentPhoto+'">';};
+  r.readAsDataURL(f);
+}
+
+function resetPhotoUpload(){
+  currentPhoto=null;
+  document.getElementById('photo-upload-zone').className='photo-upload';
+  document.getElementById('photo-preview-wrap').innerHTML='<div style="font-size:28px;opacity:0.4;margin-bottom:0.5rem">📷</div><div style="font-size:14px;color:#6b8080">Tap to add a photo</div>';
+}
+
+function setRating(n){currentRating=n;document.querySelectorAll('.star-btn').forEach(function(b,i){b.className='star-btn'+(i<n?' on':'');});}
+function toggleGift(){isGifted=!isGifted;document.getElementById('gift-toggle').className='toggle'+(isGifted?' on':'');document.getElementById('gift-fields').style.display=isGifted?'block':'none';}
+
+async function saveQuilt(){
+  var q={name:document.getElementById('f-name').value.trim()||'Untitled quilt',date:document.getElementById('f-date').value,notes:document.getElementById('f-notes').value.trim(),rating:currentRating,photo:currentPhoto,gifted:isGifted,giftee:isGifted?document.getElementById('f-giftee').value.trim():'',occasion:isGifted?document.getElementById('f-occasion').value.trim():''};
+  var ok=await dbSaveQuilt(q,editingId);
+  if(ok){closeModal();renderCat();}
+}
+
+async function deleteQuilt(){
+  if(!editingId||!confirm('Delete this quilt?'))return;
+  await dbDeleteQuilt(editingId);
+  closeModal();renderCat();
+}
+
+// ── INSPO ─────────────────────────────────────────────
+async function renderInspo(){
+  var items=await dbLoadInspo();
+  var el=document.getElementById('inspo-list');
+  if(!el)return;
+  if(!items.length){
+    el.innerHTML='<div class="empty-state"><div class="empty-icon" style="width:72px;height:72px;margin:0 auto 1rem;background:linear-gradient(135deg,var(--teal-pale),var(--blue-pale));border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);"><svg width="32" height="32" viewBox="0 0 26 26" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="18" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="1" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="9.5" y="9.5" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="18" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="1" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/><rect x="9.5" y="18" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.4"/><rect x="18" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.5"/></svg></div><p>No inspiration saved yet!<br>Add photos, links, or notes about quilts<br>you love or want to make someday.</p></div>';
+    return;
+  }
+  var html='<div class="inspo-grid">';
+  items.forEach(function(item){
+    var photo=item.photo?'<img src="'+item.photo+'" alt="'+escHtml(item.title)+'" style="width:100%;height:130px;object-fit:cover;display:block;">':'<div class="inspo-no-photo"><svg width="32" height="32" viewBox="0 0 26 26" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.4"/><rect x="9.5" y="1" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.3"/><rect x="18" y="1" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.4"/><rect x="1" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.3"/><rect x="9.5" y="9.5" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.4"/><rect x="18" y="9.5" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.3"/><rect x="1" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.4"/><rect x="9.5" y="18" width="7" height="7" rx="1.5" fill="#1a7a6e" opacity="0.3"/><rect x="18" y="18" width="7" height="7" rx="1.5" fill="#2496a0" opacity="0.4"/></svg></div>';
+    html+='<div class="inspo-card" onclick="openInspoDetail(''+item.id+'')"><div class="inspo-img">'+photo+'</div><div class="inspo-body"><div class="inspo-card-title">'+escHtml(item.title||'Untitled')+'</div><span class="inspo-tag">'+escHtml(item.tag||'Inspiration')+'</span>'+(item.link?'<div class="inspo-link-badge">🔗 Has link</div>':'')+'</div></div>';
+  });
+  html+='</div>';
+  el.innerHTML=html;
+}
+
+async function openInspoDetail(id){
+  var items=await dbLoadInspo();
+  var item=items.find(function(x){return x.id===id;});
+  if(!item)return;
+  document.getElementById('panel-inspo').classList.remove('active');
+  document.getElementById('inspo-detail-view').style.display='block';
+  var photo=item.photo?'<img class="detail-photo" src="'+item.photo+'" alt="'+escHtml(item.title)+'">':'<div class="detail-photo-placeholder">✨</div>';
+  var link=item.link?'<div class="detail-section"><div class="detail-section-label">Link</div><div class="detail-section-val"><a href="'+escHtml(item.link)+'" target="_blank" style="color:var(--teal-mid);word-break:break-all;">'+escHtml(item.link)+'</a></div></div>':'';
+  var notes=item.notes?'<div class="detail-section"><div class="detail-section-label">Notes</div><div class="detail-section-val">'+escHtml(item.notes)+'</div></div>':'';
+  document.getElementById('inspo-detail-content').innerHTML=photo+'<div class="detail-title">'+escHtml(item.title||'Untitled')+'</div><div class="detail-meta" style="color:var(--teal)">'+escHtml(item.tag||'Inspiration')+'</div>'+link+notes+'<div class="detail-actions"><button class="btn btn-p" onclick="openEditInspo(''+id+'')">Edit</button><button class="btn btn-danger" onclick="confirmDeleteInspo(''+id+'')">Delete</button></div>';
 }
 
 function closeInspoDetail(){
   document.getElementById('inspo-detail-view').style.display='none';
-  document.getElementById('panel-inspo').style.display='block';
+  document.getElementById('panel-inspo').classList.add('active');
   renderInspo();
 }
 
-var inspoPhoto=null, inspoEditIdx=-1;
+async function confirmDeleteInspo(id){
+  if(!confirm('Remove this from your inspiration board?'))return;
+  await dbDeleteInspo(id);
+  closeInspoDetail();
+}
+
+var inspoPhoto=null,inspoEditId=null;
+
 function openAddInspo(){
-  inspoEditIdx=-1; inspoPhoto=null;
-  var m=document.getElementById('inspo-modal');
-  console.log('openAddInspo: modal element=', m);
-  if(!m){console.error('inspo-modal missing from DOM!'); return;}
+  inspoEditId=null;inspoPhoto=null;
   document.getElementById('im-title').textContent='Add inspiration';
   document.getElementById('idb-del').style.display='none';
   document.getElementById('if-title').value='';
   document.getElementById('if-tag').value='';
   document.getElementById('if-link').value='';
   document.getElementById('if-notes').value='';
-  resetInspoPhoto();
-  m.style.display='flex';
+  document.getElementById('inspo-photo-zone').className='photo-upload';
+  document.getElementById('inspo-photo-wrap').innerHTML='<div style="font-size:28px;opacity:0.4;margin-bottom:0.5rem">📷</div><div style="font-size:14px;color:#6b8080">Tap to add a photo</div>';
+  document.getElementById('inspo-modal').style.display='flex';
 }
-async function openEditInspo(i){
-  var items=await loadInspo(); var item=items[i]; if(!item)return;
-  inspoEditIdx=i; inspoPhoto=item.photo||null;
+
+async function openEditInspo(id){
+  var items=await dbLoadInspo();
+  var item=items.find(function(x){return x.id===id;});
+  if(!item)return;
+  inspoEditId=id;inspoPhoto=item.photo||null;
   document.getElementById('im-title').textContent='Edit inspiration';
   document.getElementById('idb-del').style.display='block';
   document.getElementById('if-title').value=item.title||'';
   document.getElementById('if-tag').value=item.tag||'';
   document.getElementById('if-link').value=item.link||'';
   document.getElementById('if-notes').value=item.notes||'';
-  if(inspoPhoto){
-    document.getElementById('inspo-photo-zone').className='photo-upload has-photo';
-    document.getElementById('inspo-photo-wrap').innerHTML='<img class="photo-thumb" src="'+inspoPhoto+'">';
-  } else {resetInspoPhoto();}
+  if(inspoPhoto){document.getElementById('inspo-photo-zone').className='photo-upload has-photo';document.getElementById('inspo-photo-wrap').innerHTML='<img class="photo-thumb" src="'+inspoPhoto+'">';}
+  else{document.getElementById('inspo-photo-zone').className='photo-upload';document.getElementById('inspo-photo-wrap').innerHTML='<div style="font-size:28px;opacity:0.4;margin-bottom:0.5rem">📷</div><div style="font-size:14px;color:#6b8080">Tap to add a photo</div>';}
   document.getElementById('inspo-modal').style.display='flex';
 }
-function closeInspoModal(){
-  var m=document.getElementById('inspo-modal');
-  if(m) m.style.display='none';
-  else console.warn('inspo-modal not found in DOM');
-}
+
+function closeInspoModal(){document.getElementById('inspo-modal').style.display='none';}
+
 function handleInspoPhoto(e){
-  var f=e.target.files[0]; if(!f)return;
+  var f=e.target.files[0];if(!f)return;
   var r=new FileReader();
-  r.onload=function(ev){
-    inspoPhoto=ev.target.result;
-    document.getElementById('inspo-photo-zone').className='photo-upload has-photo';
-    document.getElementById('inspo-photo-wrap').innerHTML='<img class="photo-thumb" src="'+inspoPhoto+'">';
-  };
+  r.onload=function(ev){inspoPhoto=ev.target.result;document.getElementById('inspo-photo-zone').className='photo-upload has-photo';document.getElementById('inspo-photo-wrap').innerHTML='<img class="photo-thumb" src="'+inspoPhoto+'">';};
   r.readAsDataURL(f);
 }
-function resetInspoPhoto(){
-  inspoPhoto=null;
-  document.getElementById('inspo-photo-zone').className='photo-upload';
-  document.getElementById('inspo-photo-wrap').innerHTML='<div style="font-size:28px;opacity:0.4;margin-bottom:0.5rem">📷</div><div style="font-size:14px;color:#6b8080">Tap to add a photo</div>';
-}
+
 async function saveInspoItem(){
-  var item={
-    title:document.getElementById('if-title').value.trim()||'Untitled',
-    tag:document.getElementById('if-tag').value.trim(),
-    link:document.getElementById('if-link').value.trim(),
-    notes:document.getElementById('if-notes').value.trim(),
-    photo:inspoPhoto
-  };
-  var existingId=null;
-  if(inspoEditIdx>=0){var all=await loadInspo();existingId=(all[inspoEditIdx]||{}).id||null;}
-  await saveInspoRecord(item,existingId);
-  var modal=document.getElementById('inspo-modal');
-  if(modal) modal.style.display='none';
-  // Activate inspo tab explicitly
-  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
-  document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});
-  var tab=document.getElementById('tab-inspo');
-  var panel=document.getElementById('panel-inspo');
-  if(tab) tab.classList.add('active');
-  if(panel) panel.classList.add('active');
-  await renderInspo();
+  var item={title:document.getElementById('if-title').value.trim()||'Untitled',tag:document.getElementById('if-tag').value.trim(),link:document.getElementById('if-link').value.trim(),notes:document.getElementById('if-notes').value.trim(),photo:inspoPhoto};
+  var ok=await dbSaveInspo(item,inspoEditId);
+  if(ok){
+    document.getElementById('inspo-modal').style.display='none';
+    renderInspo();
+  }
 }
-async function deleteInspoConfirm(i){
-  if(!confirm('Remove this from your inspiration board?'))return;
-  var items=await loadInspo(); var id=(items[i]||{}).id; await deleteInspoRecord(id||i); closeInspoDetail();
-}
+
 async function deleteInspoFromModal(){
-  if(inspoEditIdx<0)return;
-  if(!confirm('Remove this from your inspiration board?'))return;
-  var items=await loadInspo(); var id=(items[inspoEditIdx]||{}).id; await deleteInspoRecord(id||inspoEditIdx); closeInspoModal(); renderInspo();
+  if(!inspoEditId||!confirm('Remove this from your inspiration board?'))return;
+  await dbDeleteInspo(inspoEditId);
+  closeInspoModal();
+  renderInspo();
 }
 
 // ── INIT ──────────────────────────────────────────────
@@ -1487,88 +1383,6 @@ renderProg();
 renderGuide();
 initSupabase();
 
-
 </script>
-
-<!-- CATALOGUE MODAL -->
-<div class="modal-bg" id="modal" style="display:none">
-  <div class="modal">
-    <div class="modal-hdr"><h3 id="modal-title">Add a quilt</h3><button class="close-btn" onclick="closeModal()">✕</button></div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label>Photo</label>
-        <div class="photo-upload" id="photo-upload-zone" onclick="document.getElementById('photo-file').click()">
-          <div id="photo-preview-wrap"><div style="font-size:28px;opacity:0.4;margin-bottom:0.5rem">📷</div><div style="font-size:14px;color:#6b8080">Tap to add a photo</div></div>
-        </div>
-        <input type="file" id="photo-file" accept="image/*" style="display:none" onchange="handlePhotoUpload(event)">
-      </div>
-      <div class="form-group"><label>Pattern name</label><input type="text" id="f-name" placeholder="e.g. Charm Pack Patchwork"></div>
-      <div class="form-group"><label>Date completed</label><input type="date" id="f-date"></div>
-      <div class="form-group"><label>Notes</label><textarea id="f-notes" placeholder="What did you learn? What would you do differently?"></textarea></div>
-      <div class="form-group">
-        <label>Rating</label>
-        <div class="star-picker" id="star-picker">
-          <button class="star-btn" onclick="setRating(1)">★</button>
-          <button class="star-btn" onclick="setRating(2)">★</button>
-          <button class="star-btn" onclick="setRating(3)">★</button>
-          <button class="star-btn" onclick="setRating(4)">★</button>
-          <button class="star-btn" onclick="setRating(5)">★</button>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="gift-row">
-          <button class="toggle" id="gift-toggle" onclick="toggleGift()"></button>
-          <label style="margin:0;cursor:pointer" onclick="toggleGift()">This quilt was gifted to someone</label>
-        </div>
-        <div class="gift-fields" id="gift-fields" style="display:none">
-          <div class="form-group" style="margin-bottom:0.75rem"><label>Gifted to</label><input type="text" id="f-giftee" placeholder="e.g. Grandma, Sarah's baby shower"></div>
-          <div class="form-group" style="margin-bottom:0"><label>Occasion</label><input type="text" id="f-occasion" placeholder="e.g. Birthday, Christmas, New baby"></div>
-        </div>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-danger" id="delete-btn" onclick="deleteQuilt()" style="display:none;margin-right:auto">Delete</button>
-      <button class="btn" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-p" onclick="saveQuilt()">Save quilt</button>
-    </div>
-  </div>
-</div>
-
-
-<!-- INSPO MODAL -->
-<div class="modal-bg" id="inspo-modal" style="display:none">
-  <div class="modal">
-    <div class="modal-hdr"><h3 id="im-title">Add inspiration</h3><button class="close-btn" onclick="closeInspoModal()">✕</button></div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label>Photo</label>
-        <div class="photo-upload" id="inspo-photo-zone" onclick="document.getElementById('inspo-photo-file').click()">
-          <div id="inspo-photo-wrap"><div style="font-size:28px;opacity:0.4;margin-bottom:0.5rem">📷</div><div style="font-size:14px;color:#6b8080">Tap to add a photo</div></div>
-        </div>
-        <input type="file" id="inspo-photo-file" accept="image/*" style="display:none" onchange="handleInspoPhoto(event)">
-      </div>
-      <div class="form-group"><label>Title</label><input type="text" id="if-title" placeholder="e.g. Blue log cabin pattern"></div>
-      <div class="form-group">
-        <label>Category</label>
-        <input type="text" id="if-tag" placeholder="e.g. Want to make, Color inspo, Pattern idea" list="tag-suggestions">
-        <datalist id="tag-suggestions">
-          <option value="Want to make">
-          <option value="Color inspo">
-          <option value="Pattern idea">
-          <option value="Gift idea">
-          <option value="Technique to try">
-          <option value="Fabric inspo">
-        </datalist>
-      </div>
-      <div class="form-group"><label>Link (optional)</label><input type="url" id="if-link" placeholder="https://..."></div>
-      <div class="form-group"><label>Notes</label><textarea id="if-notes" placeholder="What do you love about it? Any ideas for adapting it?"></textarea></div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-danger" id="idb-del" onclick="deleteInspoFromModal()" style="display:none;margin-right:auto">Remove</button>
-      <button class="btn" onclick="closeInspoModal()">Cancel</button>
-      <button class="btn btn-p" onclick="saveInspoItem()">Save</button>
-    </div>
-  </div>
-</div>
 </body>
 </html>
